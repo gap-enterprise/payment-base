@@ -6,7 +6,7 @@ public final class DbPromissoryNote extends DbAbstractBankNote {
 
 	public DbPromissoryNote(DataSource source, Long id) {
 		super(source, id);
-		// TODO Auto-generated constructor stub
+
 	}
 
 }

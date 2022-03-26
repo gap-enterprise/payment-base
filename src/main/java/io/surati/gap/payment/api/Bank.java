@@ -125,7 +125,7 @@ public interface Bank extends ThirdParty {
 
 		@Override
 		public PaymentCondition paymentCondition() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 	};

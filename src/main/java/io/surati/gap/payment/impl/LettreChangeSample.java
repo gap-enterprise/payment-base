@@ -126,19 +126,19 @@ public final class LettreChangeSample implements BankNote {
 
 	@Override
 	public String descriptionOfCancel() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public User authorOfCancel() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public LocalDateTime cancelDate() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 }

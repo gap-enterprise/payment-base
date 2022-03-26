@@ -136,7 +136,7 @@ public interface BankAccount {
 
 		@Override
 		public BankAccountAccountingSettings accountingSettings() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 	};

@@ -71,7 +71,7 @@ public class PaymentBatchesImpl implements PaymentBatches {
 
 	@Override
 	public PaymentBatch add(LocalDate date, BankAccount account, PaymentMeanType meantype) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 }

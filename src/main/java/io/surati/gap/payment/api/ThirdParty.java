@@ -70,55 +70,55 @@ public interface ThirdParty extends Person {
 		
 		@Override
 		public void update(String name) {
-			// TODO Auto-generated method stub
+			
 			
 		}
 		
 		@Override
 		public String name() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 		
 		@Override
 		public Long id() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 		
 		@Override
 		public void update(String code, String name, String abbreviated) {
-			// TODO Auto-generated method stub
+			
 			
 		}
 		
 		@Override
 		public PaymentCondition paymentCondition() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 		
 		@Override
 		public ThirdPartyFamily family() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 		
 		@Override
 		public String code() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 		
 		@Override
 		public void assign(ThirdPartyFamily family) {
-			// TODO Auto-generated method stub
+			
 			
 		}
 		
 		@Override
 		public String abbreviated() {
-			// TODO Auto-generated method stub
+			
 			return null;
 		}
 	};

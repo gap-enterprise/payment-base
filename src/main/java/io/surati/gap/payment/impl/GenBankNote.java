@@ -152,7 +152,7 @@ public final class GenBankNote implements BankNote {
 
 	@Override
 	public LocalDateTime cancelDate() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
