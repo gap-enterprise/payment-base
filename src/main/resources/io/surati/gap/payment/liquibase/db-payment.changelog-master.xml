@@ -1,3 +1,5 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<!--
 Copyright (c) 2022 Surati
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -12,3 +14,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+-->
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+  <includeAll path="io/surati/gap/payment/liquibase/2022-payment"/>
+</databaseChangeLog>
