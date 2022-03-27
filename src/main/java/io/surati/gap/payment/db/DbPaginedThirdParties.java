@@ -103,9 +103,9 @@ public final class DbPaginedThirdParties implements ThirdParties {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT tp.id FROM third_party as tp",
-	                        "LEFT JOIN person as ps ON ps.id = tp.id",
-	                        "LEFT JOIN third_party_family as tf ON tf.id = tp.family_id",
+                            "SELECT tp.id FROM pay_third_party as tp",
+	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
+	                        "LEFT JOIN pay_third_party_family as tf ON tf.id = tp.family_id",
                             "WHERE tp.code ILIKE ? OR tp.abbreviated ILIKE ? OR ps.name ILIKE ? OR tf.name ILIKE ? OR tf.code ILIKE ?",
                             "ORDER BY tp.abbreviated ASC",
             				"LIMIT ? OFFSET ?"
@@ -140,9 +140,9 @@ public final class DbPaginedThirdParties implements ThirdParties {
 					.sql(
 	                    new Joined(
 	                        " ",
-	                        "SELECT COUNT(tp.*) FROM third_party as tp",
-	                        "LEFT JOIN person as ps ON ps.id = tp.id",
-	                        "LEFT JOIN third_party_family as tf ON tf.id = tp.family_id",
+	                        "SELECT COUNT(tp.*) FROM pay_third_party as tp",
+	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
+	                        "LEFT JOIN pay_third_party_family as tf ON tf.id = tp.family_id",
                             "WHERE tp.code ILIKE ? OR tp.abbreviated ILIKE ? OR ps.name ILIKE ? OR tf.name ILIKE ? OR tf.code ILIKE ?"
 	                    ).toString()
 	                )

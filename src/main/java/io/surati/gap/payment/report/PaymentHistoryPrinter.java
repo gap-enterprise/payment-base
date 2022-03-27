@@ -1,4 +1,4 @@
-package io.surati.gap.payment.db;
+package io.surati.gap.payment.report;
 
 import io.surati.gap.payment.api.BankNote;
 import io.surati.gap.payment.api.PaymentMeanType;
@@ -47,7 +47,7 @@ public final class PaymentHistoryPrinter implements Printer {
 			Platform.startup(config);
 			final IReportEngineFactory fact = (IReportEngineFactory) Platform.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
 			engine = fact.createReportEngine(config);
-			final InputStream reportResource = getClass().getClassLoader().getResourceAsStream("report/payment_export_story_format.rptdesign");
+			final InputStream reportResource = getClass().getClassLoader().getResourceAsStream("io/surati/gap/payment/report/payment_export_story_format.rptdesign");
 			final IReportRunnable runnable = engine.openReportDesign(reportResource);
 			final IRunAndRenderTask task = engine.createRunAndRenderTask(runnable);
 			final RenderOption options = new EXCELRenderOption();

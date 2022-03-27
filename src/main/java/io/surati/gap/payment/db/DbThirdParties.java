@@ -65,7 +65,7 @@ public final class DbThirdParties implements ThirdParties {
 		
 		try(
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM third_party WHERE code=?");
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM pay_third_party WHERE code=?");
 		){
 			pstmt.setString(1, code);
 		
@@ -86,7 +86,7 @@ public final class DbThirdParties implements ThirdParties {
 	public ThirdParty get(Long id) {
 		try(
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM third_party WHERE id=?");
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM pay_third_party WHERE id=?");
 		){
 			pstmt.setLong(1, id);
 		
@@ -119,8 +119,8 @@ public final class DbThirdParties implements ThirdParties {
 		
 		try(
 				final Connection connection = source.getConnection();
-				final PreparedStatement pstmt = connection.prepareStatement("INSERT INTO person (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-				final PreparedStatement pstmt1 = connection.prepareStatement("INSERT INTO third_party (id, code, abbreviated) VALUES (?, ?, ?)")
+				final PreparedStatement pstmt = connection.prepareStatement("INSERT INTO ad_person (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+				final PreparedStatement pstmt1 = connection.prepareStatement("INSERT INTO pay_third_party (id, code, abbreviated) VALUES (?, ?, ?)")
 		){
 			
 			pstmt.setString(1, name);
@@ -155,12 +155,12 @@ public final class DbThirdParties implements ThirdParties {
 		            .sql(
 		                new Joined(
 		                    " ",
-		                    "SELECT COUNT(*) FROM third_party",
-		                    "WHERE id=? AND (id IN (SELECT holder_id FROM bank_account)",
-		                    "OR id IN (SELECT beneficiary_id FROM payment_order)",
-		                    "OR id IN (SELECT third_party_id FROM payment_order_group)",
-		                    "OR id IN (SELECT beneficiary_id FROM bank_note)",
-		                    "OR id IN (SELECT issuer_id FROM reference_document))"
+		                    "SELECT COUNT(*) FROM pay_third_party",
+		                    "WHERE id=? AND (id IN (SELECT holder_id FROM pay_bank_account)",
+		                    "OR id IN (SELECT beneficiary_id FROM pay_payment_order)",
+		                    "OR id IN (SELECT third_party_id FROM pay_payment_order_group)",
+		                    "OR id IN (SELECT beneficiary_id FROM pay_bank_note)",
+		                    "OR id IN (SELECT issuer_id FROM pay_reference_document))"
 		                ).toString()
 		            )
 		            .set(id)
@@ -173,8 +173,8 @@ public final class DbThirdParties implements ThirdParties {
 		}
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("DELETE FROM third_party WHERE id=?");
-			final PreparedStatement pstmt1 = connection.prepareStatement("DELETE FROM person WHERE id=?");
+			final PreparedStatement pstmt = connection.prepareStatement("DELETE FROM pay_third_party WHERE id=?");
+			final PreparedStatement pstmt1 = connection.prepareStatement("DELETE FROM ad_person WHERE id=?");
 		) {
 			pstmt.setLong(1, id);
 			pstmt1.setLong(1, id);
@@ -190,7 +190,7 @@ public final class DbThirdParties implements ThirdParties {
 		
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM third_party order by abbreviated ASC")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM pay_third_party order by abbreviated ASC")
 		){
 			final Collection<ThirdParty> items = new ArrayList<>();
 			
@@ -210,7 +210,7 @@ public final class DbThirdParties implements ThirdParties {
 	public boolean has(String code) {
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM third_party WHERE code=?")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM pay_third_party WHERE code=?")
 		){
 			pstmt.setString(1, code);
 		
@@ -229,7 +229,7 @@ public final class DbThirdParties implements ThirdParties {
 		try {
 			return
 				new JdbcSession(this.source)
-					.sql("SELECT COUNT(*) FROM third_party")
+					.sql("SELECT COUNT(*) FROM pay_third_party")
 					.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
 			throw new DatabaseException(ex);

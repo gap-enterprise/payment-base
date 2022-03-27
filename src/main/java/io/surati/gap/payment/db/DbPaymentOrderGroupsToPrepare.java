@@ -44,8 +44,8 @@ public final class DbPaymentOrderGroupsToPrepare implements PaymentOrderGroupsTo
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT grp.id FROM payment_order_group grp",
-                            "LEFT JOIN third_party tp on tp.id=grp.third_party_id",
+                            "SELECT grp.id FROM pay_payment_order_group grp",
+                            "LEFT JOIN pay_third_party tp on tp.id=grp.third_party_id",
                             "WHERE grp.status_id=? AND (?=true OR worker_id=?)",
             				"ORDER BY tp.abbreviated ASC, grp.id DESC"
                         ).toString()
@@ -132,7 +132,7 @@ public final class DbPaymentOrderGroupsToPrepare implements PaymentOrderGroupsTo
             .sql(
                 new Joined(
                     " ",
-                    "UPDATE payment_order",
+                    "UPDATE pay_payment_order",
                     "SET group_id=?",
                     "WHERE id=?"
                 ).toString()
@@ -163,7 +163,7 @@ public final class DbPaymentOrderGroupsToPrepare implements PaymentOrderGroupsTo
 		            .sql(
 		                new Joined(
 		                    " ",
-		                    "INSERT INTO payment_order_group",
+		                    "INSERT INTO pay_payment_order_group",
 		                    "(third_party_id, status_id, author_id, worker_id, is_hetero)",
 		                    "VALUES",
 		                    "(?, ?, ?, ?, ?)"
@@ -201,8 +201,8 @@ public final class DbPaymentOrderGroupsToPrepare implements PaymentOrderGroupsTo
             .sql(
                 new Joined(
                     " ",
-                    "DELETE FROM payment_order_group",
-                    "WHERE id NOT IN (SELECT group_id FROM payment_order)"
+                    "DELETE FROM pay_payment_order_group",
+                    "WHERE id NOT IN (SELECT group_id FROM pay_payment_order)"
                 ).toString()
             )
             .execute();

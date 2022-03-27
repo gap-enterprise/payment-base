@@ -25,8 +25,8 @@ public final class DbBankNote extends BankNoteWrapper {
 					.sql(
 						new Joined(
 							" ",
-							"SELECT book.mean_type_id FROM bank_note as note",
-							"LEFT JOIN bank_note_book as book ON book.id = note.book_id",
+							"SELECT book.mean_type_id FROM pay_bank_note as note",
+							"LEFT JOIN pay_bank_note_book as book ON book.id = note.book_id",
 							"WHERE note.id=?"
 						).toString()
 					)

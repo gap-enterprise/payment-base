@@ -44,7 +44,7 @@ public final class DbReferenceDocumentsToPay implements ReferenceDocumentsToPay 
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM reference_document",
+                            "SELECT id FROM pay_reference_document",
                             "WHERE step_id=? AND (?=true OR worker_id=?)",
             				"ORDER BY date ASC"
                         ).toString()
@@ -76,7 +76,7 @@ public final class DbReferenceDocumentsToPay implements ReferenceDocumentsToPay 
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET step_id=?, worker_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -100,7 +100,7 @@ public final class DbReferenceDocumentsToPay implements ReferenceDocumentsToPay 
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET step_id=?",
                         "WHERE id=?"
                     ).toString()

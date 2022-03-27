@@ -68,7 +68,7 @@ public final class DbThirdPartyFamily implements ThirdPartyFamily {
 	private boolean codeIsUsed(String code) {
 		try (
 				final Connection connection = source.getConnection();
-				final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM third_party_family WHERE code=? AND id <>?")
+				final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM pay_third_party_family WHERE code=? AND id <>?")
 			){
 				pstmt.setString(1, code);
 				pstmt.setLong(2, id);
@@ -92,7 +92,7 @@ public final class DbThirdPartyFamily implements ThirdPartyFamily {
 	public String code() {
 		try (
 				final Connection connection = source.getConnection();
-				final PreparedStatement pstmt = connection.prepareStatement("SELECT code FROM third_party_family WHERE id=?")
+				final PreparedStatement pstmt = connection.prepareStatement("SELECT code FROM pay_third_party_family WHERE id=?")
 			){
 				pstmt.setLong(1, id);
 				try (final ResultSet rs = pstmt.executeQuery()) {
@@ -108,7 +108,7 @@ public final class DbThirdPartyFamily implements ThirdPartyFamily {
 	public String name() {
 		try (
 				final Connection connection = source.getConnection();
-				final PreparedStatement pstmt = connection.prepareStatement("SELECT name FROM third_party_family WHERE id=?")
+				final PreparedStatement pstmt = connection.prepareStatement("SELECT name FROM pay_third_party_family WHERE id=?")
 			){
 				pstmt.setLong(1, id);
 				try (final ResultSet rs = pstmt.executeQuery()) {
@@ -135,7 +135,7 @@ public final class DbThirdPartyFamily implements ThirdPartyFamily {
 		try (
 			final Connection connection = source.getConnection();
 				
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE third_party_family SET code=?, name=? WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_third_party_family SET code=?, name=? WHERE id=?")
 		) {
 			pstmt.setString(1, code);
 			pstmt.setString(2, name);

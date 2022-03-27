@@ -169,7 +169,7 @@ SOFTWARE.
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>admin-base</artifactId>
-      <version>0.3</version>
+      <version>0.4.1</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
     <dependency>
@@ -221,6 +221,9 @@ SOFTWARE.
         <configuration>
           <output>file</output>
           <outputDirectory>${project.build.directory}/site/jacoco</outputDirectory>
+          <excludes>
+            <exclude>**/xls/*</exclude>
+          </excludes>
         </configuration>
         <executions>
           <execution>
@@ -263,7 +266,7 @@ SOFTWARE.
               </execution>
             </executions>
             <configuration>
-              <mainClass>io.surati.gap.admin.jooq.JooqGen</mainClass>
+              <mainClass>io.surati.gap.payment.jooq.JooqGen</mainClass>
             </configuration>
           </plugin>
         </plugins>

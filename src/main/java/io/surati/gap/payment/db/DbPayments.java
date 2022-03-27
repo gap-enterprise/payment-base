@@ -35,7 +35,7 @@ public final class DbPayments implements Payments {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment",
+                            "SELECT id FROM pay_payment",
             				"ORDER BY id DESC"
                         ).toString()
                     )
@@ -61,7 +61,7 @@ public final class DbPayments implements Payments {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment",
+                            "SELECT id FROM pay_payment",
                             "WHERE status_id=?",
             				"ORDER BY id DESC"
                         ).toString()
@@ -93,7 +93,7 @@ public final class DbPayments implements Payments {
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment WHERE id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment WHERE id=?")
 				.set(id)
 				.select(new SingleOutcome<>(Long.class)) > 0;
 		} catch(SQLException ex) {
@@ -106,7 +106,7 @@ public final class DbPayments implements Payments {
 		try {
 			return
 				new JdbcSession(this.source)
-					.sql("SELECT COUNT(*) FROM payment")
+					.sql("SELECT COUNT(*) FROM pay_payment")
 					.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
 			throw new DatabaseException(ex);

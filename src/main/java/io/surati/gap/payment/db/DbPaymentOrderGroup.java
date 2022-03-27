@@ -52,7 +52,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment_order",
+                            "SELECT id FROM pay_payment_order",
                             "WHERE group_id=?",
             				"ORDER BY date ASC"
                         ).toString()
@@ -84,7 +84,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE id=? AND group_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE id=? AND group_id=?")
 				.set(id)
 				.set(this.id)
 				.select(new SingleOutcome<>(Long.class)) > 0;
@@ -102,7 +102,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	public Long count() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE group_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE group_id=?")
 				.set(this.id)
 				.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
@@ -114,7 +114,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	public Double totalAmount() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT SUM(amount_to_pay) FROM payment_order WHERE group_id=?")
+				.sql("SELECT SUM(amount_to_pay) FROM pay_payment_order WHERE group_id=?")
 				.set(this.id)
 				.select(new SingleOutcome<>(Long.class)).doubleValue();
 		} catch(SQLException ex) {
@@ -129,7 +129,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 				.sql(
 	        		new Joined(
 	    				" ",
-	    				"SELECT account_id FROM payment_order_group",
+	    				"SELECT account_id FROM pay_payment_order_group",
 	    				"WHERE id=?"
 	    			).toString()
 	    		)
@@ -154,7 +154,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT third_party_id FROM payment_order_group",
+	        				"SELECT third_party_id FROM pay_payment_order_group",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -173,7 +173,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order_group",
+                        "UPDATE pay_payment_order_group",
                         "SET account_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -244,7 +244,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order_group",
+                        "UPDATE pay_payment_order_group",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -265,7 +265,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT status_id FROM payment_order_group",
+	        				"SELECT status_id FROM pay_payment_order_group",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -324,7 +324,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 					.sql(
 			        		new Joined(
 		        				" ",
-		        				"SELECT mean_type_id FROM payment_order_group",
+		        				"SELECT mean_type_id FROM pay_payment_order_group",
 		        				"WHERE id=?"
 		        			).toString()
 		        		)
@@ -347,7 +347,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 				final PreparedStatement pstmt = connection.prepareStatement(
 					new Joined(
 	    				" ",
-	    				"SELECT due_date FROM payment_order_group",
+	    				"SELECT due_date FROM pay_payment_order_group",
 	    				"WHERE id=?"
 	    			).toString()
 				)
@@ -379,7 +379,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order_group",
+                        "UPDATE pay_payment_order_group",
                         "SET mean_type_id=?, due_date=?",
                         "WHERE id=?"
                     ).toString()
@@ -401,7 +401,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT is_hetero FROM payment_order_group",
+        				"SELECT is_hetero FROM pay_payment_order_group",
         				"WHERE id=?"
         			).toString()
 				)
@@ -426,7 +426,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "SELECT COUNT(*) FROM payment_order",
+	                    "SELECT COUNT(*) FROM pay_payment_order",
 	                    "WHERE group_id=? AND beneficiary_id=?"
 	                ).toString()
 	            )
@@ -438,7 +438,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order_group",
+                        "UPDATE pay_payment_order_group",
                         "SET third_party_id=?, is_hetero=?",
                         "WHERE id=?"
                     ).toString()

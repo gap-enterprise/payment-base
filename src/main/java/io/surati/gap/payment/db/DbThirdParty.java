@@ -63,7 +63,7 @@ public final class DbThirdParty extends DbAbstractPerson implements ThirdParty {
 	private boolean codeIsUsed(String code) {
 		try (
 				final Connection connection = source.getConnection();
-				final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM third_party WHERE code=? AND id <>?")
+				final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM pay_third_party WHERE code=? AND id <>?")
 			){
 				pstmt.setString(1, code);
 				pstmt.setLong(2, id);
@@ -82,7 +82,7 @@ public final class DbThirdParty extends DbAbstractPerson implements ThirdParty {
 	public String code() {
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT code FROM third_party WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT code FROM pay_third_party WHERE id=?")
 		){
 			pstmt.setLong(1, id);
 			try (final ResultSet rs = pstmt.executeQuery()) {
@@ -98,7 +98,7 @@ public final class DbThirdParty extends DbAbstractPerson implements ThirdParty {
 	public String abbreviated() {
 		try (
 				final Connection connection = source.getConnection();
-				final PreparedStatement pstmt = connection.prepareStatement("SELECT abbreviated FROM third_party WHERE id=?")
+				final PreparedStatement pstmt = connection.prepareStatement("SELECT abbreviated FROM pay_third_party WHERE id=?")
 			){
 			pstmt.setLong(1, id);
 			try (final ResultSet rs = pstmt.executeQuery()) {
@@ -124,7 +124,7 @@ public final class DbThirdParty extends DbAbstractPerson implements ThirdParty {
 			
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE third_party SET code=?, abbreviated=? WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_third_party SET code=?, abbreviated=? WHERE id=?")
 		) {
 			super.update(name);
 			pstmt.setString(1, code);
@@ -143,7 +143,7 @@ public final class DbThirdParty extends DbAbstractPerson implements ThirdParty {
 				.sql(
 	        		new Joined(
 	    				" ",
-	    				"SELECT family_id FROM third_party",
+	    				"SELECT family_id FROM pay_third_party",
 	    				"WHERE id=?"
 	    			).toString()
 	    		)
@@ -164,7 +164,7 @@ public final class DbThirdParty extends DbAbstractPerson implements ThirdParty {
 		try (
 			final Connection connection = source.getConnection();
 				
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE third_party SET family_id=? WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_third_party SET family_id=? WHERE id=?")
 		) {
 			if(family == ThirdPartyFamily.EMPTY) {
 				pstmt.setObject(1, null);

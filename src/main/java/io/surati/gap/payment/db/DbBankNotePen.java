@@ -74,7 +74,7 @@ public final class DbBankNotePen implements BankNotePen {
 				.sql(
 					new Joined(
 						" ",
-						"INSERT INTO payment",
+						"INSERT INTO pay_payment",
 						"(internal_reference, issuer_reference, beneficiary_id, amount, date, edition_place, mention_1, mention_2, status_id, author_id, group_id, issuer_id, mean_type_id)",
 						"VALUES",
 						"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -98,7 +98,7 @@ public final class DbBankNotePen implements BankNotePen {
 				.sql(
 					new Joined(
 						" ",
-						"INSERT INTO bank_note",
+						"INSERT INTO pay_bank_note",
 						"(id, book_id, due_date)",
 						"VALUES",
 						"(?, ?, ?)"
@@ -122,13 +122,13 @@ public final class DbBankNotePen implements BankNotePen {
 	private BankNote lastNote() {
 		try {
 			final boolean hasany = new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM bank_note")
+				.sql("SELECT COUNT(*) FROM pay_bank_note")
 				.select(new SingleOutcome<>(Long.class)) > 0;
 			if(hasany) {
 				return new DbBankNote(
 					this.source,
 					new JdbcSession(this.source)
-						.sql("SELECT id FROM bank_note order by id DESC limit 1")
+						.sql("SELECT id FROM pay_bank_note order by id DESC limit 1")
 						.select(new SingleOutcome<>(Long.class))
 				);
 			} else {

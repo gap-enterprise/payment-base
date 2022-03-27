@@ -75,7 +75,7 @@ public final class DbBanks implements Banks {
 	public Bank get(String code) {
 		try(
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM third_party WHERE code=? and id IN (select id from bank)");
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM pay_third_party WHERE code=? and id IN (select id from pay_bank)");
 		){
 			pstmt.setString(1, code);		
 			try(final ResultSet rs = pstmt.executeQuery()){
@@ -95,7 +95,7 @@ public final class DbBanks implements Banks {
 	public Bank get(Long id) {
 		try(
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM third_party WHERE id=? and id in (select id FROM bank)");
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM pay_third_party WHERE id=? and id in (select id FROM pay_bank)");
 		){
 			pstmt.setLong(1, id);		
 			try(final ResultSet rs = pstmt.executeQuery()){
@@ -119,7 +119,7 @@ public final class DbBanks implements Banks {
 		final Bank bank;
 		try(
 			final Connection connection = this.source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("INSERT INTO bank (id) VALUES (?)")
+			final PreparedStatement pstmt = connection.prepareStatement("INSERT INTO pay_bank (id) VALUES (?)")
 		){
 			pstmt.setLong(1, tp.id());
 			pstmt.executeUpdate();			
@@ -148,7 +148,7 @@ public final class DbBanks implements Banks {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "INSERT INTO payment_mean",
+	                    "INSERT INTO pay_payment_mean",
 	                    "(type_id, bank_id, image_file_name, width, height, dpi)",
 	                    "VALUES",
 	                    "(?, ?, ?, ?, ?, ?)"
@@ -188,7 +188,7 @@ public final class DbBanks implements Banks {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "INSERT INTO payment_mean_field",
+	                    "INSERT INTO pay_payment_mean_field",
 	                    "(type_id, mean_id, x, y, width, visible)",
 	                    "VALUES",
 	                    "(?, ?, ?, ?, ?, ?)"
@@ -213,12 +213,12 @@ public final class DbBanks implements Banks {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "SELECT COUNT(*) FROM bank",
-	                    "WHERE id=? AND (id IN (SELECT bank_id FROM bank_account)",
-	                    "OR id IN (SELECT beneficiary_id FROM payment_order)",
-	                    "OR id IN (SELECT third_party_id FROM payment_order_group)",
-	                    "OR id IN (SELECT beneficiary_id FROM bank_note)",
-	                    "OR id IN (SELECT issuer_id FROM reference_document))"
+	                    "SELECT COUNT(*) FROM pay_bank",
+	                    "WHERE id=? AND (id IN (SELECT bank_id FROM pay_bank_account)",
+	                    "OR id IN (SELECT beneficiary_id FROM pay_payment_order)",
+	                    "OR id IN (SELECT third_party_id FROM pay_payment_order_group)",
+	                    "OR id IN (SELECT beneficiary_id FROM pay_bank_note)",
+	                    "OR id IN (SELECT issuer_id FROM pay_reference_document))"
 	                ).toString()
 	            )
 	            .set(id)
@@ -241,10 +241,10 @@ public final class DbBanks implements Banks {
 	}
 	
 	@Override
-	public Iterable<Bank> iterate() {		
+	public Iterable<Bank> iterate() {
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM bank")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM pay_bank")
 		){
 			final Collection<Bank> items = new ArrayList<>();		
 			try(final ResultSet rs = pstmt.executeQuery()){
@@ -262,7 +262,7 @@ public final class DbBanks implements Banks {
 	public boolean has(String code) {
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM third_party WHERE code=? and id IN (select id from bank)")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM pay_third_party WHERE code=? and id IN (select id from pay_bank)")
 		){
 			pstmt.setString(1, code);	
 			try(final ResultSet rs = pstmt.executeQuery()){
@@ -280,7 +280,7 @@ public final class DbBanks implements Banks {
 		try {
 			return
 				new JdbcSession(this.source)
-					.sql("SELECT COUNT(*) FROM bank")
+					.sql("SELECT COUNT(*) FROM pay_bank")
 					.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
 			throw new DatabaseException(ex);

@@ -85,11 +85,11 @@ public final class DbPaginedBankNotes implements BankNotes {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT bn.id FROM bank_note as bn",
-							"LEFT JOIN payment as pay ON pay.id = bn.id",
-	                        "LEFT JOIN third_party as tp ON tp.id = pay.beneficiary_id",
-	                        "LEFT JOIN person as ps ON ps.id = tp.id",
-	                        "LEFT JOIN bank_note_book as bnb ON bnb.id = bn.book_id",
+                            "SELECT bn.id FROM pay_bank_note as bn",
+							"LEFT JOIN pay_payment as pay ON pay.id = bn.id",
+	                        "LEFT JOIN pay_third_party as tp ON tp.id = pay.beneficiary_id",
+	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
+	                        "LEFT JOIN pay_bank_note_book as bnb ON bnb.id = bn.book_id",
 	                        "WHERE (pay.issuer_reference ILIKE ? OR pay.internal_reference ILIKE ? OR pay.edition_place ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (pay.status_id = ? OR ? = 'NONE')",
 	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date >= ?)",
@@ -143,11 +143,11 @@ public final class DbPaginedBankNotes implements BankNotes {
 					.sql(
 	                    new Joined(
 	                        " ",
-	                        "SELECT COUNT(bn.*) FROM bank_note as bn",
-							"LEFT JOIN payment as pay ON pay.id = bn.id",
-	                        "LEFT JOIN third_party as tp ON tp.id = pay.beneficiary_id",
-	                        "LEFT JOIN person as ps ON ps.id = tp.id",
-	                        "LEFT JOIN bank_note_book as bnb ON bnb.id = bn.book_id",
+	                        "SELECT COUNT(bn.*) FROM pay_bank_note as bn",
+							"LEFT JOIN pay_payment as pay ON pay.id = bn.id",
+	                        "LEFT JOIN pay_third_party as tp ON tp.id = pay.beneficiary_id",
+	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
+	                        "LEFT JOIN pay_bank_note_book as bnb ON bnb.id = bn.book_id",
 	                        "WHERE (pay.issuer_reference ILIKE ? OR pay.internal_reference ILIKE ? OR pay.edition_place ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (pay.status_id = ? OR ? = 'NONE')",
 	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date >= ?)",

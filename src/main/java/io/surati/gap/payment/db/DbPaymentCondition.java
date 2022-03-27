@@ -31,7 +31,7 @@ public final class DbPaymentCondition implements PaymentCondition {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT payment_deadline FROM third_party",
+        				"SELECT payment_deadline FROM pay_third_party",
         				"WHERE id=?"
         			).toString()
         		)
@@ -53,7 +53,7 @@ public final class DbPaymentCondition implements PaymentCondition {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE third_party",
+                        "UPDATE pay_third_party",
                         "SET payment_deadline=?",
                         "WHERE id=?"
                     ).toString()
@@ -84,7 +84,7 @@ public final class DbPaymentCondition implements PaymentCondition {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT mean_type_id FROM third_party_payment_mean_allowed",
+                            "SELECT mean_type_id FROM pay_third_party_payment_mean_allowed",
                             "WHERE third_party_id=?",
             				"ORDER BY mean_type_id"
                         ).toString()
@@ -111,7 +111,7 @@ public final class DbPaymentCondition implements PaymentCondition {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "INSERT INTO third_party_payment_mean_allowed",
+	                    "INSERT INTO pay_third_party_payment_mean_allowed",
 	                    "(mean_type_id, third_party_id)",
 	                    "VALUES",
 	                    "(?, ?)"
@@ -132,7 +132,7 @@ public final class DbPaymentCondition implements PaymentCondition {
                 .sql(
                     new Joined(
                         " ",
-                        "DELETE FROM third_party_payment_mean_allowed",
+                        "DELETE FROM pay_third_party_payment_mean_allowed",
                         "WHERE mean_type_id=? AND third_party_id=?"
                     ).toString()
                 )
@@ -148,7 +148,7 @@ public final class DbPaymentCondition implements PaymentCondition {
 	public boolean has(PaymentMeanType meantype) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM third_party_payment_mean_allowed WHERE mean_type_id=? AND third_party_id=?")
+				.sql("SELECT COUNT(*) FROM pay_third_party_payment_mean_allowed WHERE mean_type_id=? AND third_party_id=?")
 				.set(meantype.name())
 				.set(this.tp.id())
 				.select(new SingleOutcome<>(Long.class)) > 0;
