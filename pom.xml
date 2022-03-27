@@ -169,7 +169,7 @@ SOFTWARE.
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>admin-base</artifactId>
-      <version>0.4.1</version>
+      <version>0.4.2</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
     <dependency>
@@ -266,7 +266,7 @@ SOFTWARE.
               </execution>
             </executions>
             <configuration>
-              <mainClass>io.surati.gap.payment.jooq.JooqGen</mainClass>
+              <mainClass>io.surati.gap.payment.base.jooq.JooqGen</mainClass>
             </configuration>
           </plugin>
         </plugins>
@@ -283,7 +283,7 @@ SOFTWARE.
             <configuration>
               <excludes>
                 <exclude>xml:.*</exclude>
-                <exclude>java:./src/main/java/io/surati/gap/admin/module/jooq/generated/*</exclude>
+                <exclude>java:./src/main/java/io/surati/gap/payment/base/jooq/generated/*</exclude>
                 <exclude>duplicatefinder:.*</exclude>
                 <exclude>dependencies:.*</exclude>
               </excludes>
