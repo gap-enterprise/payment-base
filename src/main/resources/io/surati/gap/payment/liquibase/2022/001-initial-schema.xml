@@ -15,11 +15,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" logicalFilePath="001-initial-schema.xml" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
   <changeSet author="liquibase (generated)" id="1647609485878-2">
-    <createTable tableName="bank_account">
+    <createTable tableName="pay_bank_account">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="bank_account_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_bank_account_pkey"/>
       </column>
       <column name="branch_code" type="VARCHAR(5)">
         <constraints nullable="false"/>
@@ -37,9 +37,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-3">
-    <createTable tableName="third_party">
+    <createTable tableName="pay_third_party">
       <column name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="third_party_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_third_party_pkey"/>
       </column>
       <column name="code" type="VARCHAR(50)">
         <constraints nullable="false"/>
@@ -54,9 +54,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-6">
-    <createTable tableName="payment_mean">
+    <createTable tableName="pay_payment_mean">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_mean_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_mean_pkey"/>
       </column>
       <column name="type_id" type="VARCHAR(25)">
         <constraints nullable="false"/>
@@ -79,12 +79,12 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-7">
-    <createTable tableName="payment_mean_field">
+    <createTable tableName="pay_payment_mean_field">
       <column name="type_id" type="VARCHAR(50)">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_mean_field_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_mean_field_pkey"/>
       </column>
       <column name="mean_id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_mean_field_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_mean_field_pkey"/>
       </column>
       <column defaultValueNumeric="0.0" name="x" type="FLOAT8">
         <constraints nullable="false"/>
@@ -99,9 +99,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-8">
-    <createTable tableName="bank_note_book">
+    <createTable tableName="pay_bank_note_book">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="bank_note_book_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_bank_note_book_pkey"/>
       </column>
       <column name="account_id" type="BIGINT">
         <constraints nullable="false"/>
@@ -127,9 +127,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-9">
-    <createTable tableName="payment">
+    <createTable tableName="pay_payment">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_pkey"/>
       </column>
       <column name="internal_reference" type="VARCHAR(25)">
         <constraints nullable="false"/>
@@ -172,9 +172,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-10">
-    <createTable tableName="reference_document">
+    <createTable tableName="pay_reference_document">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="reference_document_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_reference_document_pkey"/>
       </column>
       <column name="type_id" type="VARCHAR(25)">
         <constraints nullable="false"/>
@@ -226,9 +226,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-11">
-    <createTable tableName="payment_order">
+    <createTable tableName="pay_payment_order">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_order_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_order_pkey"/>
       </column>
       <column name="date" type="date">
         <constraints nullable="false"/>
@@ -258,9 +258,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-12">
-    <createTable tableName="third_party_family">
+    <createTable tableName="pay_third_party_family">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="third_party_family_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_third_party_family_pkey"/>
       </column>
       <column name="code" type="VARCHAR(50)">
         <constraints nullable="false"/>
@@ -271,9 +271,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-14">
-    <createTable tableName="payment_export">
+    <createTable tableName="pay_payment_export">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_export_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_export_pkey"/>
       </column>
       <column name="payment_id" type="BIGINT">
         <constraints nullable="false"/>
@@ -284,9 +284,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-15">
-    <createTable tableName="payment_order_group">
+    <createTable tableName="pay_payment_order_group">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_order_group_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_order_group_pkey"/>
       </column>
       <column name="third_party_id" type="BIGINT">
         <constraints nullable="false"/>
@@ -307,9 +307,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-16">
-    <createTable tableName="payment_batch">
+    <createTable tableName="pay_payment_batch">
       <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="payment_batch_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_payment_batch_pkey"/>
       </column>
       <column name="date" type="date">
         <constraints nullable="false"/>
@@ -324,7 +324,7 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-21">
-    <createView fullDefinition="false" viewName="reference_document_view">SELECT rd.id,
+    <createView fullDefinition="false" viewName="pay_reference_document_view">SELECT rd.id,
       rd.type_id,
       rd.date,
       rd.reference,
@@ -342,63 +342,31 @@ SOFTWARE.
       ps.name AS name_issuer,
       tp.abbreviated AS abbreviated_issuer,
       tp.code AS code_issuer
-      FROM ((reference_document rd
-      LEFT JOIN third_party tp ON ((tp.id = rd.issuer_id)))
-      LEFT JOIN person ps ON ((ps.id = rd.issuer_id)));</createView>
+      FROM ((pay_reference_document rd
+      LEFT JOIN pay_third_party tp ON ((tp.id = rd.issuer_id)))
+      LEFT JOIN ad_person ps ON ((ps.id = rd.issuer_id)));</createView>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-22">
-    <createView fullDefinition="false" viewName="bank_account_view">SELECT ba.id,
+    <createView fullDefinition="false" viewName="pay_bank_account_view">SELECT ba.id,
       ba.branch_code,
       ba.number,
       ba.key,
       ba.bank_id,
       ba.holder_id,
       concat(b.code, ba.branch_code, ba.number, ba.key) AS full_number
-      FROM (bank_account ba
-      LEFT JOIN third_party b ON ((b.id = ba.bank_id)));</createView>
+      FROM (pay_bank_account ba
+      LEFT JOIN pay_third_party b ON ((b.id = ba.bank_id)));</createView>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-23">
-    <addUniqueConstraint columnNames="code" constraintName="third_party_code_key" tableName="third_party"/>
-  </changeSet>
-  <changeSet author="liquibase (generated)" id="1647609485878-25">
-    <createView fullDefinition="false" viewName="document_to_bundle_view">SELECT t2.id,
-      t2.reference,
-      t2.beneficiary_id,
-      t2.year_of_payment,
-      t2.total_amount,
-      t2.annual_amount_paid,
-      data.imputation,
-      data.bundle_id,
-      data.title_id,
-      data.section_id,
-      (t2.total_amount - t2.annual_amount_paid) AS left_amount,
-      (t2.total_amount &gt; t2.annual_amount_paid) AS is_split
-      FROM (( SELECT t1.id,
-      t1.reference,
-      t1.beneficiary_id,
-      t1.year_of_payment,
-      t1.total_amount,
-      sum(t1.annual_amount_paid) AS annual_amount_paid
-      FROM ( SELECT doc.id,
-      po.beneficiary_id,
-      doc.reference,
-      doc.amount AS total_amount,
-      date_part('year'::text, (pay.date)::date) AS year_of_payment,
-      po.amount_to_pay AS annual_amount_paid
-      FROM ((payment_order po
-      LEFT JOIN reference_document doc ON ((doc.id = po.reference_document_id)))
-      LEFT JOIN payment pay ON ((pay.group_id = po.group_id)))
-      WHERE ((pay.status_id)::text = 'ISSUED'::text)) t1
-      GROUP BY t1.id, t1.reference, t1.beneficiary_id, t1.year_of_payment, t1.total_amount) t2
-      LEFT JOIN ma_data data ON ((data.id = t2.id)));</createView>
+    <addUniqueConstraint columnNames="code" constraintName="pay_third_party_code_key" tableName="pay_third_party"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-26">
-    <addUniqueConstraint columnNames="code" constraintName="third_party_family_code_key" tableName="third_party_family"/>
+    <addUniqueConstraint columnNames="code" constraintName="pay_third_party_family_code_key" tableName="pay_third_party_family"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-31">
-    <createTable tableName="bank">
+    <createTable tableName="pay_bank">
       <column name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="bank_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_bank_pkey"/>
       </column>
       <column name="representative" type="VARCHAR(50)"/>
       <column name="representative_position" type="VARCHAR(50)"/>
@@ -407,7 +375,7 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-32">
-    <createTable tableName="bank_account_accounting_setting">
+    <createTable tableName="pay_bank_account_accounting_setting">
       <column name="account_id" type="BIGINT">
         <constraints nullable="false"/>
       </column>
@@ -418,9 +386,9 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-33">
-    <createTable tableName="bank_note">
+    <createTable tableName="pay_bank_note">
       <column name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="bank_note_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_bank_note_pkey"/>
       </column>
       <column name="book_id" type="BIGINT">
         <constraints nullable="false"/>
@@ -429,103 +397,103 @@ SOFTWARE.
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-34">
-    <createTable tableName="third_party_payment_mean_allowed">
+    <createTable tableName="pay_third_party_payment_mean_allowed">
       <column name="third_party_id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="third_party_payment_mean_allowed_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_third_party_payment_mean_allowed_pkey"/>
       </column>
       <column name="mean_type_id" type="VARCHAR(25)">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="third_party_payment_mean_allowed_pkey"/>
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pay_third_party_payment_mean_allowed_pkey"/>
       </column>
     </createTable>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-36">
-    <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="payment_order" constraintName="app_user_payment_order_author_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="pay_payment_order" constraintName="pay_payment_order_author_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="ad_user" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-37">
-    <addForeignKeyConstraint baseColumnNames="authorizing_officer_id" baseTableName="payment_order" constraintName="app_user_payment_order_authorizing_officer_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="authorizing_officer_id" baseTableName="pay_payment_order" constraintName="pay_payment_order_authorizing_officer_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="ad_user" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-38">
-    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="bank_account_accounting_setting" constraintName="bank_account_bank_account_accounting_setting_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bank_account" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="pay_bank_account_accounting_setting" constraintName="pay_bank_account_accounting_setting_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_bank_account" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-39">
-    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="bank_note_book" constraintName="bank_account_bank_note_book_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bank_account" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="pay_bank_note_book" constraintName="pay_bank_note_book_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_bank_account" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-40">
-    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="payment_batch" constraintName="bank_account_payment_batch_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bank_account" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="pay_payment_batch" constraintName="pay_payment_batch_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_bank_account" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-41">
-    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="payment_order_group" constraintName="bank_account_payment_order_group_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bank_account" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="pay_payment_order_group" constraintName="pay_payment_order_group_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_bank_account" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-42">
-    <addForeignKeyConstraint baseColumnNames="bank_id" baseTableName="bank_account" constraintName="bank_bank_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bank" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="bank_id" baseTableName="pay_bank_account" constraintName="pay_bank_account_bank_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_bank" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-43">
-    <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="bank_note" constraintName="bank_note_book_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bank_note_book" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="pay_bank_note" constraintName="pay_bank_note_book_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_bank_note_book" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-44">
-    <addForeignKeyConstraint baseColumnNames="id" baseTableName="bank_note" constraintName="bank_note_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="payment" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="id" baseTableName="pay_bank_note" constraintName="pay_bank_note_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_payment" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-45">
-    <addForeignKeyConstraint baseColumnNames="bank_id" baseTableName="payment_mean" constraintName="bank_payment_mean_bank_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="bank" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="bank_id" baseTableName="pay_payment_mean" constraintName="pay_payment_mean_bank_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_bank" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-49">
-    <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="payment" constraintName="payment_author_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="pay_payment" constraintName="pay_payment_author_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="ad_user" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-50">
-    <addForeignKeyConstraint baseColumnNames="batch_id" baseTableName="payment" constraintName="payment_batch_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="payment_batch" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="batch_id" baseTableName="pay_payment" constraintName="pay_payment_batch_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_payment_batch" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-51">
-    <addForeignKeyConstraint baseColumnNames="beneficiary_id" baseTableName="payment" constraintName="payment_beneficiary_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="beneficiary_id" baseTableName="pay_payment" constraintName="pay_payment_beneficiary_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-52">
-    <addForeignKeyConstraint baseColumnNames="payment_id" baseTableName="payment_export" constraintName="payment_export_payment_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="payment" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="payment_id" baseTableName="pay_payment_export" constraintName="pay_payment_export_payment_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_payment" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-53">
-    <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="payment" constraintName="payment_group_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="payment_order_group" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="pay_payment" constraintName="pay_payment_group_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_payment_order_group" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-54">
-    <addForeignKeyConstraint baseColumnNames="issuer_id" baseTableName="payment" constraintName="payment_issuer_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="issuer_id" baseTableName="pay_payment" constraintName="pay_payment_issuer_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-55">
-    <addForeignKeyConstraint baseColumnNames="mean_id" baseTableName="payment_mean_field" constraintName="payment_mean_payment_mean_field_mean_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="payment_mean" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="mean_id" baseTableName="pay_payment_mean_field" constraintName="pay_payment_mean_field_mean_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_payment_mean" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-56">
-    <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="payment_order_group" constraintName="payment_order_group_author_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="author_id" baseTableName="pay_payment_order_group" constraintName="pay_payment_order_group_author_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="ad_user" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-57">
-    <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="payment_order" constraintName="payment_order_group_payment_order_group_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="payment_order_group" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="group_id" baseTableName="pay_payment_order" constraintName="pay_payment_order_group_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_payment_order_group" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-58">
-    <addForeignKeyConstraint baseColumnNames="worker_id" baseTableName="payment_order_group" constraintName="payment_order_group_worker_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="worker_id" baseTableName="pay_payment_order_group" constraintName="pay_payment_order_group_worker_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="ad_user" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-62">
-    <addForeignKeyConstraint baseColumnNames="reference_document_id" baseTableName="payment_order" constraintName="reference_document_payment_order_reference_document_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="reference_document" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="reference_document_id" baseTableName="pay_payment_order" constraintName="pay_payment_order_reference_document_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_reference_document" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-63">
-    <addForeignKeyConstraint baseColumnNames="worker_id" baseTableName="reference_document" constraintName="reference_document_worker_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="app_user" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="worker_id" baseTableName="pay_reference_document" constraintName="pay_reference_document_worker_id" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="ad_user" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-64">
-    <addForeignKeyConstraint baseColumnNames="holder_id" baseTableName="bank_account" constraintName="third_party_bank_account_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="holder_id" baseTableName="pay_bank_account" constraintName="pay_bank_account_holder_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-65">
-    <addForeignKeyConstraint baseColumnNames="id" baseTableName="bank" constraintName="third_party_bank_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="id" baseTableName="pay_bank" constraintName="pay_bank_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-66">
-    <addForeignKeyConstraint baseColumnNames="family_id" baseTableName="third_party" constraintName="third_party_family_third_party_family_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party_family" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="family_id" baseTableName="pay_third_party" constraintName="pay_third_party_family_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party_family" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-67">
-    <addForeignKeyConstraint baseColumnNames="id" baseTableName="third_party" constraintName="third_party_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="person" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="id" baseTableName="pay_third_party" constraintName="pay_third_party_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="ad_person" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-68">
-    <addForeignKeyConstraint baseColumnNames="beneficiary_id" baseTableName="payment_order" constraintName="third_party_payment_order_beneficiary_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="beneficiary_id" baseTableName="pay_payment_order" constraintName="pay_payment_order_beneficiary_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-69">
-    <addForeignKeyConstraint baseColumnNames="third_party_id" baseTableName="payment_order_group" constraintName="third_party_payment_order_group_third_party_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="third_party_id" baseTableName="pay_payment_order_group" constraintName="pay_payment_order_group_third_party_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-70">
-    <addForeignKeyConstraint baseColumnNames="issuer_id" baseTableName="reference_document" constraintName="third_party_reference_document_beneficiary_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="issuer_id" baseTableName="pay_reference_document" constraintName="pay_reference_document_issuer_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
   <changeSet author="liquibase (generated)" id="1647609485878-71">
-    <addForeignKeyConstraint baseColumnNames="third_party_id" baseTableName="third_party_payment_mean_allowed" constraintName="third_party_third_party_payment_mean_allowed_third_party_id_fke" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="third_party" validate="true"/>
+    <addForeignKeyConstraint baseColumnNames="third_party_id" baseTableName="pay_third_party_payment_mean_allowed" constraintName="pay_third_party_payment_mean_allowed_third_party_id_fkey" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="CASCADE" referencedColumnNames="id" referencedTableName="pay_third_party" validate="true"/>
   </changeSet>
 </databaseChangeLog>

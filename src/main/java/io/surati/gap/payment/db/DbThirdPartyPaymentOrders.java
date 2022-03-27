@@ -56,7 +56,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment_order",
+                            "SELECT id FROM pay_payment_order",
                             "WHERE beneficiary_id=? AND (?='NONE' OR status_id=?)",
             				"ORDER BY date, id DESC"
                         ).toString()
@@ -105,7 +105,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 		            .sql(
 		                new Joined(
 		                    " ",
-		                    "INSERT INTO payment_order",
+		                    "INSERT INTO pay_payment_order",
 		                    "(date, reference, beneficiary_id, amount_to_pay, author_id, status_id, reason, description)",
 		                    "VALUES",
 		                    "(?, ?, ?, ?, ?, ?, ?, ?)"
@@ -150,7 +150,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
                 .sql(
                     new Joined(
                         " ",
-                        "DELETE FROM payment_order",
+                        "DELETE FROM pay_payment_order",
                         "WHERE id=? AND beneficiary_id=? AND (?='NONE' OR status_id=?)"
                     ).toString()
                 )
@@ -162,8 +162,8 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
                 .sql(
                     new Joined(
                         " ",
-                        "DELETE FROM payment_order_group",
-                        "WHERE id NOT IN (SELECT group_id FROM payment_order)"
+                        "DELETE FROM pay_payment_order_group",
+                        "WHERE id NOT IN (SELECT group_id FROM pay_payment_order)"
                     ).toString()
                 )
                 .execute();;
@@ -175,7 +175,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE id=? AND beneficiary_id=? AND (?='NONE' OR status_id=?)")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE id=? AND beneficiary_id=? AND (?='NONE' OR status_id=?)")
 				.set(id)
 				.set(this.tp.id())
 				.set(this.status.name())
@@ -190,7 +190,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 	public boolean has(final String reference) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE reference=? AND beneficiary_id=? AND (?='NONE' OR status_id=?)")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE reference=? AND beneficiary_id=? AND (?='NONE' OR status_id=?)")
 				.set(reference)
 				.set(this.tp.id())
 				.set(this.status.name())
@@ -208,7 +208,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 				return new DbPaymentOrder(
 					this.source,
 					new JdbcSession(this.source)
-						.sql("SELECT id FROM payment_order WHERE reference=? AND beneficiary_id=? AND (?='NONE' OR status_id=?)")
+						.sql("SELECT id FROM pay_payment_order WHERE reference=? AND beneficiary_id=? AND (?='NONE' OR status_id=?)")
 						.set(reference)
 						.set(this.tp.id())
 						.set(this.status.name())
@@ -226,13 +226,13 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 	private PaymentOrder last() {
 		try {
 			final boolean hasany = new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order")
+				.sql("SELECT COUNT(*) FROM pay_payment_order")
 				.select(new SingleOutcome<>(Long.class)) > 0;
 			if(hasany) {
 				return new DbPaymentOrder(
 					this.source,
 					new JdbcSession(this.source)
-						.sql("SELECT id FROM payment_order order by id DESC limit 1")
+						.sql("SELECT id FROM pay_payment_order order by id DESC limit 1")
 						.select(new SingleOutcome<>(Long.class))
 				);
 			} else {
@@ -274,7 +274,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 	public Long count() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE beneficiary_id=? AND (?='NONE' OR status_id=?)")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE beneficiary_id=? AND (?='NONE' OR status_id=?)")
 				.set(this.tp.id())
 				.set(this.status.name())
 				.set(this.status.name())
@@ -288,7 +288,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 	public Double totalAmount() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT SUM(amount_to_pay) FROM payment_order WHERE beneficiary_id=? AND (?='NONE' OR status_id=?)")
+				.sql("SELECT SUM(amount_to_pay) FROM pay_payment_order WHERE beneficiary_id=? AND (?='NONE' OR status_id=?)")
 				.set(this.tp.id())
 				.set(this.status.name())
 				.set(this.status.name())

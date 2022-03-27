@@ -64,7 +64,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT issuer_reference FROM payment",
+        				"SELECT issuer_reference FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -82,7 +82,7 @@ public abstract class DbAbstractPayment implements Payment {
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT date FROM payment",
+    				"SELECT date FROM pay_payment",
     				"WHERE id=?"
     			).toString()
 			)
@@ -106,7 +106,7 @@ public abstract class DbAbstractPayment implements Payment {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT beneficiary_id FROM payment",
+	        				"SELECT beneficiary_id FROM pay_payment",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -127,7 +127,7 @@ public abstract class DbAbstractPayment implements Payment {
 					.sql(
 						new Joined(
 							" ",
-							"SELECT issuer_id FROM payment",
+							"SELECT issuer_id FROM pay_payment",
 							"WHERE id=?"
 						).toString()
 					)
@@ -143,7 +143,7 @@ public abstract class DbAbstractPayment implements Payment {
 	public Double amount() {
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT amount FROM payment WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT amount FROM pay_payment WHERE id=?")
 		){
 			pstmt.setLong(1, this.id);
 			try (final ResultSet rs = pstmt.executeQuery()) {
@@ -163,7 +163,7 @@ public abstract class DbAbstractPayment implements Payment {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT status_id FROM payment",
+	        				"SELECT status_id FROM pay_payment",
 	        				"WHERE id=?"
 	        			).asString()
 	        		)
@@ -182,7 +182,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT mention_1 FROM payment",
+        				"SELECT mention_1 FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -200,7 +200,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT mention_2 FROM payment",
+        				"SELECT mention_2 FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -224,7 +224,7 @@ public abstract class DbAbstractPayment implements Payment {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment",
+                        "UPDATE pay_payment",
                         "SET status_id=?, cancel_reason_id=?, cancel_reason_description=?, cancel_author_id=?, cancel_date=?",
                         "WHERE id=?"
                     ).toString()
@@ -250,7 +250,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT cancel_reason_id FROM payment",
+        				"SELECT cancel_reason_id FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -273,7 +273,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT edition_place FROM payment",
+        				"SELECT edition_place FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -293,7 +293,7 @@ public abstract class DbAbstractPayment implements Payment {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT author_id FROM payment",
+	        				"SELECT author_id FROM pay_payment",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -322,7 +322,7 @@ public abstract class DbAbstractPayment implements Payment {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment",
+                        "UPDATE pay_payment",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -343,7 +343,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT internal_reference FROM payment",
+        				"SELECT internal_reference FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -361,7 +361,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT group_id FROM payment",
+        				"SELECT group_id FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -384,7 +384,7 @@ public abstract class DbAbstractPayment implements Payment {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT cancel_reason_description FROM payment",
+        				"SELECT cancel_reason_description FROM pay_payment",
         				"WHERE id=?"
         			).toString()
         		)
@@ -402,7 +402,7 @@ public abstract class DbAbstractPayment implements Payment {
 					.sql(
 			        		new Joined(
 		        				" ",
-		        				"SELECT cancel_author_id FROM payment",
+		        				"SELECT cancel_author_id FROM pay_payment",
 		        				"WHERE id=?"
 		        			).toString()
 		        		)
@@ -430,7 +430,7 @@ public abstract class DbAbstractPayment implements Payment {
 					.sql(
 						new Joined(
 							" ",
-							"SELECT mean_type_id FROM payment",
+							"SELECT mean_type_id FROM pay_payment",
 							"WHERE id=?"
 						).toString()
 					)
@@ -449,7 +449,7 @@ public abstract class DbAbstractPayment implements Payment {
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT cancel_date FROM payment",
+    				"SELECT cancel_date FROM pay_payment",
     				"WHERE id=?"
     			).toString()
 			)

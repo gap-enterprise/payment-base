@@ -49,7 +49,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT date FROM payment_order",
+    				"SELECT date FROM pay_payment_order",
     				"WHERE id=?"
     			).toString()
 			)
@@ -71,7 +71,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT reference FROM payment_order",
+        				"SELECT reference FROM pay_payment_order",
         				"WHERE id=?"
         			).toString()
         		)
@@ -91,7 +91,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT beneficiary_id FROM payment_order",
+	        				"SELECT beneficiary_id FROM pay_payment_order",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -111,7 +111,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT amount_to_pay FROM payment_order",
+        				"SELECT amount_to_pay FROM pay_payment_order",
         				"WHERE id=?"
         			).toString()
 				)
@@ -138,7 +138,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT reference_document_id FROM payment_order",
+        				"SELECT reference_document_id FROM pay_payment_order",
         				"WHERE id=?"
         			).toString()
         		)
@@ -173,7 +173,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order",
+                        "UPDATE pay_payment_order",
                         "SET date=?, beneficiary_id=?, amount_to_pay=?, reason=?, description=?",
                         "WHERE id=?"
                     ).toString()
@@ -197,7 +197,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 			   .sql(
 	        		new Joined(
         				" ",
-        				"SELECT authorizing_officer_id FROM payment_order",
+        				"SELECT authorizing_officer_id FROM pay_payment_order",
         				"WHERE id=?"
         			).toString()
         		)
@@ -223,7 +223,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT status_id FROM payment_order",
+	        				"SELECT status_id FROM pay_payment_order",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -249,7 +249,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order",
+                        "UPDATE pay_payment_order",
                         "SET status_id=?, authorizing_officer_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -278,7 +278,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order",
+                        "UPDATE pay_payment_order",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -315,7 +315,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 		try (
 			final Connection connection = source.getConnection();
 				
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE payment_order SET bank_account_id=? WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_payment_order SET bank_account_id=? WHERE id=?")
 		) {
 			if(account == BankAccount.EMPTY) {
 				pstmt.setObject(1, null);
@@ -340,7 +340,7 @@ public final class DbPaymentOrder implements PaymentOrder {
             .sql(
                 new Joined(
                     " ",
-                    "UPDATE payment_order",
+                    "UPDATE pay_payment_order",
                     "SET mean_type_id=?",
                     "WHERE id=?"
                 ).asString()
@@ -362,7 +362,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT author_id FROM payment_order",
+	        				"SELECT author_id FROM pay_payment_order",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -381,7 +381,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order",
+                        "UPDATE pay_payment_order",
                         "SET reference_document_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -410,7 +410,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order",
+                        "UPDATE pay_payment_order",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -440,7 +440,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT reason FROM payment_order",
+        				"SELECT reason FROM pay_payment_order",
         				"WHERE id=?"
         			).toString()
         		)
@@ -458,7 +458,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT description FROM payment_order",
+        				"SELECT description FROM pay_payment_order",
         				"WHERE id=?"
         			).toString()
         		)
@@ -504,7 +504,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_order",
+                        "UPDATE pay_payment_order",
                         "SET amount_to_pay=?",
                         "WHERE id=?"
                     ).toString()

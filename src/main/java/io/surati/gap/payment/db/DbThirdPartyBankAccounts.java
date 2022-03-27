@@ -71,7 +71,7 @@ public final class DbThirdPartyBankAccounts implements BankAccounts {
 		        .sql(
 	        		new Joined(
         				" ",
-        				"SELECT COUNT(*) FROM bank_account_view",
+        				"SELECT COUNT(*) FROM pay_bank_account_view",
         				"WHERE holder_id=? AND full_number = ?"
         			).asString()
         		)
@@ -100,7 +100,7 @@ public final class DbThirdPartyBankAccounts implements BankAccounts {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT id FROM bank_account_view",
+	        				"SELECT id FROM pay_bank_account_view",
 	        				"WHERE holder_id=? AND full_number = ?"
 	        			).asString()
 	        		)
@@ -121,7 +121,7 @@ public final class DbThirdPartyBankAccounts implements BankAccounts {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT id FROM bank_account",
+	        				"SELECT id FROM pay_bank_account",
 	        				"WHERE holder_id=? AND id=?"
 	        			).asString()
 	        		)
@@ -167,7 +167,7 @@ public final class DbThirdPartyBankAccounts implements BankAccounts {
                     .sql(
                         new Joined(
                             " ",
-                            "INSERT INTO bank_account",
+                            "INSERT INTO pay_bank_account",
                             "(branch_code, number, key, bank_id, holder_id)",
                             "VALUES",
                             "(?, ?, ?, ?, ?)"
@@ -192,7 +192,7 @@ public final class DbThirdPartyBankAccounts implements BankAccounts {
                 .sql(
                     new Joined(
                         " ",
-                        "DELETE FROM bank_account",
+                        "DELETE FROM pay_bank_account",
                         "WHERE holder_id=? AND id=?"
                     ).asString()
                 )
@@ -212,7 +212,7 @@ public final class DbThirdPartyBankAccounts implements BankAccounts {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM bank_account",
+                            "SELECT id FROM pay_bank_account",
             				"WHERE holder_id=?"
                         ).asString()
                     )

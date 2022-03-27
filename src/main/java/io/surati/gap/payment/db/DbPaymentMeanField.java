@@ -49,7 +49,7 @@ public final class DbPaymentMeanField implements PaymentMeanField {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT x, y FROM payment_mean_field",
+                            "SELECT x, y FROM pay_payment_mean_field",
             				"WHERE type_id=? AND mean_id=?"
                         ).asString()
                     )
@@ -77,7 +77,7 @@ public final class DbPaymentMeanField implements PaymentMeanField {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT width FROM payment_mean_field",
+        				"SELECT width FROM pay_payment_mean_field",
         				"WHERE type_id=? AND mean_id=?"
         			).toString()
 				)
@@ -97,7 +97,7 @@ public final class DbPaymentMeanField implements PaymentMeanField {
 	public void update(Point point, double width) {
 		try (
 			final Connection connection = source.getConnection();				
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE payment_mean_field SET x=?, y=?, width=? WHERE type_id=? AND mean_id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_payment_mean_field SET x=?, y=?, width=? WHERE type_id=? AND mean_id=?")
 		) {
 			pstmt.setDouble(1, point.x());
 			pstmt.setDouble(2, point.y());
@@ -123,7 +123,7 @@ public final class DbPaymentMeanField implements PaymentMeanField {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT visible FROM payment_mean_field",
+        				"SELECT visible FROM pay_payment_mean_field",
         				"WHERE type_id=? AND mean_id=?"
         			).toString()
 				)
@@ -143,7 +143,7 @@ public final class DbPaymentMeanField implements PaymentMeanField {
 	public void show() {
 		try (
 			final Connection connection = source.getConnection();				
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE payment_mean_field SET visible=? WHERE type_id=? AND mean_id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_payment_mean_field SET visible=? WHERE type_id=? AND mean_id=?")
 		) {
 			pstmt.setBoolean(1, true);
 			pstmt.setString(2, this.type.name());
@@ -158,7 +158,7 @@ public final class DbPaymentMeanField implements PaymentMeanField {
 	public void disappear() {
 		try (
 			final Connection connection = source.getConnection();				
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE payment_mean_field SET visible=? WHERE type_id=? AND mean_id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_payment_mean_field SET visible=? WHERE type_id=? AND mean_id=?")
 		) {
 			pstmt.setBoolean(1, false);
 			pstmt.setString(2, this.type.name());

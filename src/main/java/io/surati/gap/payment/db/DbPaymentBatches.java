@@ -47,7 +47,7 @@ public final class DbPaymentBatches implements PaymentBatches {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment_batch",
+                            "SELECT id FROM pay_payment_batch",
             				"ORDER BY date DESC"
                         ).toString()
                     )
@@ -79,7 +79,7 @@ public final class DbPaymentBatches implements PaymentBatches {
 		            .sql(
 		                new Joined(
 		                    " ",
-		                    "INSERT INTO payment_batch",
+		                    "INSERT INTO pay_payment_batch",
 		                    "(date, account_id, mean_type_id)",
 		                    "VALUES",
 		                    "(?, ?, ?)"
@@ -98,7 +98,7 @@ public final class DbPaymentBatches implements PaymentBatches {
 	private boolean has(final Long id) {
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM payment_batch WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT COUNT(*) as nb FROM pay_payment_batch WHERE id=?")
 		){
 			pstmt.setLong(1, id);
 		

@@ -134,7 +134,7 @@ public final class DbPaginedReferenceDocuments implements ReferenceDocuments {
                 .sql(
                     new Joined(
                         " ",
-                        "DELETE FROM reference_document",
+                        "DELETE FROM pay_reference_document",
                         "WHERE id=?"
                     ).toString()
                 )
@@ -205,7 +205,7 @@ public final class DbPaginedReferenceDocuments implements ReferenceDocuments {
 			new Joined(
 	            " ",
 	            select,
-	            "FROM reference_document_view",
+	            "FROM pay_reference_document_view",
 	            "WHERE 1=1"
 	        ).toString()
 		);

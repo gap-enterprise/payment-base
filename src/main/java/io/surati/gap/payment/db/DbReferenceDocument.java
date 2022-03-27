@@ -51,7 +51,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT type_id FROM reference_document",
+	        				"SELECT type_id FROM pay_reference_document",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -70,7 +70,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT date FROM reference_document",
+    				"SELECT date FROM pay_reference_document",
     				"WHERE id=?"
     			).toString()
 			)
@@ -92,7 +92,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT reference FROM reference_document",
+        				"SELECT reference FROM pay_reference_document",
         				"WHERE id=?"
         			).toString()
         		)
@@ -110,7 +110,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT object FROM reference_document",
+        				"SELECT object FROM pay_reference_document",
         				"WHERE id=?"
         			).toString()
         		)
@@ -128,7 +128,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT place FROM reference_document",
+        				"SELECT place FROM pay_reference_document",
         				"WHERE id=?"
         			).toString()
         		)
@@ -170,7 +170,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET date=?, reference=?, object=?, place=?",
                         "WHERE id=?"
                     ).toString()
@@ -205,7 +205,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET other_reference=?",
                         "WHERE id=?"
                     ).toString()
@@ -227,7 +227,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT issuer_id FROM reference_document",
+	        				"SELECT issuer_id FROM pay_reference_document",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -246,7 +246,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT deposit_date FROM reference_document",
+    				"SELECT deposit_date FROM pay_reference_document",
     				"WHERE id=?"
     			).toString()
 			)
@@ -272,7 +272,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT entry_date FROM reference_document",
+    				"SELECT entry_date FROM pay_reference_document",
     				"WHERE id=?"
     			).toString()
 			)
@@ -301,7 +301,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET deposit_date=?, entry_date=?",
                         "WHERE id=?"
                     ).toString()
@@ -323,7 +323,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT amount FROM reference_document",
+        				"SELECT amount FROM pay_reference_document",
         				"WHERE id=?"
         			).toString()
 				)
@@ -354,7 +354,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET amount=?, advanced_amount=?",
                         "WHERE id=?"
                     ).toString()
@@ -378,7 +378,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "SELECT amount_paid",
-                        "FROM reference_document",
+                        "FROM pay_reference_document",
                         "WHERE id=?"
                     ).toString()
                 )
@@ -399,7 +399,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "SELECT amount_left",
-                        "FROM reference_document",
+                        "FROM pay_reference_document",
                         "WHERE id=?"
                     ).toString()
                 )
@@ -419,7 +419,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 					.sql(
 		        		new Joined(
 		    				" ",
-		    				"SELECT status_id FROM reference_document",
+		    				"SELECT status_id FROM pay_reference_document",
 		    				"WHERE id=?"
 		    			).toString()
 		    		)
@@ -486,7 +486,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT COUNT(*) FROM reference_document",
+        				"SELECT COUNT(*) FROM pay_reference_document",
         				"WHERE other_reference=? AND issuer_id=? AND type_id=?"
         			).toString()
         		)
@@ -512,7 +512,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET type_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -538,7 +538,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET issuer_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -559,7 +559,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 					.sql(
 		        		new Joined(
 		    				" ",
-		    				"SELECT step_id FROM reference_document",
+		    				"SELECT step_id FROM pay_reference_document",
 		    				"WHERE id=?"
 		    			).toString()
 		    		)
@@ -577,7 +577,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET step_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -633,7 +633,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE reference_document",
+                        "UPDATE pay_reference_document",
                         "SET status_id=?, amount_paid=?, amount_left=?",
                         "WHERE id=?"
                     ).toString()
@@ -655,7 +655,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT other_reference FROM reference_document",
+        				"SELECT other_reference FROM pay_reference_document",
         				"WHERE id=?"
         			).toString()
         		)
@@ -675,7 +675,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT author_id FROM reference_document",
+	        				"SELECT author_id FROM pay_reference_document",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -696,7 +696,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "SELECT advanced_amount",
-                        "FROM reference_document",
+                        "FROM pay_reference_document",
                         "WHERE id=?"
                     ).toString()
                 )

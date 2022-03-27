@@ -49,7 +49,7 @@ public final class DbPaymentBatch implements PaymentBatch {
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT date FROM payment_batch",
+    				"SELECT date FROM pay_payment_batch",
     				"WHERE id=?"
     			).toString()
 			)
@@ -73,7 +73,7 @@ public final class DbPaymentBatch implements PaymentBatch {
 					.sql(
 		        		new Joined(
 		    				" ",
-		    				"SELECT account_id FROM payment_batch",
+		    				"SELECT account_id FROM pay_payment_batch",
 		    				"WHERE id=?"
 		    			).toString()
 		    		)
@@ -93,7 +93,7 @@ public final class DbPaymentBatch implements PaymentBatch {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT mean_type_id FROM payment_batch",
+	        				"SELECT mean_type_id FROM pay_payment_batch",
 	        				"WHERE id=?"
 	        			).asString()
 	        		)
@@ -113,7 +113,7 @@ public final class DbPaymentBatch implements PaymentBatch {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT group_id FROM payment",
+                            "SELECT group_id FROM pay_payment",
                             "WHERE batch_id=?",
             				"ORDER BY date ASC"
                         ).toString()
@@ -141,7 +141,7 @@ public final class DbPaymentBatch implements PaymentBatch {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment",
+                            "SELECT id FROM pay_payment",
                             "WHERE batch_id=?",
             				"ORDER BY id ASC"
                         ).toString()
@@ -192,7 +192,7 @@ public final class DbPaymentBatch implements PaymentBatch {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment",
+                        "UPDATE pay_payment",
                         "SET batch_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -214,7 +214,7 @@ public final class DbPaymentBatch implements PaymentBatch {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT status_id FROM payment_batch",
+	        				"SELECT status_id FROM pay_payment_batch",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -239,7 +239,7 @@ public final class DbPaymentBatch implements PaymentBatch {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE payment_batch",
+                        "UPDATE pay_payment_batch",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()

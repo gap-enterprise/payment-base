@@ -97,9 +97,9 @@ public final class DbPaginedBanks implements Banks {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT bk.id FROM bank as bk",
-                            "LEFT JOIN third_party as tp ON tp.id = bk.id",
-                            "LEFT JOIN person as ps ON ps.id = bk.id",
+                            "SELECT bk.id FROM pay_bank as bk",
+                            "LEFT JOIN pay_third_party as tp ON tp.id = bk.id",
+                            "LEFT JOIN ad_person as ps ON ps.id = bk.id",
             				"WHERE tp.code ILIKE ? OR tp.abbreviated ILIKE ? OR ps.name ILIKE ?",
             				"LIMIT ? OFFSET ?"
                         ).toString()
@@ -136,9 +136,9 @@ public final class DbPaginedBanks implements Banks {
 					.sql(
 	                    new Joined(
 	                        " ",
-	                        "SELECT COUNT(bk.*) FROM bank as bk",
-	                        "LEFT JOIN third_party as tp ON tp.id = bk.id",
-	                        "LEFT JOIN person as ps ON ps.id = bk.id",
+	                        "SELECT COUNT(bk.*) FROM pay_bank as bk",
+	                        "LEFT JOIN pay_third_party as tp ON tp.id = bk.id",
+	                        "LEFT JOIN ad_person as ps ON ps.id = bk.id",
 	                        "WHERE tp.code ILIKE ? OR tp.abbreviated ILIKE ? OR ps.name ILIKE ?"
 	                    ).toString()
 	                )

@@ -29,7 +29,7 @@ public final class DbPaymentExport implements PaymentExport {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT payment_id FROM payment_export",
+                            "SELECT payment_id FROM pay_payment_export",
                             "WHERE is_done = false",
             				"ORDER BY id"
                         ).toString()
@@ -60,7 +60,7 @@ public final class DbPaymentExport implements PaymentExport {
 			            .sql(
 			                new Joined(
 			                    " ",
-			                    "DELETE FROM payment_export",
+			                    "DELETE FROM pay_payment_export",
 			                    "WHERE is_done = false AND payment_id=?"
 			                ).toString()
 			            )
@@ -83,7 +83,7 @@ public final class DbPaymentExport implements PaymentExport {
 	        .sql(
 	            new Joined(
 	                " ",
-	                "INSERT INTO payment_export (payment_id, is_done)",
+	                "INSERT INTO pay_payment_export (payment_id, is_done)",
 	                "VALUES",
 	                "(?, false)"
 	            ).toString()
@@ -101,7 +101,7 @@ public final class DbPaymentExport implements PaymentExport {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "UPDATE payment_export",
+	                    "UPDATE pay_payment_export",
 	                    "SET is_done = true",
 	                    "WHERE is_done = false"
 	                ).toString()
@@ -118,7 +118,7 @@ public final class DbPaymentExport implements PaymentExport {
 				.sql(
 	        		new Joined(
 	    				" ",
-	    				"SELECT COUNT(*) FROM payment_export",
+	    				"SELECT COUNT(*) FROM pay_payment_export",
 	    				"WHERE is_done=false AND payment_id=?"
 	    			).toString()
 	    		)
@@ -135,7 +135,7 @@ public final class DbPaymentExport implements PaymentExport {
 				.sql(
 	        		new Joined(
 	    				" ",
-	    				"SELECT COUNT(*) FROM payment_export",
+	    				"SELECT COUNT(*) FROM pay_payment_export",
 	    				"WHERE is_done=true AND payment_id=?"
 	    			).toString()
 	    		)

@@ -98,7 +98,7 @@ public final class DbBank implements Bank {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT representative FROM bank",
+        				"SELECT representative FROM pay_bank",
         				"WHERE id=?"
         			).toString()
         		)
@@ -116,7 +116,7 @@ public final class DbBank implements Bank {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT headquarters FROM bank",
+        				"SELECT headquarters FROM pay_bank",
         				"WHERE id=?"
         			).toString()
         		)
@@ -134,7 +134,7 @@ public final class DbBank implements Bank {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT representative_position FROM bank",
+        				"SELECT representative_position FROM pay_bank",
         				"WHERE id=?"
         			).toString()
         		)
@@ -152,7 +152,7 @@ public final class DbBank implements Bank {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT representative_civility FROM bank",
+        				"SELECT representative_civility FROM pay_bank",
         				"WHERE id=?"
         			).toString()
         		)
@@ -170,7 +170,7 @@ public final class DbBank implements Bank {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank",
+                        "UPDATE pay_bank",
                         "SET headquarters=?",
                         "WHERE id=?"
                     ).toString()
@@ -190,7 +190,7 @@ public final class DbBank implements Bank {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank",
+                        "UPDATE pay_bank",
                         "SET representative=?,representative_position=?,representative_civility=?",
                         "WHERE id=?"
                     ).toString()

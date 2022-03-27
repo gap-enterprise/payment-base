@@ -86,11 +86,11 @@ public final class DbPaginedBankNoteBooks implements BankNoteBooks {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT bnb.id FROM bank_note_book as bnb",
-	                        "LEFT JOIN bank_account as ba ON ba.id = bnb.account_id",
-	                        "LEFT JOIN bank as bk ON bk.id = ba.bank_id",
-	                        "LEFT JOIN third_party as tp ON tp.id = bk.id",
-	                        "LEFT JOIN person as ps ON ps.id = bk.id",
+                            "SELECT bnb.id FROM pay_bank_note_book as bnb",
+	                        "LEFT JOIN pay_bank_account as ba ON ba.id = bnb.account_id",
+	                        "LEFT JOIN pay_bank as bk ON bk.id = ba.bank_id",
+	                        "LEFT JOIN pay_third_party as tp ON tp.id = bk.id",
+	                        "LEFT JOIN ad_person as ps ON ps.id = bk.id",
 	                        "WHERE (ba.number ILIKE ? OR ba.branch_code ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (bnb.status_id = ? OR ? = 'NONE')",
             				"LIMIT ? OFFSET ?"
@@ -141,11 +141,11 @@ public final class DbPaginedBankNoteBooks implements BankNoteBooks {
 					.sql(
 	                    new Joined(
 	                        " ",
-	                        "SELECT COUNT(bnb.*) FROM bank_note_book as bnb",
-	                        "LEFT JOIN bank_account as ba ON ba.id = bnb.account_id",
-	                        "LEFT JOIN bank as bk ON bk.id = ba.bank_id",
-	                        "LEFT JOIN third_party as tp ON tp.id = bk.id",
-	                        "LEFT JOIN person as ps ON ps.id = bk.id",
+	                        "SELECT COUNT(bnb.*) FROM pay_bank_note_book as bnb",
+	                        "LEFT JOIN pay_bank_account as ba ON ba.id = bnb.account_id",
+	                        "LEFT JOIN pay_bank as bk ON bk.id = ba.bank_id",
+	                        "LEFT JOIN pay_third_party as tp ON tp.id = bk.id",
+	                        "LEFT JOIN ad_person as ps ON ps.id = bk.id",
 	                        "WHERE (ba.number ILIKE ? OR ba.branch_code ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (bnb.status_id = ? OR ? = 'NONE')"
 	                    ).toString()

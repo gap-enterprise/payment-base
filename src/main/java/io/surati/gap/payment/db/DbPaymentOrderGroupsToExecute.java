@@ -33,7 +33,7 @@ public final class DbPaymentOrderGroupsToExecute implements PaymentOrderGroupsTo
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment_order_group",
+                            "SELECT id FROM pay_payment_order_group",
                             "WHERE status_id=? AND (?=true OR worker_id=?)",
             				"ORDER BY third_party_id ASC"
                         ).toString()
@@ -74,7 +74,7 @@ public final class DbPaymentOrderGroupsToExecute implements PaymentOrderGroupsTo
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order_group WHERE id=? AND status_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order_group WHERE id=? AND status_id=?")
 				.set(id)
 				.set(PaymentOrderStatus.IN_WAITING_FOR_PAYMENT.name())
 				.select(new SingleOutcome<>(Long.class)) > 0;
