@@ -43,7 +43,7 @@ public final class DbPaymentMeans implements PaymentMeans {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment_mean",
+                            "SELECT id FROM pay_payment_mean",
             				"WHERE bank_id=? order by id"
                         ).asString()
                     )
@@ -80,7 +80,7 @@ public final class DbPaymentMeans implements PaymentMeans {
 						.sql(
 			        		new Joined(
 		        				" ",
-		        				"SELECT id FROM payment_mean",
+		        				"SELECT id FROM pay_payment_mean",
 		        				"WHERE bank_id=? AND type_id=?"
 		        			).toString()
 		        		)
@@ -98,7 +98,7 @@ public final class DbPaymentMeans implements PaymentMeans {
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_mean WHERE id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_mean WHERE id=?")
 				.set(id)
 				.select(new SingleOutcome<>(Long.class)) > 0;
 		} catch(SQLException ex) {
@@ -109,7 +109,7 @@ public final class DbPaymentMeans implements PaymentMeans {
 	private boolean has(final PaymentMeanType type) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_mean WHERE bank_id=? AND type_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_mean WHERE bank_id=? AND type_id=?")
 				.set(this.bank.id())
 				.set(type.name())
 				.select(new SingleOutcome<>(Long.class)) > 0;

@@ -116,7 +116,7 @@ public final class DbThirdPartyReferenceDocuments implements ThirdPartyReference
 		            .sql(
 		                new Joined(
 		                    " ",
-		                    "INSERT INTO reference_document",
+		                    "INSERT INTO pay_reference_document",
 		                    "(date, type_id, reference, object, place, issuer_id, amount, status_id, step_id, amount_paid, amount_left, author_id, entry_date, worker_id)",
 		                    "VALUES",
 		                    "(?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?)"

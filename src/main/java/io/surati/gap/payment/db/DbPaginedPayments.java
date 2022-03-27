@@ -85,9 +85,9 @@ public final class DbPaginedPayments implements Payments {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT pay.id FROM payment as pay",
-	                        "LEFT JOIN third_party as tp ON tp.id = pay.beneficiary_id",
-	                        "LEFT JOIN person as ps ON ps.id = tp.id",
+                            "SELECT pay.id FROM pay_payment as pay",
+	                        "LEFT JOIN pay_third_party as tp ON tp.id = pay.beneficiary_id",
+	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
 	                        "WHERE (pay.issuer_reference ILIKE ? OR pay.internal_reference ILIKE ? OR pay.edition_place ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (pay.status_id = ? OR ? = 'NONE')",
 	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date >= ?)",
@@ -141,9 +141,9 @@ public final class DbPaginedPayments implements Payments {
 					.sql(
 	                    new Joined(
 	                        " ",
-	                        "SELECT COUNT(pay.*) FROM payment as pay",
-	                        "LEFT JOIN third_party as tp ON tp.id = pay.beneficiary_id",
-	                        "LEFT JOIN person as ps ON ps.id = tp.id",
+	                        "SELECT COUNT(pay.*) FROM pay_payment as pay",
+	                        "LEFT JOIN pay_third_party as tp ON tp.id = pay.beneficiary_id",
+	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
 	                        "WHERE (pay.issuer_reference ILIKE ? OR pay.internal_reference ILIKE ? OR pay.edition_place ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (pay.status_id = ? OR ? = 'NONE')",
 	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date >= ?)",

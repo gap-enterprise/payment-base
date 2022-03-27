@@ -32,21 +32,21 @@ public final class DbBankAccountAccountingSettings implements BankAccountAccount
                     new Joined(
                         " ",
                         "SELECT mean_type_id",
-                        "FROM bank_account_accounting_setting",
+                        "FROM pay_bank_account_accounting_setting",
                         "WHERE account_id=?",
         				"ORDER BY mean_type_id ASC"
                     ).toString()
                 )
                 .set(this.account.id())
                 .select(
-                    new ListOutcome<BankAccountAccountingSetting>(
-                        rset ->
-                        new DbBankAccountAccountingSetting(
-                    		this.source,
-                    		this.account,
-                    		PaymentMeanType.valueOf(rset.getString(1))
-                    	)
-                    )
+					new ListOutcome<>(
+						rset ->
+							new DbBankAccountAccountingSetting(
+								this.source,
+								this.account,
+								PaymentMeanType.valueOf(rset.getString(1))
+							)
+					)
                 );
 		} catch(SQLException ex) {
 			throw new DatabaseException(ex);
@@ -65,7 +65,7 @@ public final class DbBankAccountAccountingSettings implements BankAccountAccount
 	private boolean has(final PaymentMeanType meantype) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM bank_account_accounting_setting WHERE account_id=? AND mean_type_id=?")
+				.sql("SELECT COUNT(*) FROM pay_bank_account_accounting_setting WHERE account_id=? AND mean_type_id=?")
 				.set(this.account.id())
 				.set(meantype.name())
 				.select(new SingleOutcome<>(Long.class)) > 0;

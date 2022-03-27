@@ -32,7 +32,7 @@ public final class PaymentDatabaseBuiltWithLiquibase extends DataSourceWrap {
      * Changelog master file name.
      */
     public static final String CHANGELOG_MASTER_FILENAME =
-        "io/surati/gap/payment/liquibase/db-payment.changelog-master.xml";
+        "io/surati/gap/payment/liquibase/db.changelog-master.xml";
 
     /**
      * Ctor.

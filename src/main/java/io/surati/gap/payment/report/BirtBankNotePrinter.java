@@ -1,4 +1,4 @@
-package io.surati.gap.payment.db;
+package io.surati.gap.payment.report;
 
 import io.surati.gap.admin.api.Company;
 import io.surati.gap.admin.prop.PropCompany;
@@ -11,6 +11,7 @@ import io.surati.gap.payment.api.PaymentMeanFieldType;
 import io.surati.gap.payment.api.PaymentMeanType;
 import io.surati.gap.payment.api.Point;
 import io.surati.gap.payment.api.Printer;
+import io.surati.gap.payment.db.BankNotePrintDirection;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.birt.core.framework.Platform;
 import org.eclipse.birt.report.engine.api.EngineConfig;
@@ -62,7 +63,7 @@ public final class BirtBankNotePrinter implements Printer {
 		final int fontsize = Integer.parseInt(company.parameter("branknoteprintfontsize"));
 		IReportEngine engine = null;
 		try {
-			final BankNotePrintDirection printdir;// = BankNotePrintDirection.valueOf(company.parameter("banknoteprintdirection"));	
+			final BankNotePrintDirection printdir;// = BankNotePrintDirection.valueOf(company.parameter("banknoteprintdirection"));
 			if(note.book().meanType() == PaymentMeanType.CHEQUE) {
 				printdir = BankNotePrintDirection.MIDDLE;
 			} else {

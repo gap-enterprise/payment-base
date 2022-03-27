@@ -35,7 +35,7 @@ public final class DbBankNotes implements BankNotes {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM bank_note",
+                            "SELECT id FROM pay_bank_note",
             				"ORDER BY id DESC"
                         ).toString()
                     )
@@ -61,8 +61,8 @@ public final class DbBankNotes implements BankNotes {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT note.id FROM bank_note note",
-							"LEFT JOIN payment pay ON pay.id=note.id",
+                            "SELECT note.id FROM pay_bank_note note",
+							"LEFT JOIN pay_payment pay ON pay.id=note.id",
                             "WHERE pay.status_id=?",
             				"ORDER BY id DESC"
                         ).toString()
@@ -94,7 +94,7 @@ public final class DbBankNotes implements BankNotes {
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM bank_note WHERE id=?")
+				.sql("SELECT COUNT(*) FROM pay_bank_note WHERE id=?")
 				.set(id)
 				.select(new SingleOutcome<>(Long.class)) > 0;
 		} catch(SQLException ex) {
@@ -107,7 +107,7 @@ public final class DbBankNotes implements BankNotes {
 		try {
 			return
 				new JdbcSession(this.source)
-					.sql("SELECT COUNT(*) FROM bank_note")
+					.sql("SELECT COUNT(*) FROM pay_bank_note")
 					.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
 			throw new DatabaseException(ex);

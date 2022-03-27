@@ -25,7 +25,7 @@ public final class DbPayment extends PaymentWrapper {
 					.sql(
 						new Joined(
 							" ",
-							"SELECT mean_type_id FROM payment",
+							"SELECT mean_type_id FROM pay_payment",
 							"WHERE id=?"
 						).toString()
 					)

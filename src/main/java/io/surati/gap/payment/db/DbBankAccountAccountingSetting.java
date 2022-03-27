@@ -39,7 +39,7 @@ public final class DbBankAccountAccountingSetting implements BankAccountAccounti
 					new Joined(
 						" ",
 						"SELECT journal_code",
-						"FROM bank_account_accounting_setting",
+						"FROM pay_bank_account_accounting_setting",
 						"WHERE mean_type_id=? AND account_id=?"
 					).toString()
 				)
@@ -63,7 +63,7 @@ public final class DbBankAccountAccountingSetting implements BankAccountAccounti
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank_account_accounting_setting",
+                        "UPDATE pay_bank_account_accounting_setting",
                         "SET journal_code=?",
                         "WHERE mean_type_id=? AND account_id=?"
                     ).toString()

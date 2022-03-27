@@ -41,7 +41,7 @@ public abstract class DbAbstractBankNote extends DbAbstractPayment implements Ba
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT book_id FROM bank_note",
+	        				"SELECT book_id FROM pay_bank_note",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -60,7 +60,7 @@ public abstract class DbAbstractBankNote extends DbAbstractPayment implements Ba
 			final PreparedStatement pstmt = connection.prepareStatement(
 				new Joined(
     				" ",
-    				"SELECT due_date FROM bank_note",
+    				"SELECT due_date FROM pay_bank_note",
     				"WHERE id=?"
     			).toString()
 			)

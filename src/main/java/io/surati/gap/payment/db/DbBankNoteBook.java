@@ -25,7 +25,7 @@ public final class DbBankNoteBook extends BankNoteBookWrapper {
 					.sql(
 						new Joined(
 							" ",
-							"SELECT mean_type_id FROM bank_note_book",
+							"SELECT mean_type_id FROM pay_bank_note_book",
 							"WHERE id=?"
 						).toString()
 					)

@@ -62,7 +62,7 @@ public final class DbThirdPartyFamilies implements ThirdPartyFamilies {
 	public boolean has(final String code) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM third_party_family WHERE code=?")
+				.sql("SELECT COUNT(*) FROM pay_third_party_family WHERE code=?")
 				.set(code)
 				.select(new SingleOutcome<>(Long.class)) > 0;
 		} catch(SQLException ex) {
@@ -74,7 +74,7 @@ public final class DbThirdPartyFamilies implements ThirdPartyFamilies {
 	public boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM third_party_family WHERE id=?")
+				.sql("SELECT COUNT(*) FROM pay_third_party_family WHERE id=?")
 				.set(id)
 				.select(new SingleOutcome<>(Long.class)) > 0;
 		} catch(SQLException ex) {
@@ -111,7 +111,7 @@ public final class DbThirdPartyFamilies implements ThirdPartyFamilies {
 					.sql(
 						new Joined(
 							" ",
-                            "INSERT INTO third_party_family",
+                            "INSERT INTO pay_third_party_family",
                             "(code, name)",
                             "VALUES",
                             "(?, ?)"
@@ -130,7 +130,7 @@ public final class DbThirdPartyFamilies implements ThirdPartyFamilies {
 	public Iterable<ThirdPartyFamily> iterate() {		
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM third_party_family")
+			final PreparedStatement pstmt = connection.prepareStatement("SELECT id FROM pay_third_party_family")
 		){
 			final Collection<ThirdPartyFamily> items = new ArrayList<>();
 			
@@ -153,8 +153,8 @@ public final class DbThirdPartyFamilies implements ThirdPartyFamilies {
 		            .sql(
 		                new Joined(
 		                    " ",
-		                    "SELECT COUNT(*) FROM third_party_family",
-		                    "WHERE id=? AND id IN (SELECT family_id FROM third_party)"
+		                    "SELECT COUNT(*) FROM pay_third_party_family",
+		                    "WHERE id=? AND id IN (SELECT family_id FROM pay_third_party)"
 		                ).toString()
 		            )
 		            .set(id)
@@ -167,7 +167,7 @@ public final class DbThirdPartyFamilies implements ThirdPartyFamilies {
 		}
 		try (
 			final Connection connection = source.getConnection();
-			final PreparedStatement pstmt = connection.prepareStatement("DELETE FROM third_party_family WHERE id=?");
+			final PreparedStatement pstmt = connection.prepareStatement("DELETE FROM pay_third_party_family WHERE id=?");
 		) {
 			pstmt.setLong(1, id);
 			pstmt.executeUpdate();
@@ -180,7 +180,7 @@ public final class DbThirdPartyFamilies implements ThirdPartyFamilies {
 	public ThirdPartyFamily get(String code) {
 		try {
 			final Long familyid = new JdbcSession(this.source)
-				.sql("SELECT id FROM third_party_family WHERE code=?")
+				.sql("SELECT id FROM pay_third_party_family WHERE code=?")
 				.set(code)
 				.select(new SingleOutcome<>(Long.class));
 			if(familyid.equals(0L)) {

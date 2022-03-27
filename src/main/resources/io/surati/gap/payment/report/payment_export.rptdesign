@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201805221921</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">72</property>
+    <data-sources>
+        <script-data-source name="srcPayments" id="57"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="dsPayments" id="58">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">columnDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">columnRefPay</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">columnTypeFormule</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">columnNumFormule</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">columnDateEcheance</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">columnRIB</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">columnCodeTiers</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">columnAmount</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">columnStatus</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">columnAmountDocRefs</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">columnTypeDocRefs</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">columnNumDocRefs</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">columnOtherRefDocRefs</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">columnJournalCode</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">columnLabelFormule</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">columnDate</property>
+                    <text-property name="displayName">Date de paiement</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnRefPay</property>
+                    <text-property name="displayName">Référence de paiement</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnTypeFormule</property>
+                    <text-property name="displayName">Type formule (CHEQUE, LETTRE_DE_CHANGE, BILLET_A_ORDRE)</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnNumFormule</property>
+                    <text-property name="displayName">N° de formule</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnDateEcheance</property>
+                    <text-property name="displayName">Date d'échéance (si Traite)</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnRIB</property>
+                    <text-property name="displayName">RIB du compte</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnCodeTiers</property>
+                    <text-property name="displayName">Code du tiers</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnAmount</property>
+                    <text-property name="displayName">Montant</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnStatus</property>
+                    <text-property name="displayName">Statut (ISSUED, CANCELLED)</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnAmountDocRefs</property>
+                    <text-property name="displayName">Montant Doc de réf</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnTypeDocRefs</property>
+                    <text-property name="displayName">Type document de référence</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnNumDocRefs</property>
+                    <text-property name="displayName">N° Doc référence</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnOtherRefDocRefs</property>
+                    <text-property name="displayName">Autre Référence Doc de réf</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnJournalCode</property>
+                    <text-property name="displayName">Code journal</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">columnLabelFormule</property>
+                    <text-property name="displayName">Libellé de la formule</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">columnDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">columnRefPay</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">columnTypeFormule</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">columnNumFormule</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">columnDateEcheance</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">columnRIB</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">columnCodeTiers</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">columnAmount</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">columnStatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">columnAmountDocRefs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">columnTypeDocRefs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">columnNumDocRefs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">columnOtherRefDocRefs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">columnJournalCode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">columnLabelFormule</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">srcPayments</property>
+            <method name="open"><![CDATA[count = 0;
+lines = reportContext.getAppContext().get("lines");
+labels = reportContext.getAppContext().get("labels");
+amounts = reportContext.getAppContext().get("amounts");
+orderamounts = reportContext.getAppContext().get("orderamounts");]]></method>
+            <method name="fetch"><![CDATA[if(count < lines.size()) {
+
+   line = lines.get(count);
+   row["columnDate"] = line.date();
+   row["columnRefPay"] = line.reference();
+   row["columnTypeFormule"] = line.book().meanType().name();
+   row["columnNumFormule"] = line.number();
+   row["columnDateEcheance"] = line.dueDate();
+   account = line.book().account();
+   setting = account.accountingSettings().get(line.book().meanType());
+   row["columnJournalCode"] = setting.journalCode();
+   row["columnRIB"] = account.rib().replace(' ', '');
+   row["columnCodeTiers"] = line.beneficiary().code();
+   row["columnAmount"] = amounts.get(count);
+   row["columnStatus"] = line.status().name();
+   
+   orders = line.orders().iterate().toArray();
+   
+   numdocrefs = [];
+   otherdocrefs = [];
+   amountdocrefs = [];
+   typedocrefs = [];
+   
+   for(i = 0; i < orders.length; i++) {
+   		item = orders[i];
+   		docref = item.document();
+	    numdocrefs.push(docref.reference());
+	    otherdocrefs.push(item.reference());
+	    amountdocrefs.push(docref.amount().toString());
+	    typedocrefs.push(docref.type().name());
+   }
+   
+   row["columnNumDocRefs"] = numdocrefs.join('|');
+   row["columnOtherRefDocRefs"] = otherdocrefs.join('|');
+   row["columnAmountDocRefs"] = orderamounts.get(count);
+   row["columnTypeDocRefs"] = typedocrefs.join('|');
+   row["columnLabelFormule"] = labels.get(count);
+   
+   count++;
+   return true;
+}
+
+return false;]]></method>
+        </script-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="4">
+            <property name="dataSet">dsPayments</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">columnDate</property>
+                    <text-property name="displayName">Date de paiement</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnRefPay</property>
+                    <text-property name="displayName">Référence de paiement</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnRefPay"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnTypeFormule</property>
+                    <text-property name="displayName">Type formule (CHEQUE, LETTRE_DE_CHANGE, BILLET_A_ORDRE)</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnTypeFormule"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnNumFormule</property>
+                    <text-property name="displayName">N° de formule</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnNumFormule"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnDateEcheance</property>
+                    <text-property name="displayName">Date d'échéance (si Traite)</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnDateEcheance"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnRIB</property>
+                    <text-property name="displayName">RIB du compte</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnRIB"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnCodeTiers</property>
+                    <text-property name="displayName">Code du tiers</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnCodeTiers"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnAmount</property>
+                    <text-property name="displayName">Montant</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnAmount"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnStatus</property>
+                    <text-property name="displayName">Statut (ISSUED, CANCELLED)</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnStatus"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnAmountDocRefs</property>
+                    <text-property name="displayName">Montant Doc de réf</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnAmountDocRefs"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnTypeDocRefs</property>
+                    <text-property name="displayName">Type document de référence</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnTypeDocRefs"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnNumDocRefs</property>
+                    <text-property name="displayName">N° Doc référence</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnNumDocRefs"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnOtherRefDocRefs</property>
+                    <text-property name="displayName">Autre Référence Doc de réf</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnOtherRefDocRefs"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnJournalCode</property>
+                    <text-property name="displayName">Code journal</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnJournalCode"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">columnLabelFormule</property>
+                    <text-property name="displayName">Libellé de la formule</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["columnLabelFormule"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="44"/>
+            <column id="45"/>
+            <column id="46"/>
+            <column id="89"/>
+            <column id="92"/>
+            <column id="47"/>
+            <column id="48"/>
+            <column id="49"/>
+            <column id="50"/>
+            <column id="51"/>
+            <column id="52"/>
+            <column id="53"/>
+            <column id="54"/>
+            <column id="55"/>
+            <column id="109"/>
+            <header>
+                <row id="5">
+                    <property name="backgroundColor">orange</property>
+                    <property name="fontWeight">bold</property>
+                    <cell id="6">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="59">
+                            <text-property name="text">Date de paiement</text-property>
+                        </label>
+                    </cell>
+                    <cell id="7">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="61">
+                            <text-property name="text">Référence de paiement</text-property>
+                        </label>
+                    </cell>
+                    <cell id="8">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="63">
+                            <text-property name="text">Type formule (CHEQUE, LETTRE_DE_CHANGE, BILLET_A_ORDRE)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="87">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="94">
+                            <text-property name="text">N° de formule</text-property>
+                        </label>
+                    </cell>
+                    <cell id="90">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="97">
+                            <text-property name="text">Date d'échéance (si Traite)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="9">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="65">
+                            <text-property name="text">Code journal</text-property>
+                        </label>
+                    </cell>
+                    <cell id="10">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="67">
+                            <text-property name="text">RIB du compte bancaire</text-property>
+                        </label>
+                    </cell>
+                    <cell id="11">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="71">
+                            <text-property name="text">Code du tiers</text-property>
+                        </label>
+                    </cell>
+                    <cell id="12">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="73">
+                            <text-property name="text">Montant</text-property>
+                        </label>
+                    </cell>
+                    <cell id="13">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="75">
+                            <text-property name="text">Statut (ISSUED, CANCELLED)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="14">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="77">
+                            <text-property name="text">N° Doc de réf</text-property>
+                        </label>
+                    </cell>
+                    <cell id="15">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="79">
+                            <text-property name="text">Autre Référence Doc de réf</text-property>
+                        </label>
+                    </cell>
+                    <cell id="16">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="81">
+                            <text-property name="text">Montant Doc de réf</text-property>
+                        </label>
+                    </cell>
+                    <cell id="17">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="83">
+                            <text-property name="text">Type Doc de réf (INVOICE, EXPENSE_REPORT, PAY_SLIP, WARRANT)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="107">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <label id="111">
+                            <text-property name="text">Libellé de la formule</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="18">
+                    <cell id="19">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="60">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">dd/MM/yyyy</property>
+                                <property name="locale">fr</property>
+                            </structure>
+                            <property name="resultSetColumn">columnDate</property>
+                        </data>
+                    </cell>
+                    <cell id="20">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="62">
+                            <property name="resultSetColumn">columnRefPay</property>
+                        </data>
+                    </cell>
+                    <cell id="21">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="64">
+                            <property name="resultSetColumn">columnTypeFormule</property>
+                        </data>
+                    </cell>
+                    <cell id="88">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="95">
+                            <property name="resultSetColumn">columnNumFormule</property>
+                        </data>
+                    </cell>
+                    <cell id="91">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="98">
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">dd/MM/yyyy</property>
+                                <property name="locale">fr</property>
+                            </structure>
+                            <property name="resultSetColumn">columnDateEcheance</property>
+                        </data>
+                    </cell>
+                    <cell id="22">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="99">
+                            <property name="resultSetColumn">columnJournalCode</property>
+                        </data>
+                    </cell>
+                    <cell id="23">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="68">
+                            <property name="resultSetColumn">columnRIB</property>
+                        </data>
+                    </cell>
+                    <cell id="24">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="72">
+                            <property name="resultSetColumn">columnCodeTiers</property>
+                        </data>
+                    </cell>
+                    <cell id="25">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="74">
+                            <structure name="numberFormat">
+                                <property name="category">Unformatted</property>
+                            </structure>
+                            <property name="resultSetColumn">columnAmount</property>
+                        </data>
+                    </cell>
+                    <cell id="26">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="76">
+                            <property name="resultSetColumn">columnStatus</property>
+                        </data>
+                    </cell>
+                    <cell id="27">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="100">
+                            <property name="resultSetColumn">columnNumDocRefs</property>
+                        </data>
+                    </cell>
+                    <cell id="28">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="101">
+                            <property name="resultSetColumn">columnOtherRefDocRefs</property>
+                        </data>
+                    </cell>
+                    <cell id="29">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="102">
+                            <property name="resultSetColumn">columnAmountDocRefs</property>
+                        </data>
+                    </cell>
+                    <cell id="30">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="103">
+                            <property name="resultSetColumn">columnTypeDocRefs</property>
+                        </data>
+                    </cell>
+                    <cell id="108">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <data id="112">
+                            <property name="resultSetColumn">columnLabelFormule</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

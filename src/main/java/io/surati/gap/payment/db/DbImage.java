@@ -55,7 +55,7 @@ public final class DbImage implements Image {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT width FROM payment_mean",
+        				"SELECT width FROM pay_payment_mean",
         				"WHERE id=?"
         			).toString()
 				)
@@ -78,7 +78,7 @@ public final class DbImage implements Image {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT height FROM payment_mean",
+        				"SELECT height FROM pay_payment_mean",
         				"WHERE id=?"
         			).toString()
 				)
@@ -99,7 +99,7 @@ public final class DbImage implements Image {
 		final InputStream in;
 		if(fileopt.isPresent()) {
 			in = new FileInputStream(
-				new File(String.format("images/%s", fileopt.get()))
+				String.format("images/%s", fileopt.get())
 			);
 		} else {
 			final Double widthcm = this.width();
@@ -166,7 +166,7 @@ public final class DbImage implements Image {
 	public void update(double width, double height, int dpi) {
 		try (
 			final Connection connection = source.getConnection();				
-			final PreparedStatement pstmt = connection.prepareStatement("UPDATE payment_mean SET width=?, height=?, dpi=? WHERE id=?")
+			final PreparedStatement pstmt = connection.prepareStatement("UPDATE pay_payment_mean SET width=?, height=?, dpi=? WHERE id=?")
 		) {
 			pstmt.setDouble(1, width);
 			pstmt.setDouble(2, height);
@@ -204,7 +204,7 @@ public final class DbImage implements Image {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT dpi FROM payment_mean",
+        				"SELECT dpi FROM pay_payment_mean",
         				"WHERE id=?"
         			).toString()
 				)

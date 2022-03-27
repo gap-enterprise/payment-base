@@ -41,7 +41,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment_order",
+                            "SELECT id FROM pay_payment_order",
                             "WHERE reference_document_id=?",
             				"ORDER BY date, id ASC"
                         ).toString()
@@ -96,7 +96,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
 	public Long count() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE reference_document_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE reference_document_id=?")
 				.set(this.rd.id())
 				.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
@@ -107,7 +107,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE id=? AND reference_document_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE id=? AND reference_document_id=?")
 				.set(id)
 				.set(this.rd.id())
 				.select(new SingleOutcome<>(Long.class)) > 0;
@@ -120,7 +120,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
 	public boolean has(String reference) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM payment_order WHERE reference=? AND reference_document_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE reference=? AND reference_document_id=?")
 				.set(reference.trim())
 				.set(this.rd.id())
 				.select(new SingleOutcome<>(Long.class)) > 0;
@@ -133,7 +133,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
 	public Double totalAmount() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT SUM(amount_to_pay) FROM payment_order WHERE reference_document_id=?")
+				.sql("SELECT SUM(amount_to_pay) FROM pay_payment_order WHERE reference_document_id=?")
 				.set(this.rd.id())
 				.select(new SingleOutcome<>(Long.class)).doubleValue();
 		} catch(SQLException ex) {
@@ -148,7 +148,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
 				return new DbPaymentOrder(
 					this.source,
 					new JdbcSession(this.source)
-						.sql("SELECT id FROM payment_order WHERE reference_document_id=? AND reference=?")
+						.sql("SELECT id FROM pay_payment_order WHERE reference_document_id=? AND reference=?")
 						.set(this.rd.id())
 						.set(reference)
 						.select(new SingleOutcome<>(Long.class))

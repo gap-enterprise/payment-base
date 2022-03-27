@@ -78,7 +78,7 @@ public final class DbBankAccount implements BankAccount {
 			return new DbBank(
 				this.source,
 				new JdbcSession(this.source)
-			        .sql("SELECT bank_id FROM bank_account WHERE id=?")
+			        .sql("SELECT bank_id FROM pay_bank_account WHERE id=?")
 			        .set(this.id)
 			        .select(new SingleOutcome<>(Long.class))
 	        );
@@ -91,7 +91,7 @@ public final class DbBankAccount implements BankAccount {
 	public String branchCode() {
 		try {
 			return new JdbcSession(this.source)
-		        .sql("SELECT branch_code FROM bank_account WHERE id=?")
+		        .sql("SELECT branch_code FROM pay_bank_account WHERE id=?")
 		        .set(this.id)
 		        .select(new SingleOutcome<>(String.class));
 		} catch (SQLException ex) {
@@ -103,7 +103,7 @@ public final class DbBankAccount implements BankAccount {
 	public String number() {
 		try {
 			return new JdbcSession(this.source)
-		        .sql("SELECT number FROM bank_account WHERE id=?")
+		        .sql("SELECT number FROM pay_bank_account WHERE id=?")
 		        .set(this.id)
 		        .select(new SingleOutcome<>(String.class));
 		} catch (SQLException ex) {
@@ -115,7 +115,7 @@ public final class DbBankAccount implements BankAccount {
 	public String key() {
 		try {
 			return new JdbcSession(this.source)
-		        .sql("SELECT key FROM bank_account WHERE id=?")
+		        .sql("SELECT key FROM pay_bank_account WHERE id=?")
 		        .set(this.id)
 		        .select(new SingleOutcome<>(String.class));
 		} catch (SQLException ex) {
@@ -134,7 +134,7 @@ public final class DbBankAccount implements BankAccount {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank_account",
+                        "UPDATE pay_bank_account",
                         "SET branch_code=?,number=?,key=?",
                         "WHERE id=?"
                     ).asString()
@@ -167,7 +167,7 @@ public final class DbBankAccount implements BankAccount {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "SELECT COUNT(*) FROM bank_note_book",
+	                    "SELECT COUNT(*) FROM pay_bank_note_book",
 	                    "WHERE (?='' OR prefix_number=?)",
 	                    "AND (",
 	                    "    	(? >= CAST(start_number AS integer) AND ? <= CAST(end_number AS integer))",
@@ -195,7 +195,7 @@ public final class DbBankAccount implements BankAccount {
 		            .sql(
 		                new Joined(
 		                    " ",
-		                    "INSERT INTO bank_note_book",
+		                    "INSERT INTO pay_bank_note_book",
 		                    "(account_id, mean_type_id, start_number, end_number, current_number, status_id, prefix_number)",
 		                    "VALUES",
 		                    "(?, ?, ?, ?, ?, ?, ?)"

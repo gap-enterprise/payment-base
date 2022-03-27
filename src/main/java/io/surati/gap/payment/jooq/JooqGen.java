@@ -34,7 +34,7 @@ public final class JooqGen {
         new JooqGenerator(
             PaymentDatabaseBuiltWithLiquibase.CHANGELOG_MASTER_FILENAME,
             "io.surati.gap.payment.jooq.generated",
-            ".*",
+            "pay_(.*)",
             "src/main/java"
         ).start();
     }

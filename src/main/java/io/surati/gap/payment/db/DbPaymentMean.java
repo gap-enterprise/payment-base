@@ -41,7 +41,7 @@ public final class DbPaymentMean implements PaymentMean {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT type_id FROM payment_mean",
+	        				"SELECT type_id FROM pay_payment_mean",
 	        				"WHERE id=?"
 	        			).asString()
 	        		)
@@ -62,7 +62,7 @@ public final class DbPaymentMean implements PaymentMean {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT bank_id FROM payment_mean",
+	        				"SELECT bank_id FROM pay_payment_mean",
 	        				"WHERE id=?"
 	        			).asString()
 	        		)
@@ -87,7 +87,7 @@ public final class DbPaymentMean implements PaymentMean {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT type_id FROM payment_mean_field",
+                            "SELECT type_id FROM pay_payment_mean_field",
             				"WHERE mean_id=? ORDER BY type_id"
                         ).asString()
                     )
@@ -114,7 +114,7 @@ public final class DbPaymentMean implements PaymentMean {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT * FROM payment_mean_field",
+        				"SELECT * FROM pay_payment_mean_field",
         				"WHERE type_id=? AND mean_id=?"
         			).asString()
         		)

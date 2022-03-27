@@ -65,7 +65,7 @@ public final class DbCompanyBankAccounts implements BankAccounts {
 		        .sql(
 	        		new Joined(
         				" ",
-        				"SELECT COUNT(*) FROM bank_account_view",
+        				"SELECT COUNT(*) FROM pay_bank_account_view",
         				"WHERE holder_id IS NULL AND full_number = ?"
         			).asString()
         		)
@@ -93,7 +93,7 @@ public final class DbCompanyBankAccounts implements BankAccounts {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT id FROM bank_account_view",
+	        				"SELECT id FROM pay_bank_account_view",
 	        				"WHERE holder_id IS NULL AND full_number = ?"
 	        			).asString()
 	        		)
@@ -114,7 +114,7 @@ public final class DbCompanyBankAccounts implements BankAccounts {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT id FROM bank_account",
+	        				"SELECT id FROM pay_bank_account",
 	        				"WHERE holder_id IS NULL AND id=?"
 	        			).asString()
 	        		)
@@ -144,7 +144,7 @@ public final class DbCompanyBankAccounts implements BankAccounts {
                 session.sql(
                         new Joined(
                             " ",
-                            "INSERT INTO bank_account",
+                            "INSERT INTO pay_bank_account",
                             "(branch_code, number, key, bank_id)",
                             "VALUES",
                             "(?, ?, ?, ?)"
@@ -164,7 +164,7 @@ public final class DbCompanyBankAccounts implements BankAccounts {
                 	.sql(
 	                    new Joined(
 	                        " ",
-	                        "INSERT INTO bank_account_accounting_setting",
+	                        "INSERT INTO pay_bank_account_accounting_setting",
 	                        "(account_id, mean_type_id)",
 	                        "VALUES",
 	                        "(?, ?)"
@@ -187,9 +187,9 @@ public final class DbCompanyBankAccounts implements BankAccounts {
 	            .sql(
 	                new Joined(
 	                    " ",
-	                    "SELECT COUNT(*) FROM bank_account",
-	                    "WHERE id=? AND (id IN (SELECT account_id FROM bank_note_book)",
-	                    "OR id IN (SELECT account_id FROM payment_batch))"
+	                    "SELECT COUNT(*) FROM pay_bank_account",
+	                    "WHERE id=? AND (id IN (SELECT account_id FROM pay_bank_note_book)",
+	                    "OR id IN (SELECT account_id FROM pay_payment_batch))"
 	                ).toString()
 	            )
 	            .set(id)
@@ -201,7 +201,7 @@ public final class DbCompanyBankAccounts implements BankAccounts {
                 .sql(
                     new Joined(
                         " ",
-                        "DELETE FROM bank_account",
+                        "DELETE FROM pay_bank_account",
                         "WHERE holder_id IS NULL AND id=?"
                     ).asString()
                 )
@@ -220,7 +220,7 @@ public final class DbCompanyBankAccounts implements BankAccounts {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM bank_account",
+                            "SELECT id FROM pay_bank_account",
             				"WHERE holder_id IS NULL"
                         ).asString()
                     )

@@ -78,7 +78,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 			return new DbBankAccount(
 				this.source,
 				new JdbcSession(this.source)
-			        .sql("SELECT account_id FROM bank_note_book WHERE id=?")
+			        .sql("SELECT account_id FROM pay_bank_note_book WHERE id=?")
 			        .set(this.id)
 			        .select(new SingleOutcome<>(Long.class))
 	        );
@@ -95,7 +95,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT mean_type_id FROM bank_note_book",
+	        				"SELECT mean_type_id FROM pay_bank_note_book",
 	        				"WHERE id=?"
 	        			).asString()
 	        		)
@@ -115,7 +115,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM bank_note",
+                            "SELECT id FROM pay_bank_note",
             				"WHERE book_id=? order by id DESC"
                         ).asString()
                     )
@@ -139,7 +139,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT status_id FROM bank_note_book",
+	        				"SELECT status_id FROM pay_bank_note_book",
 	        				"WHERE id=?"
 	        			).asString()
 	        		)
@@ -158,7 +158,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank_note_book",
+                        "UPDATE pay_bank_note_book",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -178,7 +178,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank_note_book",
+                        "UPDATE pay_bank_note_book",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -201,7 +201,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank_note_book",
+                        "UPDATE pay_bank_note_book",
                         "SET status_id=?",
                         "WHERE id=?"
                     ).toString()
@@ -226,7 +226,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT COUNT(*) FROM bank_note",
+        				"SELECT COUNT(*) FROM pay_bank_note",
         				"WHERE book_id=?"
         			).asString()
         		)
@@ -258,7 +258,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT current_number FROM bank_note_book",
+        				"SELECT current_number FROM pay_bank_note_book",
         				"WHERE id=?"
         			).toString()
         		)
@@ -286,7 +286,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 				.sql(
 	        		new Joined(
         				" ",
-        				"UPDATE bank_note_book",
+        				"UPDATE pay_bank_note_book",
         				"SET current_number=?",
         				"WHERE id=?"
         			).toString()
@@ -327,7 +327,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank_note_book",
+                        "UPDATE pay_bank_note_book",
                         "SET start_number=?, end_number=?, current_number=?",
                         "WHERE id=?"
                     ).toString()
@@ -351,7 +351,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT start_number FROM bank_note_book",
+        				"SELECT start_number FROM pay_bank_note_book",
         				"WHERE id=?"
         			).toString()
         		)
@@ -369,7 +369,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT end_number FROM bank_note_book",
+        				"SELECT end_number FROM pay_bank_note_book",
         				"WHERE id=?"
         			).toString()
         		)
@@ -405,7 +405,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT prefix_number FROM bank_note_book",
+        				"SELECT prefix_number FROM pay_bank_note_book",
         				"WHERE id=?"
         			).toString()
         		)
@@ -427,7 +427,7 @@ public abstract class DbAbstractBankNoteBook implements BankNoteBook {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE bank_note_book",
+                        "UPDATE pay_bank_note_book",
                         "SET prefix_number=?",
                         "WHERE id=?"
                     ).toString()

@@ -16,5 +16,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
-  <includeAll path="io/surati/gap/payment/liquibase/2022-payment"/>
+  <include file="io/surati/gap/admin/liquibase/db.changelog-master.xml"/>
+  <includeAll path="io/surati/gap/payment/liquibase/2022"/>
 </databaseChangeLog>
