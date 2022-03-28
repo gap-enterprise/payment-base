@@ -36,6 +36,7 @@ import org.cactoos.text.Joined;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  * Pagined payment orders from Database.
@@ -225,10 +226,8 @@ public final class DbPaginedPaymentOrders implements PaymentOrders {
             "LEFT JOIN pay_reference_document as rd ON rd.id = po.reference_document_id",
             "WHERE (po.reference ILIKE ? OR rd.reference ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
             "AND (po.status_id = ? OR ? = 'NONE')",
-            "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR po.date >= ?)",
-            "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR po.date <= ?)",
-            "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR rd.date >= ?)",
-            "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR rd.date <= ?)",
+            "AND po.date BETWEEN ? AND ?",
+            "AND rd.date BETWEEN ? AND ?",
             StringUtils.isBlank(filter) ? StringUtils.EMPTY : String.format("AND (%s)", filter),
             order	
         ).toString();
@@ -240,13 +239,9 @@ public final class DbPaginedPaymentOrders implements PaymentOrders {
 			.set("%" + this.filter + "%")
             .set(this.status.name())
             .set(this.status.name())
-            .set(java.sql.Date.valueOf(this.opperiod.begin()))
-            .set(java.sql.Date.valueOf(this.opperiod.begin()))
-            .set(java.sql.Date.valueOf(this.opperiod.end()))
-            .set(java.sql.Date.valueOf(this.opperiod.end()))
-            .set(java.sql.Date.valueOf(this.refdocperiod.begin()))
-            .set(java.sql.Date.valueOf(this.refdocperiod.begin()))
-            .set(java.sql.Date.valueOf(this.refdocperiod.end()))
-            .set(java.sql.Date.valueOf(this.refdocperiod.end()));
+            .set(java.sql.Date.valueOf(this.opperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.opperiod.begin()))
+            .set(java.sql.Date.valueOf(this.opperiod.end() == LocalDate.MAX ? LocalDate.of(3000, 01, 01) : this.opperiod.end()))
+			.set(java.sql.Date.valueOf(this.refdocperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.refdocperiod.begin()))
+			.set(java.sql.Date.valueOf(this.refdocperiod.end() == LocalDate.MAX ? LocalDate.of(3000, 01, 01) : this.refdocperiod.end()));
 	}
 }
