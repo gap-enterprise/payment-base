@@ -35,6 +35,7 @@ import org.cactoos.text.Joined;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  * Pagined payments from Database.
@@ -90,8 +91,7 @@ public final class DbPaginedPayments implements Payments {
 	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
 	                        "WHERE (pay.issuer_reference ILIKE ? OR pay.internal_reference ILIKE ? OR pay.edition_place ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (pay.status_id = ? OR ? = 'NONE')",
-	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date >= ?)",
-	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date <= ?)",
+	                        "AND pay.date BETWEEN ? AND ?",
 	                        "ORDER BY id DESC",
             				"LIMIT ? OFFSET ?"
                         ).toString()
@@ -103,10 +103,8 @@ public final class DbPaginedPayments implements Payments {
                     .set("%" + this.filter + "%")
                     .set(this.status.name())
                     .set(this.status.name())
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
+					.set(java.sql.Date.valueOf(this.payperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.payperiod.begin()))
+					.set(java.sql.Date.valueOf(this.payperiod.end() == LocalDate.MAX ? LocalDate.of(3000, 01, 01) : this.payperiod.end()))
                     .set(this.nbperpage)
                     .set(this.nbperpage * (this.page - 1))
                     .select(
@@ -146,8 +144,7 @@ public final class DbPaginedPayments implements Payments {
 	                        "LEFT JOIN ad_person as ps ON ps.id = tp.id",
 	                        "WHERE (pay.issuer_reference ILIKE ? OR pay.internal_reference ILIKE ? OR pay.edition_place ILIKE ? OR ps.name ILIKE ? OR tp.abbreviated ILIKE ?)",
 	                        "AND (pay.status_id = ? OR ? = 'NONE')",
-	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date >= ?)",
-	                        "AND (to_char(?::date, 'YYYY-MM-DD') = '1970-01-01' OR pay.date <= ?)"
+							"AND pay.date BETWEEN ? AND ?"
 	                    ).toString()
 	                )
 					.set("%" + this.filter + "%")
@@ -157,10 +154,8 @@ public final class DbPaginedPayments implements Payments {
                     .set("%" + this.filter + "%")
                     .set(this.status.name())
                     .set(this.status.name())
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
+					.set(java.sql.Date.valueOf(this.payperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.payperiod.begin()))
+					.set(java.sql.Date.valueOf(this.payperiod.end() == LocalDate.MAX ? LocalDate.of(3000, 01, 01) : this.payperiod.end()))
 					.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
 			throw new DatabaseException(ex);
