@@ -72,7 +72,7 @@ public class PayPaymentBatch extends TableImpl<PayPaymentBatchRecord> {
     /**
      * The column <code>public.pay_payment_batch.status_id</code>.
      */
-    public final TableField<PayPaymentBatchRecord, String> STATUS_ID = createField(DSL.name("status_id"), SQLDataType.VARCHAR(25).defaultValue(DSL.field("'TO_PRINT'", SQLDataType.VARCHAR)), this, "");
+    public final TableField<PayPaymentBatchRecord, String> STATUS_ID = createField(DSL.name("status_id"), SQLDataType.VARCHAR(25).nullable(false), this, "");
 
     private PayPaymentBatch(Name alias, Table<PayPaymentBatchRecord> aliased) {
         this(alias, aliased, null);
@@ -119,12 +119,12 @@ public class PayPaymentBatch extends TableImpl<PayPaymentBatchRecord> {
 
     @Override
     public UniqueKey<PayPaymentBatchRecord> getPrimaryKey() {
-        return Keys.PAY_PAYMENT_BATCH_PKEY;
+        return Keys.CONSTRAINT_75;
     }
 
     @Override
     public List<UniqueKey<PayPaymentBatchRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentBatchRecord>>asList(Keys.PAY_PAYMENT_BATCH_PKEY);
+        return Arrays.<UniqueKey<PayPaymentBatchRecord>>asList(Keys.CONSTRAINT_75);
     }
 
     @Override

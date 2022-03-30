@@ -132,7 +132,7 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
     /**
      * The column <code>public.pay_reference_document.advanced_amount</code>.
      */
-    public final TableField<PayReferenceDocumentRecord, Double> ADVANCED_AMOUNT = createField(DSL.name("advanced_amount"), SQLDataType.DOUBLE.nullable(false).defaultValue(DSL.field("'0'", SQLDataType.DOUBLE)), this, "");
+    public final TableField<PayReferenceDocumentRecord, Double> ADVANCED_AMOUNT = createField(DSL.name("advanced_amount"), SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_reference_document.worker_id</code>.
@@ -184,12 +184,12 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
 
     @Override
     public UniqueKey<PayReferenceDocumentRecord> getPrimaryKey() {
-        return Keys.PAY_REFERENCE_DOCUMENT_PKEY;
+        return Keys.CONSTRAINT_4;
     }
 
     @Override
     public List<UniqueKey<PayReferenceDocumentRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayReferenceDocumentRecord>>asList(Keys.PAY_REFERENCE_DOCUMENT_PKEY);
+        return Arrays.<UniqueKey<PayReferenceDocumentRecord>>asList(Keys.CONSTRAINT_4);
     }
 
     @Override

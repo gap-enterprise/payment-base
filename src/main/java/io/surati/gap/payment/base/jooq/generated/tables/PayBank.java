@@ -112,12 +112,12 @@ public class PayBank extends TableImpl<PayBankRecord> {
 
     @Override
     public UniqueKey<PayBankRecord> getPrimaryKey() {
-        return Keys.PAY_BANK_PKEY;
+        return Keys.CONSTRAINT_5;
     }
 
     @Override
     public List<UniqueKey<PayBankRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayBankRecord>>asList(Keys.PAY_BANK_PKEY);
+        return Arrays.<UniqueKey<PayBankRecord>>asList(Keys.CONSTRAINT_5);
     }
 
     @Override

@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Row3;
@@ -51,7 +52,7 @@ public class PayBankNote extends TableImpl<PayBankNoteRecord> {
     /**
      * The column <code>public.pay_bank_note.id</code>.
      */
-    public final TableField<PayBankNoteRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<PayBankNoteRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>public.pay_bank_note.book_id</code>.
@@ -102,29 +103,26 @@ public class PayBankNote extends TableImpl<PayBankNoteRecord> {
     }
 
     @Override
+    public Identity<PayBankNoteRecord, Long> getIdentity() {
+        return (Identity<PayBankNoteRecord, Long>) super.getIdentity();
+    }
+
+    @Override
     public UniqueKey<PayBankNoteRecord> getPrimaryKey() {
-        return Keys.PAY_BANK_NOTE_PKEY;
+        return Keys.CONSTRAINT_E0;
     }
 
     @Override
     public List<UniqueKey<PayBankNoteRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayBankNoteRecord>>asList(Keys.PAY_BANK_NOTE_PKEY);
+        return Arrays.<UniqueKey<PayBankNoteRecord>>asList(Keys.CONSTRAINT_E0);
     }
 
     @Override
     public List<ForeignKey<PayBankNoteRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<PayBankNoteRecord, ?>>asList(Keys.PAY_BANK_NOTE_ID_FKEY, Keys.PAY_BANK_NOTE_BOOK_ID_FKEY);
+        return Arrays.<ForeignKey<PayBankNoteRecord, ?>>asList(Keys.PAY_BANK_NOTE_BOOK_ID_FKEY);
     }
 
-    private transient PayPayment _payPayment;
     private transient PayBankNoteBook _payBankNoteBook;
-
-    public PayPayment payPayment() {
-        if (_payPayment == null)
-            _payPayment = new PayPayment(this, Keys.PAY_BANK_NOTE_ID_FKEY);
-
-        return _payPayment;
-    }
 
     public PayBankNoteBook payBankNoteBook() {
         if (_payBankNoteBook == null)

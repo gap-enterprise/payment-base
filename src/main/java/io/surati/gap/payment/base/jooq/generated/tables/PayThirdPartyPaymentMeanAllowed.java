@@ -97,12 +97,12 @@ public class PayThirdPartyPaymentMeanAllowed extends TableImpl<PayThirdPartyPaym
 
     @Override
     public UniqueKey<PayThirdPartyPaymentMeanAllowedRecord> getPrimaryKey() {
-        return Keys.PAY_THIRD_PARTY_PAYMENT_MEAN_ALLOWED_PKEY;
+        return Keys.PAY_THIRD_PARTY_PAYMENT_MEAN_ALLOWED_PK;
     }
 
     @Override
     public List<UniqueKey<PayThirdPartyPaymentMeanAllowedRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayThirdPartyPaymentMeanAllowedRecord>>asList(Keys.PAY_THIRD_PARTY_PAYMENT_MEAN_ALLOWED_PKEY);
+        return Arrays.<UniqueKey<PayThirdPartyPaymentMeanAllowedRecord>>asList(Keys.PAY_THIRD_PARTY_PAYMENT_MEAN_ALLOWED_PK);
     }
 
     @Override

@@ -70,7 +70,7 @@ public class PayThirdParty extends TableImpl<PayThirdPartyRecord> {
     /**
      * The column <code>public.pay_third_party.payment_deadline</code>.
      */
-    public final TableField<PayThirdPartyRecord, Short> PAYMENT_DEADLINE = createField(DSL.name("payment_deadline"), SQLDataType.SMALLINT.nullable(false).defaultValue(DSL.field("0", SQLDataType.SMALLINT)), this, "");
+    public final TableField<PayThirdPartyRecord, Short> PAYMENT_DEADLINE = createField(DSL.name("payment_deadline"), SQLDataType.SMALLINT.nullable(false), this, "");
 
     private PayThirdParty(Name alias, Table<PayThirdPartyRecord> aliased) {
         this(alias, aliased, null);
@@ -112,12 +112,12 @@ public class PayThirdParty extends TableImpl<PayThirdPartyRecord> {
 
     @Override
     public UniqueKey<PayThirdPartyRecord> getPrimaryKey() {
-        return Keys.PAY_THIRD_PARTY_PKEY;
+        return Keys.CONSTRAINT_9;
     }
 
     @Override
     public List<UniqueKey<PayThirdPartyRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayThirdPartyRecord>>asList(Keys.PAY_THIRD_PARTY_PKEY, Keys.PAY_THIRD_PARTY_CODE_KEY);
+        return Arrays.<UniqueKey<PayThirdPartyRecord>>asList(Keys.CONSTRAINT_9);
     }
 
     @Override

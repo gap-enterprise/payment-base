@@ -19,6 +19,7 @@ package io.surati.gap.payment.base.db;
 import com.lightweight.db.DataSourceWrap;
 import com.lightweight.db.LiquibaseDataSource;
 
+import java.sql.SQLException;
 import javax.sql.DataSource;
 
 /**
@@ -32,13 +33,13 @@ public final class PaymentDatabaseBuiltWithLiquibase extends DataSourceWrap {
      * Changelog master file name.
      */
     public static final String CHANGELOG_MASTER_FILENAME =
-        "io/surati/gap/payment/base/liquibase/db.changelog-master.xml";
+        "io/surati/gap/payment/base/liquibase/db.postgresql.changelog-master.xml";
 
     /**
      * Ctor.
      * @param src Data source
      */
-    public PaymentDatabaseBuiltWithLiquibase(final DataSource src) {
+    public PaymentDatabaseBuiltWithLiquibase(final DataSource src) throws SQLException {
         super(
             new LiquibaseDataSource(
                 src, PaymentDatabaseBuiltWithLiquibase.CHANGELOG_MASTER_FILENAME

@@ -128,12 +128,12 @@ public class PayPaymentMean extends TableImpl<PayPaymentMeanRecord> {
 
     @Override
     public UniqueKey<PayPaymentMeanRecord> getPrimaryKey() {
-        return Keys.PAY_PAYMENT_MEAN_PKEY;
+        return Keys.CONSTRAINT_E;
     }
 
     @Override
     public List<UniqueKey<PayPaymentMeanRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentMeanRecord>>asList(Keys.PAY_PAYMENT_MEAN_PKEY);
+        return Arrays.<UniqueKey<PayPaymentMeanRecord>>asList(Keys.CONSTRAINT_E);
     }
 
     @Override

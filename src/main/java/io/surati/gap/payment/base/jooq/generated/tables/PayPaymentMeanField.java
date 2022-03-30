@@ -60,12 +60,12 @@ public class PayPaymentMeanField extends TableImpl<PayPaymentMeanFieldRecord> {
     /**
      * The column <code>public.pay_payment_mean_field.x</code>.
      */
-    public final TableField<PayPaymentMeanFieldRecord, Double> X = createField(DSL.name("x"), SQLDataType.DOUBLE.nullable(false).defaultValue(DSL.field("'0'", SQLDataType.DOUBLE)), this, "");
+    public final TableField<PayPaymentMeanFieldRecord, Double> X = createField(DSL.name("x"), SQLDataType.DOUBLE.nullable(false).defaultValue(DSL.field("0", SQLDataType.DOUBLE)), this, "");
 
     /**
      * The column <code>public.pay_payment_mean_field.y</code>.
      */
-    public final TableField<PayPaymentMeanFieldRecord, Double> Y = createField(DSL.name("y"), SQLDataType.DOUBLE.nullable(false).defaultValue(DSL.field("'0'", SQLDataType.DOUBLE)), this, "");
+    public final TableField<PayPaymentMeanFieldRecord, Double> Y = createField(DSL.name("y"), SQLDataType.DOUBLE.nullable(false).defaultValue(DSL.field("0", SQLDataType.DOUBLE)), this, "");
 
     /**
      * The column <code>public.pay_payment_mean_field.visible</code>.
@@ -117,12 +117,12 @@ public class PayPaymentMeanField extends TableImpl<PayPaymentMeanFieldRecord> {
 
     @Override
     public UniqueKey<PayPaymentMeanFieldRecord> getPrimaryKey() {
-        return Keys.PAY_PAYMENT_MEAN_FIELD_PKEY;
+        return Keys.PAY_PAYMENT_MEAN_FIELD_PK;
     }
 
     @Override
     public List<UniqueKey<PayPaymentMeanFieldRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentMeanFieldRecord>>asList(Keys.PAY_PAYMENT_MEAN_FIELD_PKEY);
+        return Arrays.<UniqueKey<PayPaymentMeanFieldRecord>>asList(Keys.PAY_PAYMENT_MEAN_FIELD_PK);
     }
 
     @Override

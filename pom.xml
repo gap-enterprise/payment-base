@@ -72,6 +72,12 @@ SOFTWARE.
       <version>5.8.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.8.2</version>
+      <scope>test</scope>
+    </dependency>
     <!--
       Use 1.4.x because there is an error on 2.x.x.
       See https://stackoverflow.com/questions/70696570/h2-database-engine-version-upgrade-from-1-4-182-to-2-0-x-fails-with-caused-by-o
@@ -117,7 +123,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.baudoliver7</groupId>
       <artifactId>lightweight-db</artifactId>
-      <version>0.4</version>
+      <version>0.4.1</version>
     </dependency>
     <dependency>
       <groupId>org.cactoos</groupId>
@@ -169,7 +175,7 @@ SOFTWARE.
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>admin-base</artifactId>
-      <version>0.4.2</version>
+      <version>0.4.3</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
     <dependency>
