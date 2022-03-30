@@ -1,0 +1,279 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<!--
+Copyright (c) 2022 Surati
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to read
+the Software only. Permissions is hereby NOT GRANTED to use, copy, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" logicalFilePath="001-initial-schema.xml" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+  <changeSet author="baudoliver7" id="001">
+    <sql>
+      CREATE TABLE pay_third_party_family (
+      id BIGSERIAL PRIMARY KEY,
+      code character varying(50) NOT NULL,
+      name character varying(50) NOT NULL
+      );
+
+      CREATE TABLE pay_third_party (
+      id BIGINT PRIMARY KEY,
+      code character varying(50) NOT NULL,
+      abbreviated character varying(100) NOT NULL,
+      family_id bigint,
+      payment_deadline smallint NOT NULL,
+      CONSTRAINT pay_third_party_id_fkey FOREIGN KEY (id) REFERENCES ad_person (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_third_party_family_id_fkey FOREIGN KEY (family_id) REFERENCES pay_third_party_family (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_bank (
+      id BIGINT PRIMARY KEY,
+      representative character varying(50),
+      representative_position character varying(50),
+      representative_civility character varying(15),
+      headquarters character varying(50),
+      CONSTRAINT pay_bank_id_fkey FOREIGN KEY (id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_bank_account (
+      id BIGSERIAL PRIMARY KEY,
+      branch_code character varying(5) NOT NULL,
+      number character varying(12) NOT NULL,
+      key character varying(2) NOT NULL,
+      bank_id bigint NOT NULL,
+      holder_id bigint NOT NULL,
+      CONSTRAINT pay_bank_account_bank_id_fkey FOREIGN KEY (bank_id) REFERENCES pay_bank (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_bank_account_holder_id_fkey FOREIGN KEY (holder_id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_bank_account_accounting_setting (
+      account_id bigint NOT NULL,
+      mean_type_id character varying(25) NOT NULL,
+      journal_code character varying(25),
+      CONSTRAINT pay_bank_account_accounting_setting_pk PRIMARY KEY (account_id, mean_type_id),
+      CONSTRAINT pay_bank_account_accounting_setting_account_id_fkey FOREIGN KEY (account_id) REFERENCES pay_bank_account (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_payment_mean (
+      id BIGSERIAL PRIMARY KEY,
+      type_id character varying(25) NOT NULL,
+      bank_id bigint NOT NULL,
+      image_file_name character varying(100) NOT NULL,
+      width double precision NOT NULL,
+      height double precision NOT NULL,
+      dpi smallint DEFAULT 72 NOT NULL,
+      CONSTRAINT pay_payment_mean_bank_id_fkey FOREIGN KEY (bank_id) REFERENCES pay_bank (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_payment_mean_field (
+      type_id character varying(50) NOT NULL,
+      mean_id bigint NOT NULL,
+      x double precision DEFAULT 0 NOT NULL,
+      y double precision DEFAULT 0 NOT NULL,
+      visible boolean DEFAULT true,
+      width double precision NOT NULL,
+      CONSTRAINT pay_payment_mean_field_pk PRIMARY KEY (type_id, mean_id),
+      CONSTRAINT pay_payment_mean_field_mean_id_fkey FOREIGN KEY (mean_id) REFERENCES pay_payment_mean (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_reference_document (
+      id BIGSERIAL PRIMARY KEY,
+      type_id character varying(25) NOT NULL,
+      date date NOT NULL,
+      reference character varying(50) NOT NULL,
+      object character varying(100) NOT NULL,
+      place character varying(50) NOT NULL,
+      amount double precision NOT NULL,
+      deposit_date date,
+      entry_date date NOT NULL,
+      issuer_id bigint NOT NULL,
+      other_reference character varying(50),
+      status_id character varying(25) NOT NULL,
+      step_id character varying(25) NOT NULL,
+      amount_paid double precision NOT NULL,
+      amount_left double precision NOT NULL,
+      author_id bigint NOT NULL,
+      advanced_amount double precision NOT NULL,
+      worker_id bigint NOT NULL,
+      CONSTRAINT pay_reference_document_issuer_id_fkey FOREIGN KEY (issuer_id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_reference_document_author_id_fkey FOREIGN KEY (author_id) REFERENCES ad_user (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_reference_document_worker_id_fkey FOREIGN KEY (worker_id) REFERENCES ad_user (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE VIEW pay_bank_account_view AS
+      SELECT ba.id,
+      ba.branch_code,
+      ba.number,
+      ba.key,
+      ba.bank_id,
+      ba.holder_id,
+      concat(b.code, ba.branch_code, ba.number, ba.key) AS full_number
+      FROM (pay_bank_account ba
+      LEFT JOIN pay_third_party b ON ((b.id = ba.bank_id)));
+
+      CREATE TABLE pay_bank_note_book (
+      id BIGSERIAL PRIMARY KEY,
+      account_id bigint NOT NULL,
+      status_id character varying(25) NOT NULL,
+      mean_type_id character varying(25) NOT NULL,
+      start_number character varying(25) NOT NULL,
+      end_number character varying(25) NOT NULL,
+      current_number character varying(25) NOT NULL,
+      prefix_number character varying(25) NOT NULL,
+      CONSTRAINT pay_bank_note_book_account_id_fkey FOREIGN KEY (account_id) REFERENCES pay_bank_account (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_bank_note (
+      id BIGSERIAL PRIMARY KEY,
+      book_id bigint NOT NULL,
+      due_date date,
+      CONSTRAINT pay_bank_note_book_id_fkey FOREIGN KEY (book_id) REFERENCES pay_bank_note_book (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_payment_order_group (
+      id BIGSERIAL PRIMARY KEY,
+      third_party_id bigint NOT NULL,
+      account_id bigint,
+      status_id character varying(25),
+      mean_type_id character varying(25),
+      due_date date,
+      author_id bigint NOT NULL,
+      worker_id bigint NOT NULL,
+      is_hetero boolean DEFAULT false NOT NULL,
+      CONSTRAINT pay_payment_order_group_third_party_id_fkey FOREIGN KEY (third_party_id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_order_group_account_id_fkey FOREIGN KEY (account_id) REFERENCES pay_bank_account (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_order_group_author_id_fkey FOREIGN KEY (author_id) REFERENCES ad_user (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_order_group_worker_id_fkey FOREIGN KEY (worker_id) REFERENCES ad_user (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_payment_order (
+      id BIGSERIAL PRIMARY KEY,
+      date date NOT NULL,
+      reference character varying(25) NOT NULL,
+      beneficiary_id bigint NOT NULL,
+      amount_to_pay double precision NOT NULL,
+      reference_document_id bigint,
+      authorizing_officer_id bigint,
+      status_id character varying(25) NOT NULL,
+      author_id bigint NOT NULL,
+      group_id bigint,
+      reason character varying(225) NOT NULL,
+      description character varying(225),
+      CONSTRAINT pay_payment_order_beneficiary_id_fkey FOREIGN KEY (beneficiary_id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_order_reference_document_id_fkey FOREIGN KEY (reference_document_id) REFERENCES pay_reference_document (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_order_authorizing_officer_id_fkey FOREIGN KEY (authorizing_officer_id) REFERENCES ad_user (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_order_author_id_fkey FOREIGN KEY (author_id) REFERENCES ad_user (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_order_group_id_fkey FOREIGN KEY (group_id) REFERENCES pay_payment_order_group (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_payment_batch (
+      id BIGSERIAL PRIMARY KEY,
+      date date NOT NULL,
+      mean_type_id character varying(25) NOT NULL,
+      account_id bigint NOT NULL,
+      status_id character varying(25) NOT NULL,
+      CONSTRAINT pay_payment_batch_account_id_fkey FOREIGN KEY (account_id) REFERENCES pay_bank_account (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_payment (
+      id BIGSERIAL PRIMARY KEY,
+      internal_reference character varying(25) NOT NULL,
+      issuer_reference character varying(25) NOT NULL,
+      beneficiary_id bigint NOT NULL,
+      amount double precision NOT NULL,
+      date timestamp without time zone NOT NULL,
+      edition_place character varying(50),
+      mention_1 character varying(50),
+      mention_2 character varying(50),
+      status_id character varying(25) NOT NULL,
+      cancel_reason_description character varying(100),
+      author_id bigint NOT NULL,
+      group_id bigint NOT NULL,
+      cancel_reason_id character varying(25),
+      cancel_author_id bigint,
+      batch_id bigint,
+      issuer_id bigint NOT NULL,
+      mean_type_id character varying(25) NOT NULL,
+      cancel_date timestamp without time zone,
+      CONSTRAINT pay_payment_beneficiary_id_fkey FOREIGN KEY (beneficiary_id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_group_id_fkey FOREIGN KEY (group_id) REFERENCES pay_payment_order_group (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_batch_id_fkey FOREIGN KEY (batch_id) REFERENCES pay_payment_batch (id)
+      ON UPDATE CASCADE ON DELETE CASCADE,
+      CONSTRAINT pay_payment_issuer_id_fkey FOREIGN KEY (issuer_id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE TABLE pay_payment_export (
+      id BIGSERIAL PRIMARY KEY,
+      payment_id bigint NOT NULL,
+      is_done boolean NOT NULL,
+      CONSTRAINT pay_payment_export_payment_id_fkey FOREIGN KEY (payment_id) REFERENCES pay_payment (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+
+      CREATE VIEW pay_reference_document_view AS
+      SELECT rd.id,
+      rd.type_id,
+      rd.date,
+      rd.reference,
+      rd.object,
+      rd.place,
+      rd.amount,
+      rd.deposit_date,
+      rd.entry_date,
+      rd.issuer_id,
+      rd.other_reference,
+      rd.status_id,
+      rd.step_id,
+      rd.amount_paid,
+      rd.amount_left,
+      ps.name AS name_issuer,
+      tp.abbreviated AS abbreviated_issuer,
+      tp.code AS code_issuer
+      FROM ((pay_reference_document rd
+      LEFT JOIN pay_third_party tp ON ((tp.id = rd.issuer_id)))
+      LEFT JOIN ad_person ps ON ((ps.id = rd.issuer_id)));
+
+      CREATE TABLE pay_third_party_payment_mean_allowed (
+      third_party_id bigint NOT NULL,
+      mean_type_id character varying(25) NOT NULL,
+      CONSTRAINT pay_third_party_payment_mean_allowed_pk PRIMARY KEY (third_party_id, mean_type_id),
+      CONSTRAINT pay_third_party_payment_mean_allowed_third_party_id_fkey FOREIGN KEY (third_party_id) REFERENCES pay_third_party (id)
+      ON UPDATE CASCADE ON DELETE CASCADE
+      );
+    </sql>
+  </changeSet>
+</databaseChangeLog>

@@ -86,7 +86,7 @@ public class PayBankNoteBook extends TableImpl<PayBankNoteBookRecord> {
     /**
      * The column <code>public.pay_bank_note_book.prefix_number</code>.
      */
-    public final TableField<PayBankNoteBookRecord, String> PREFIX_NUMBER = createField(DSL.name("prefix_number"), SQLDataType.VARCHAR(25).nullable(false).defaultValue(DSL.field("''", SQLDataType.VARCHAR)), this, "");
+    public final TableField<PayBankNoteBookRecord, String> PREFIX_NUMBER = createField(DSL.name("prefix_number"), SQLDataType.VARCHAR(25).nullable(false), this, "");
 
     private PayBankNoteBook(Name alias, Table<PayBankNoteBookRecord> aliased) {
         this(alias, aliased, null);
@@ -133,12 +133,12 @@ public class PayBankNoteBook extends TableImpl<PayBankNoteBookRecord> {
 
     @Override
     public UniqueKey<PayBankNoteBookRecord> getPrimaryKey() {
-        return Keys.PAY_BANK_NOTE_BOOK_PKEY;
+        return Keys.CONSTRAINT_F8;
     }
 
     @Override
     public List<UniqueKey<PayBankNoteBookRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayBankNoteBookRecord>>asList(Keys.PAY_BANK_NOTE_BOOK_PKEY);
+        return Arrays.<UniqueKey<PayBankNoteBookRecord>>asList(Keys.CONSTRAINT_F8);
     }
 
     @Override

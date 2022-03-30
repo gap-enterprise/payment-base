@@ -139,12 +139,12 @@ public class PayPaymentOrderGroup extends TableImpl<PayPaymentOrderGroupRecord> 
 
     @Override
     public UniqueKey<PayPaymentOrderGroupRecord> getPrimaryKey() {
-        return Keys.PAY_PAYMENT_ORDER_GROUP_PKEY;
+        return Keys.CONSTRAINT_D;
     }
 
     @Override
     public List<UniqueKey<PayPaymentOrderGroupRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentOrderGroupRecord>>asList(Keys.PAY_PAYMENT_ORDER_GROUP_PKEY);
+        return Arrays.<UniqueKey<PayPaymentOrderGroupRecord>>asList(Keys.CONSTRAINT_D);
     }
 
     @Override

@@ -76,7 +76,7 @@ public class PayBankAccount extends TableImpl<PayBankAccountRecord> {
     /**
      * The column <code>public.pay_bank_account.holder_id</code>.
      */
-    public final TableField<PayBankAccountRecord, Long> HOLDER_ID = createField(DSL.name("holder_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<PayBankAccountRecord, Long> HOLDER_ID = createField(DSL.name("holder_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     private PayBankAccount(Name alias, Table<PayBankAccountRecord> aliased) {
         this(alias, aliased, null);
@@ -123,12 +123,12 @@ public class PayBankAccount extends TableImpl<PayBankAccountRecord> {
 
     @Override
     public UniqueKey<PayBankAccountRecord> getPrimaryKey() {
-        return Keys.PAY_BANK_ACCOUNT_PKEY;
+        return Keys.CONSTRAINT_93;
     }
 
     @Override
     public List<UniqueKey<PayBankAccountRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayBankAccountRecord>>asList(Keys.PAY_BANK_ACCOUNT_PKEY);
+        return Arrays.<UniqueKey<PayBankAccountRecord>>asList(Keys.CONSTRAINT_93);
     }
 
     @Override

@@ -108,12 +108,12 @@ public class PayThirdPartyFamily extends TableImpl<PayThirdPartyFamilyRecord> {
 
     @Override
     public UniqueKey<PayThirdPartyFamilyRecord> getPrimaryKey() {
-        return Keys.PAY_THIRD_PARTY_FAMILY_PKEY;
+        return Keys.CONSTRAINT_B9;
     }
 
     @Override
     public List<UniqueKey<PayThirdPartyFamilyRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayThirdPartyFamilyRecord>>asList(Keys.PAY_THIRD_PARTY_FAMILY_PKEY, Keys.PAY_THIRD_PARTY_FAMILY_CODE_KEY);
+        return Arrays.<UniqueKey<PayThirdPartyFamilyRecord>>asList(Keys.CONSTRAINT_B9);
     }
 
     @Override

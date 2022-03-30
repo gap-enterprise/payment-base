@@ -154,12 +154,12 @@ public class PayPaymentOrder extends TableImpl<PayPaymentOrderRecord> {
 
     @Override
     public UniqueKey<PayPaymentOrderRecord> getPrimaryKey() {
-        return Keys.PAY_PAYMENT_ORDER_PKEY;
+        return Keys.CONSTRAINT_7;
     }
 
     @Override
     public List<UniqueKey<PayPaymentOrderRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentOrderRecord>>asList(Keys.PAY_PAYMENT_ORDER_PKEY);
+        return Arrays.<UniqueKey<PayPaymentOrderRecord>>asList(Keys.CONSTRAINT_7);
     }
 
     @Override

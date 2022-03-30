@@ -108,12 +108,12 @@ public class PayPaymentExport extends TableImpl<PayPaymentExportRecord> {
 
     @Override
     public UniqueKey<PayPaymentExportRecord> getPrimaryKey() {
-        return Keys.PAY_PAYMENT_EXPORT_PKEY;
+        return Keys.CONSTRAINT_3;
     }
 
     @Override
     public List<UniqueKey<PayPaymentExportRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentExportRecord>>asList(Keys.PAY_PAYMENT_EXPORT_PKEY);
+        return Arrays.<UniqueKey<PayPaymentExportRecord>>asList(Keys.CONSTRAINT_3);
     }
 
     @Override

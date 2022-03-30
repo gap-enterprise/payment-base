@@ -20,6 +20,7 @@ import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
 import org.jooq.TableOptions;
+import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.SQLDataType;
 import org.jooq.impl.TableImpl;
@@ -97,6 +98,16 @@ public class PayBankAccountAccountingSetting extends TableImpl<PayBankAccountAcc
     @Override
     public Schema getSchema() {
         return Public.PUBLIC;
+    }
+
+    @Override
+    public UniqueKey<PayBankAccountAccountingSettingRecord> getPrimaryKey() {
+        return Keys.PAY_BANK_ACCOUNT_ACCOUNTING_SETTING_PK;
+    }
+
+    @Override
+    public List<UniqueKey<PayBankAccountAccountingSettingRecord>> getKeys() {
+        return Arrays.<UniqueKey<PayBankAccountAccountingSettingRecord>>asList(Keys.PAY_BANK_ACCOUNT_ACCOUNTING_SETTING_PK);
     }
 
     @Override
