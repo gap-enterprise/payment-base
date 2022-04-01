@@ -24,7 +24,7 @@ SOFTWARE.
   </parent>
   <groupId>io.surati.gap</groupId>
   <artifactId>payment-base</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.1.4</version>
   <description>Base payment module</description>
   <url>https://github.com/gap-enterprise/payment-base</url>
   <inceptionYear>2022</inceptionYear>
