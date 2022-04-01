@@ -120,7 +120,7 @@ public final class DbThirdParties implements ThirdParties {
 		try(
 				final Connection connection = source.getConnection();
 				final PreparedStatement pstmt = connection.prepareStatement("INSERT INTO ad_person (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
-				final PreparedStatement pstmt1 = connection.prepareStatement("INSERT INTO pay_third_party (id, code, abbreviated) VALUES (?, ?, ?)")
+				final PreparedStatement pstmt1 = connection.prepareStatement("INSERT INTO pay_third_party (id, code, abbreviated, payment_deadline) VALUES (?, ?, ?, 0)")
 		){
 			
 			pstmt.setString(1, name);
@@ -137,7 +137,6 @@ public final class DbThirdParties implements ThirdParties {
 			pstmt1.setLong(1, id);
 			pstmt1.setString(2, code);
 			pstmt1.setString(3, abbreviated);
-			
 			pstmt1.executeUpdate();
 			
             final ThirdParty tp = new DbThirdParty(source, id);

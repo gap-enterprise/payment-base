@@ -123,7 +123,7 @@ SOFTWARE.
     <dependency>
       <groupId>com.baudoliver7</groupId>
       <artifactId>lightweight-db</artifactId>
-      <version>0.4.1</version>
+      <version>0.5.1</version>
     </dependency>
     <dependency>
       <groupId>org.cactoos</groupId>
@@ -147,15 +147,19 @@ SOFTWARE.
       <version>0.2</version>
     </dependency>
     <dependency>
+      <groupId>com.baudoliver7</groupId>
+      <artifactId>easy-liquibase4j</artifactId>
+      <version>0.1.0</version>
+    </dependency>
+    <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>database-utils</artifactId>
-      <version>0.3</version>
+      <version>0.5.0</version>
     </dependency>
     <dependency>
       <groupId>com.zaxxer</groupId>
       <artifactId>HikariCP</artifactId>
       <version>4.0.3</version>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.jooq</groupId>
@@ -175,7 +179,7 @@ SOFTWARE.
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>admin-base</artifactId>
-      <version>0.4.3</version>
+      <version>0.4.4</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
     <dependency>
@@ -207,6 +211,11 @@ SOFTWARE.
           <artifactId>commons-csv</artifactId>
         </exclusion>
       </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.baudoliver7</groupId>
+      <artifactId>takes-utils</artifactId>
+      <version>0.3.1</version>
     </dependency>
   </dependencies>
   <build>
@@ -272,7 +281,14 @@ SOFTWARE.
               </execution>
             </executions>
             <configuration>
-              <mainClass>io.surati.gap.payment.base.jooq.JooqGen</mainClass>
+              <mainClass>io.surati.gap.payment.base.db.jooq.JooqGen</mainClass>
+              <cleanupDaemonThreads>false</cleanupDaemonThreads>
+              <arguments>
+                <argument>--driver=${db.driver}</argument>
+                <argument>--url=${db.url}</argument>
+                <argument>--user=${db.user}</argument>
+                <argument>--password=${db.password}</argument>
+              </arguments>
             </configuration>
           </plugin>
         </plugins>
