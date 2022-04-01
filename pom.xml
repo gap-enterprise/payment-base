@@ -149,7 +149,7 @@ SOFTWARE.
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>database-utils</artifactId>
-      <version>0.3</version>
+      <version>0.4.1</version>
     </dependency>
     <dependency>
       <groupId>com.zaxxer</groupId>
