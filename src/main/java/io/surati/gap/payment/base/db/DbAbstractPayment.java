@@ -15,10 +15,6 @@ import io.surati.gap.payment.base.api.PaymentMeanType;
 import io.surati.gap.payment.base.api.PaymentOrderGroup;
 import io.surati.gap.payment.base.api.PaymentStatus;
 import io.surati.gap.payment.base.api.ThirdParty;
-import org.apache.commons.lang3.StringUtils;
-import org.cactoos.text.Joined;
-
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +22,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.sql.DataSource;
+import org.apache.commons.lang3.StringUtils;
+import org.cactoos.text.Joined;
 
 public abstract class DbAbstractPayment implements Payment {
 
@@ -457,8 +456,8 @@ public abstract class DbAbstractPayment implements Payment {
 			pstmt.setLong(1, id);
 			try (final ResultSet rs = pstmt.executeQuery()) {
 				rs.next();
-				if(rs.getDate(1) == null) {
-					return null;
+				if(rs.getTimestamp(1) == null) {
+					return LocalDateTime.MIN;
 				} else {
 					return rs.getTimestamp(1).toLocalDateTime();
 				}

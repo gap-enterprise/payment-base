@@ -439,9 +439,9 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM payment pay",
+                            "SELECT id FROM pay_payment pay",
                             "WHERE group_id IN (",
-                            "SELECT group_id FROM payment_order",
+                            "SELECT group_id FROM pay_payment_order",
                             "WHERE group_id=pay.group_id and reference_document_id=?",
                             ")",
             				"ORDER BY pay.date, id DESC"
