@@ -16,7 +16,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
-  <changeSet author="baudoliver7" id="001">
+  <changeSet author="baudoliver7" id="001" context="base">
     <sql>
       CREATE TABLE pay_third_party_family (
         id BIGSERIAL PRIMARY KEY,
@@ -52,7 +52,7 @@ SOFTWARE.
         number character varying(12) NOT NULL,
         key character varying(2) NOT NULL,
         bank_id bigint NOT NULL,
-        holder_id bigint NOT NULL,
+        holder_id bigint,
         CONSTRAINT pay_bank_account_bank_id_fkey FOREIGN KEY (bank_id) REFERENCES pay_bank (id)
           ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT pay_bank_account_holder_id_fkey FOREIGN KEY (holder_id) REFERENCES pay_third_party (id)

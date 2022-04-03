@@ -38,6 +38,15 @@ public final class PaymentBaseDatabaseBuiltWithLiquibase extends DataSourceWrap 
      * @param src Data source
      */
     public PaymentBaseDatabaseBuiltWithLiquibase(final DataSource src) {
+        this(src, "base");
+    }
+
+    /**
+     * Ctor.
+     * @param src Data source
+     * @param contexts Contexts
+     */
+    public PaymentBaseDatabaseBuiltWithLiquibase(final DataSource src, final String contexts) {
         super(
             new UncheckedLiquibaseDataSource(
                 src, PaymentBaseDatabaseBuiltWithLiquibase.CHANGELOG_MASTER_FILENAME

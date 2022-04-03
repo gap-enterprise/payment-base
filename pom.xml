@@ -85,8 +85,8 @@ SOFTWARE.
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-      <version>1.4.200</version>
-      <scope>runtime</scope>
+      <version>2.1.210</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -102,7 +102,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.liquibase</groupId>
       <artifactId>liquibase-core</artifactId>
-      <version>4.9.0</version>
+      <version>4.9.1</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -149,12 +149,12 @@ SOFTWARE.
     <dependency>
       <groupId>com.baudoliver7</groupId>
       <artifactId>easy-liquibase4j</artifactId>
-      <version>0.1.0</version>
+      <version>0.2.0</version>
     </dependency>
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>database-utils</artifactId>
-      <version>0.5.0</version>
+      <version>0.5.1</version>
     </dependency>
     <dependency>
       <groupId>com.zaxxer</groupId>
@@ -179,18 +179,13 @@ SOFTWARE.
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>admin-base</artifactId>
-      <version>0.4.4</version>
+      <version>0.5.0</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-imaging -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-imaging</artifactId>
       <version>1.0-alpha1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>3.9</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
