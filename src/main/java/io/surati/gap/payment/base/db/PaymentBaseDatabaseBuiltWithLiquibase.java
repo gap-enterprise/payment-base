@@ -49,7 +49,8 @@ public final class PaymentBaseDatabaseBuiltWithLiquibase extends DataSourceWrap 
     public PaymentBaseDatabaseBuiltWithLiquibase(final DataSource src, final String contexts) {
         super(
             new UncheckedLiquibaseDataSource(
-                src, PaymentBaseDatabaseBuiltWithLiquibase.CHANGELOG_MASTER_FILENAME
+                src, PaymentBaseDatabaseBuiltWithLiquibase.CHANGELOG_MASTER_FILENAME,
+                contexts
             )
         );
     }
