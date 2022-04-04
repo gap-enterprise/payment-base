@@ -50,7 +50,7 @@ SOFTWARE.
         id BIGSERIAL PRIMARY KEY,
         branch_code character varying(5) NOT NULL,
         number character varying(12) NOT NULL,
-        key character varying(2) NOT NULL,
+        "key" character varying(2) NOT NULL,
         bank_id bigint NOT NULL,
         holder_id bigint,
         CONSTRAINT pay_bank_account_bank_id_fkey FOREIGN KEY (bank_id) REFERENCES pay_bank (id)
@@ -123,10 +123,10 @@ SOFTWARE.
         SELECT ba.id,
         ba.branch_code,
         ba.number,
-        ba.key,
+        ba."key",
         ba.bank_id,
         ba.holder_id,
-        concat(b.code, ba.branch_code, ba.number, ba.key) AS full_number
+        concat(b.code, ba.branch_code, ba.number, ba."key") AS full_number
         FROM (pay_bank_account ba
         LEFT JOIN pay_third_party b ON ((b.id = ba.bank_id)));
 
