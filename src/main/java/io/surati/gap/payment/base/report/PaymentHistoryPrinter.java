@@ -95,7 +95,7 @@ public final class PaymentHistoryPrinter implements Printer {
 		
 		public String type() {
 			final String type;
-			if (this.note.book().meanType() == PaymentMeanType.CHEQUE) {
+			if (this.note.book().meanType() == PaymentMeanType.CHQ) {
 				type = "CHÈQUE";
 			} else {
 				type = "TRAITE";

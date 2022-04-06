@@ -21,7 +21,7 @@ public final class ChequeSample implements BankNote {
 
 	@Override
 	public PaymentMeanType meanType() {
-		return PaymentMeanType.CHEQUE;
+		return PaymentMeanType.CHQ;
 	}
 
 	@Override

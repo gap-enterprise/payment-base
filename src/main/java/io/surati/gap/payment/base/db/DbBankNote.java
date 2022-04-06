@@ -34,13 +34,13 @@ public final class DbBankNote extends BankNoteWrapper {
 					.select(new SingleOutcome<>(String.class)));
 			
 			switch (type) {
-				case CHEQUE:
+				case CHQ:
 					note = new DbCheck(source, id);
 					break;
-				case LETTRE_DE_CHANGE:
+				case LC:
 					note = new DbBillOfExchange(source, id);
 					break;
-				case BILLET_A_ORDRE:
+				case BO:
 					note = new DbPromissoryNote(source, id);
 					break;
 				default:

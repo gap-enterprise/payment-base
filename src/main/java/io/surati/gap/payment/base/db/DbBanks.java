@@ -177,7 +177,7 @@ public final class DbBanks implements Banks {
 		this.createPaymentMeanField(mean, PaymentMeanFieldType.VILLE_EDITION, 11.3, 3.4, 2.5);
 		this.createPaymentMeanField(mean, PaymentMeanFieldType.MENTION_SUPPLEMENTAIRE_1, 0, 35, 0);
 		this.createPaymentMeanField(mean, PaymentMeanFieldType.MENTION_SUPPLEMENTAIRE_2, 0, 35, 0);
-		if(mean.type() == PaymentMeanType.LETTRE_DE_CHANGE || mean.type() == PaymentMeanType.BILLET_A_ORDRE) {
+		if(mean.type() == PaymentMeanType.LC || mean.type() == PaymentMeanType.BO) {
 			this.createPaymentMeanField(mean, PaymentMeanFieldType.DATE_ECHEANCE, 7.5, 3.4, 2.5);
 		}
 	}

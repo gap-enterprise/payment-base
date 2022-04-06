@@ -214,7 +214,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 				)
 			);
 		}
-		if(this.meanType() == PaymentMeanType.LETTRE_DE_CHANGE && this.dueDate() == LocalDate.MIN) {
+		if(this.meanType() == PaymentMeanType.LC && this.dueDate() == LocalDate.MIN) {
 			throw new IllegalArgumentException(
 				String.format(
 					"La date d'échéance pour le groupe (Bénéficiaire=%s, Montant=%s) doit être spécifié !",
@@ -369,7 +369,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	public void update(PaymentMeanType meantype, LocalDate duedate) {
 		try {
 			final LocalDate lduedate;
-			if(duedate == null || meantype == PaymentMeanType.NONE || meantype == PaymentMeanType.CHEQUE) {
+			if(duedate == null || meantype == PaymentMeanType.NONE || meantype == PaymentMeanType.CHQ) {
 				lduedate = null;
 			} else {
 				lduedate = duedate;
