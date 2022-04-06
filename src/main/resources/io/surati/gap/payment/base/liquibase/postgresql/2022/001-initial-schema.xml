@@ -174,7 +174,7 @@ SOFTWARE.
       CREATE TABLE pay_payment_order (
         id BIGSERIAL PRIMARY KEY,
         date date NOT NULL,
-        reference character varying(25) NOT NULL,
+        reference character varying(25) UNIQUE NOT NULL,
         beneficiary_id bigint NOT NULL,
         amount_to_pay double precision NOT NULL,
         reference_document_id bigint,
@@ -208,7 +208,7 @@ SOFTWARE.
 
       CREATE TABLE pay_payment (
         id BIGSERIAL PRIMARY KEY,
-        internal_reference character varying(25) NOT NULL,
+        internal_reference character varying(25) UNIQUE NOT NULL,
         issuer_reference character varying(25) NOT NULL,
         beneficiary_id bigint NOT NULL,
         amount double precision NOT NULL,

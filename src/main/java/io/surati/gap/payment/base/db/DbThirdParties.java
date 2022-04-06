@@ -140,7 +140,7 @@ public final class DbThirdParties implements ThirdParties {
 			pstmt1.executeUpdate();
 			
             final ThirdParty tp = new DbThirdParty(source, id);
-			tp.paymentCondition().add(PaymentMeanType.CHEQUE);
+			tp.paymentCondition().add(PaymentMeanType.CHQ);
 			return tp;
 		} catch(SQLException e) {
 			throw new DatabaseException(e);

@@ -33,13 +33,13 @@ public final class DbBankNoteBook extends BankNoteBookWrapper {
 					.select(new SingleOutcome<>(String.class)));
 			
 			switch (type) {
-				case CHEQUE:
+				case CHQ:
 					book = new DbCheckBook(source, id);
 					break;
-				case LETTRE_DE_CHANGE:
+				case LC:
 					book = new DbBillOfExchangeBook(source, id);
 					break;
-				case BILLET_A_ORDRE:
+				case BO:
 					book = new DbPromissoryNoteBook(source, id);
 					break;
 				default:

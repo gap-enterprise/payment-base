@@ -64,7 +64,7 @@ public final class BirtBankNotePrinter implements Printer {
 		IReportEngine engine = null;
 		try {
 			final BankNotePrintDirection printdir;// = BankNotePrintDirection.valueOf(company.parameter("banknoteprintdirection"));
-			if(note.book().meanType() == PaymentMeanType.CHEQUE) {
+			if(note.book().meanType() == PaymentMeanType.CHQ) {
 				printdir = BankNotePrintDirection.MIDDLE;
 			} else {
 				printdir = BankNotePrintDirection.LEFT;

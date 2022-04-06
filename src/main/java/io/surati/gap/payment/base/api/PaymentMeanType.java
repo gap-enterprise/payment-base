@@ -3,9 +3,13 @@ package io.surati.gap.payment.base.api;
 public enum PaymentMeanType {
 
 	NONE("Aucun", false),
-	CHEQUE("Chèque", true),
-	BILLET_A_ORDRE("Billet à ordre", true),
-	LETTRE_DE_CHANGE("Lettre de change", true);
+	CHQ("Chèque", true),
+	BO("Billet à ordre", true),
+	LC("Lettre de change", true),
+	OV("Ordre de virement", false),
+	CB("Carte bancaire", false),
+	MM("Mobile money", false),
+	BDC("Bon de caisse", false);
 	
 	private final String title;
 
