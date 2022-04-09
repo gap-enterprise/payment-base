@@ -31,8 +31,6 @@ public interface ReferenceDocument {
 	
 	Double amount();
 	
-	Double advancedAmount();
-	
 	Double amountPaid();
 	
 	Double amountLeft();
@@ -45,7 +43,7 @@ public interface ReferenceDocument {
 
 	void update(LocalDate date, String reference, String object, String place);
 	
-	void update(String otherref);
+	void update(String internalref);
 	
 	void update(LocalDate depositdate, LocalDate entrydate);
 	
@@ -291,12 +289,6 @@ public interface ReferenceDocument {
 
 		@Override
 		public User author() {
-			
-			return null;
-		}
-
-		@Override
-		public Double advancedAmount() {
 			
 			return null;
 		}

@@ -1,6 +1,7 @@
 package io.surati.gap.payment.base.db;
 
 import com.jcabi.jdbc.JdbcSession;
+import com.jcabi.jdbc.ListOutcome;
 import com.jcabi.jdbc.Outcome;
 import com.jcabi.jdbc.SingleOutcome;
 import io.surati.gap.admin.base.api.User;
@@ -12,7 +13,10 @@ import io.surati.gap.payment.base.api.Payment;
 import io.surati.gap.payment.base.api.PaymentCancelReason;
 import io.surati.gap.payment.base.api.PaymentExport;
 import io.surati.gap.payment.base.api.PaymentMeanType;
+import io.surati.gap.payment.base.api.PaymentOrder;
 import io.surati.gap.payment.base.api.PaymentOrderGroup;
+import io.surati.gap.payment.base.api.PaymentOrderGroupsToPrepare;
+import io.surati.gap.payment.base.api.PaymentOrderStatus;
 import io.surati.gap.payment.base.api.PaymentStatus;
 import io.surati.gap.payment.base.api.ThirdParty;
 import java.io.IOException;
@@ -22,6 +26,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.LinkedList;
 import javax.sql.DataSource;
 import org.apache.commons.lang3.StringUtils;
 import org.cactoos.text.Joined;
@@ -235,7 +241,7 @@ public abstract class DbAbstractPayment implements Payment {
                 .set(canceldate)
                 .set(this.id)
                 .execute();
-            this.orders().cancelExecution(author, sendbackinpayment);
+            this.cancelExecution(author, sendbackinpayment);
             export.add(this);
         } catch (SQLException ex) {
             throw new DatabaseException(ex);
@@ -354,23 +360,27 @@ public abstract class DbAbstractPayment implements Payment {
 	}
 
 	@Override
-	public PaymentOrderGroup orders() {
+	public Iterable<PaymentOrder> orders() {
 		try {
-			final Long groupid = new JdbcSession(this.source)
-				.sql(
-	        		new Joined(
-        				" ",
-        				"SELECT group_id FROM pay_payment",
-        				"WHERE id=?"
-        			).toString()
-        		)
-				.set(this.id)
-	            .select(new SingleOutcome<>(Long.class));
-			if(groupid.equals(0L)) {
-				return PaymentOrderGroup.EMPTY;
-			} else {
-				return new DbPaymentOrderGroup(this.source, groupid);
-			}
+			return
+				new JdbcSession(this.source)
+					.sql(
+						new Joined(
+							" ",
+							"SELECT id FROM pay_payment_order",
+							"WHERE payment_id=?"
+						).toString()
+					)
+					.set(this.id)
+					.select(
+						new ListOutcome<>(
+							rset ->
+								new DbPaymentOrder(
+									this.source,
+									rset.getLong(1)
+								)
+						)
+					);
 		} catch (SQLException ex) {
 			throw new DatabaseException(ex);
 		}
@@ -465,5 +475,54 @@ public abstract class DbAbstractPayment implements Payment {
 		} catch (SQLException ex) {
 			throw new DatabaseException(ex);
 		}
+	}
+
+	private void cancelPaymentGroup(final PaymentOrderGroup group) {
+		if (group == PaymentOrderGroup.EMPTY || group.status() == PaymentOrderStatus.CANCELLED) {
+			return;
+		}
+		try {
+			new JdbcSession(this.source)
+				.sql(
+					new Joined(
+						" ",
+						"UPDATE pay_payment_order_group",
+						"SET status_id=?",
+						"WHERE id=?"
+					).toString()
+				)
+				.set(PaymentOrderStatus.CANCELLED)
+				.set(group.id())
+				.execute();
+		} catch (SQLException ex) {
+			throw new DatabaseException(ex);
+		}
+	}
+
+	private void cancelExecution(final User author, final boolean sentbackinpayment) {
+		/*for (PaymentOrder order : this.orders()) {
+			order.cancelExecution();
+		}
+
+		this.cancelPaymentGroup(order.);
+		this.changeStatus(PaymentOrderStatus.CANCELLED);
+		if(sentbackinpayment) {
+			final Collection<PaymentOrder> duplicatedorders = new LinkedList<>();
+			for (PaymentOrder order : this.iterate()) {
+				duplicatedorders.add(
+					order.duplicate(author)
+				);
+			}
+			final PaymentOrderGroupsToPrepare groups = new DbPaymentOrderGroupsToPrepare(this.source, author);
+			final PaymentOrderGroup newgroup;
+			if(this.isHetero()) {
+				newgroup = groups.mergeAcross(this.beneficiary(), duplicatedorders);
+			} else {
+				newgroup = groups.merge(duplicatedorders);
+			}
+			newgroup.useAccount(this.accountToUse());
+			newgroup.update(this.meanType(), this.dueDate());
+			newgroup.validate(author);
+		}*/
 	}
 }

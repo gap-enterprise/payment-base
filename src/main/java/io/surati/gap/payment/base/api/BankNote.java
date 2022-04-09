@@ -3,6 +3,7 @@ package io.surati.gap.payment.base.api;
 import io.surati.gap.admin.base.api.User;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 public interface BankNote extends Payment {
 
@@ -10,7 +11,7 @@ public interface BankNote extends Payment {
 	
 	LocalDate dueDate();
 	
-	PaymentOrderGroup orders();
+	Iterable<PaymentOrder> orders();
 
 	BankNote EMPTY = new BankNote() {
 
@@ -137,8 +138,8 @@ public interface BankNote extends Payment {
 		}
 
 		@Override
-		public PaymentOrderGroup orders() {
-			return PaymentOrderGroup.EMPTY;
+		public Iterable<PaymentOrder> orders() {
+			return Collections.emptyList();
 		}
 
 		@Override

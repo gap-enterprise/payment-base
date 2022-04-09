@@ -8,6 +8,7 @@ import io.surati.gap.payment.base.api.BankNote;
 import io.surati.gap.payment.base.api.BankNoteBook;
 import io.surati.gap.payment.base.api.PaymentCancelReason;
 import io.surati.gap.payment.base.api.PaymentMeanType;
+import io.surati.gap.payment.base.api.PaymentOrder;
 import io.surati.gap.payment.base.api.PaymentOrderGroup;
 import io.surati.gap.payment.base.api.PaymentStatus;
 import io.surati.gap.payment.base.api.ThirdParty;
@@ -146,8 +147,8 @@ public final class GenBankNote implements BankNote {
 	}
 
 	@Override
-	public PaymentOrderGroup orders() {
-		return this.orders;
+	public Iterable<PaymentOrder> orders() {
+		return this.orders.iterate();
 	}
 
 	@Override

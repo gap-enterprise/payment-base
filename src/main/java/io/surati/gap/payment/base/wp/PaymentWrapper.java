@@ -4,10 +4,9 @@ import io.surati.gap.admin.base.api.User;
 import io.surati.gap.payment.base.api.Payment;
 import io.surati.gap.payment.base.api.PaymentCancelReason;
 import io.surati.gap.payment.base.api.PaymentMeanType;
-import io.surati.gap.payment.base.api.PaymentOrderGroup;
+import io.surati.gap.payment.base.api.PaymentOrder;
 import io.surati.gap.payment.base.api.PaymentStatus;
 import io.surati.gap.payment.base.api.ThirdParty;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -115,7 +114,7 @@ public abstract class PaymentWrapper implements Payment {
 	}
 
 	@Override
-	public PaymentOrderGroup orders() {
+	public Iterable<PaymentOrder> orders() {
 		return this.origin.orders();
 	}
 
