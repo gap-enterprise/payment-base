@@ -7,6 +7,7 @@ package io.surati.gap.payment.base.db.jooq.generated.tables.records;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentBatchLine;
 
 import org.jooq.Field;
+import org.jooq.Record1;
 import org.jooq.Record2;
 import org.jooq.Row2;
 import org.jooq.impl.UpdatableRecordImpl;
@@ -21,16 +22,16 @@ public class PayPaymentBatchLineRecord extends UpdatableRecordImpl<PayPaymentBat
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.pay_payment_batch_line.payment_id</code>.
+     * Setter for <code>public.pay_payment_batch_line.id</code>.
      */
-    public void setPaymentId(Long value) {
+    public void setId(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.pay_payment_batch_line.payment_id</code>.
+     * Getter for <code>public.pay_payment_batch_line.id</code>.
      */
-    public Long getPaymentId() {
+    public Long getId() {
         return (Long) get(0);
     }
 
@@ -53,8 +54,8 @@ public class PayPaymentBatchLineRecord extends UpdatableRecordImpl<PayPaymentBat
     // -------------------------------------------------------------------------
 
     @Override
-    public Record2<Long, Long> key() {
-        return (Record2) super.key();
+    public Record1<Long> key() {
+        return (Record1) super.key();
     }
 
     // -------------------------------------------------------------------------
@@ -73,7 +74,7 @@ public class PayPaymentBatchLineRecord extends UpdatableRecordImpl<PayPaymentBat
 
     @Override
     public Field<Long> field1() {
-        return PayPaymentBatchLine.PAY_PAYMENT_BATCH_LINE.PAYMENT_ID;
+        return PayPaymentBatchLine.PAY_PAYMENT_BATCH_LINE.ID;
     }
 
     @Override
@@ -83,7 +84,7 @@ public class PayPaymentBatchLineRecord extends UpdatableRecordImpl<PayPaymentBat
 
     @Override
     public Long component1() {
-        return getPaymentId();
+        return getId();
     }
 
     @Override
@@ -93,7 +94,7 @@ public class PayPaymentBatchLineRecord extends UpdatableRecordImpl<PayPaymentBat
 
     @Override
     public Long value1() {
-        return getPaymentId();
+        return getId();
     }
 
     @Override
@@ -103,7 +104,7 @@ public class PayPaymentBatchLineRecord extends UpdatableRecordImpl<PayPaymentBat
 
     @Override
     public PayPaymentBatchLineRecord value1(Long value) {
-        setPaymentId(value);
+        setId(value);
         return this;
     }
 
@@ -134,10 +135,10 @@ public class PayPaymentBatchLineRecord extends UpdatableRecordImpl<PayPaymentBat
     /**
      * Create a detached, initialised PayPaymentBatchLineRecord
      */
-    public PayPaymentBatchLineRecord(Long paymentId, Long batchId) {
+    public PayPaymentBatchLineRecord(Long id, Long batchId) {
         super(PayPaymentBatchLine.PAY_PAYMENT_BATCH_LINE);
 
-        setPaymentId(paymentId);
+        setId(id);
         setBatchId(batchId);
     }
 }

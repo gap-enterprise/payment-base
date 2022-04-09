@@ -48,9 +48,9 @@ public class PayPaymentOrderGroupLine extends TableImpl<PayPaymentOrderGroupLine
     }
 
     /**
-     * The column <code>public.pay_payment_order_group_line.order_id</code>.
+     * The column <code>public.pay_payment_order_group_line.id</code>.
      */
-    public final TableField<PayPaymentOrderGroupLineRecord, Long> ORDER_ID = createField(DSL.name("order_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<PayPaymentOrderGroupLineRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_payment_order_group_line.group_id</code>.
@@ -107,7 +107,7 @@ public class PayPaymentOrderGroupLine extends TableImpl<PayPaymentOrderGroupLine
 
     @Override
     public List<ForeignKey<PayPaymentOrderGroupLineRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<PayPaymentOrderGroupLineRecord, ?>>asList(Keys.PAY_PAYMENT_ORDER_GROUP_LINE__PAY_PAYMENT_ORDER_GROUP_LINE_ORDER_ID_FKEY, Keys.PAY_PAYMENT_ORDER_GROUP_LINE__PAY_PAYMENT_ORDER_GROUP_LINE_GROUP_ID_FKEY);
+        return Arrays.<ForeignKey<PayPaymentOrderGroupLineRecord, ?>>asList(Keys.PAY_PAYMENT_ORDER_GROUP_LINE__PAY_PAYMENT_ORDER_GROUP_LINE_ID_FKEY, Keys.PAY_PAYMENT_ORDER_GROUP_LINE__PAY_PAYMENT_ORDER_GROUP_LINE_GROUP_ID_FKEY);
     }
 
     private transient PayPaymentOrder _payPaymentOrder;
@@ -115,7 +115,7 @@ public class PayPaymentOrderGroupLine extends TableImpl<PayPaymentOrderGroupLine
 
     public PayPaymentOrder payPaymentOrder() {
         if (_payPaymentOrder == null)
-            _payPaymentOrder = new PayPaymentOrder(this, Keys.PAY_PAYMENT_ORDER_GROUP_LINE__PAY_PAYMENT_ORDER_GROUP_LINE_ORDER_ID_FKEY);
+            _payPaymentOrder = new PayPaymentOrder(this, Keys.PAY_PAYMENT_ORDER_GROUP_LINE__PAY_PAYMENT_ORDER_GROUP_LINE_ID_FKEY);
 
         return _payPaymentOrder;
     }

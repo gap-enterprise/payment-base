@@ -106,7 +106,6 @@ SOFTWARE.
         beneficiary_id bigint NOT NULL,
         step_id character varying(25) NOT NULL,
         author_id bigint NOT NULL,
-        advanced_amount double precision NOT NULL,
         worker_id bigint NOT NULL,
         CONSTRAINT pay_reference_document_beneficiary_id_fkey FOREIGN KEY (beneficiary_id) REFERENCES pay_third_party (id)
           ON UPDATE CASCADE ON DELETE CASCADE,

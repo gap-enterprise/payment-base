@@ -13,7 +13,7 @@ import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row21;
+import org.jooq.Row20;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -110,11 +110,6 @@ public class PayReferenceDocumentView extends TableImpl<PayReferenceDocumentView
     public final TableField<PayReferenceDocumentViewRecord, Long> AUTHOR_ID = createField(DSL.name("author_id"), SQLDataType.BIGINT, this, "");
 
     /**
-     * The column <code>public.pay_reference_document_view.advanced_amount</code>.
-     */
-    public final TableField<PayReferenceDocumentViewRecord, Double> ADVANCED_AMOUNT = createField(DSL.name("advanced_amount"), SQLDataType.DOUBLE, this, "");
-
-    /**
      * The column <code>public.pay_reference_document_view.worker_id</code>.
      */
     public final TableField<PayReferenceDocumentViewRecord, Long> WORKER_ID = createField(DSL.name("worker_id"), SQLDataType.BIGINT, this, "");
@@ -154,7 +149,7 @@ public class PayReferenceDocumentView extends TableImpl<PayReferenceDocumentView
     }
 
     private PayReferenceDocumentView(Name alias, Table<PayReferenceDocumentViewRecord> aliased, Field<?>[] parameters) {
-        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("create view \"pay_reference_document_view\" as  SELECT rd.id,\n    rd.type_id,\n    rd.date,\n    rd.reference,\n    rd.internal_reference,\n    rd.object,\n    rd.place,\n    rd.amount,\n    rd.deposit_date,\n    rd.entry_date,\n    rd.beneficiary_id,\n    rd.step_id,\n    rd.author_id,\n    rd.advanced_amount,\n    rd.worker_id,\n        CASE\n            WHEN (rda.amount_left = (0)::double precision) THEN 'PAID'::text\n            WHEN (rda.amount_paid > (0)::double precision) THEN 'PAID_PARTIALLY'::text\n            ELSE 'WAITING_FOR_PAYMENT'::text\n        END AS status_id,\n        CASE\n            WHEN (rda.id IS NULL) THEN (0)::double precision\n            ELSE rda.amount_paid\n        END AS amount_paid,\n        CASE\n            WHEN (rda.id IS NULL) THEN rd.amount\n            ELSE rda.amount_left\n        END AS amount_left,\n    ps.name AS beneficiary_name,\n    tp.abbreviated AS beneficiary_abbreviated,\n    tp.code AS beneficiary_code\n   FROM (((pay_reference_document rd\n     LEFT JOIN pay_reference_document_amount_view rda ON ((rda.id = rd.id)))\n     LEFT JOIN pay_third_party tp ON ((tp.id = rd.beneficiary_id)))\n     LEFT JOIN ad_person ps ON ((ps.id = rd.beneficiary_id)));"));
+        super(alias, null, aliased, parameters, DSL.comment(""), TableOptions.view("create view \"pay_reference_document_view\" as  SELECT rd.id,\n    rd.type_id,\n    rd.date,\n    rd.reference,\n    rd.internal_reference,\n    rd.object,\n    rd.place,\n    rd.amount,\n    rd.deposit_date,\n    rd.entry_date,\n    rd.beneficiary_id,\n    rd.step_id,\n    rd.author_id,\n    rd.worker_id,\n        CASE\n            WHEN (rda.amount_left = (0)::double precision) THEN 'PAID'::text\n            WHEN (rda.amount_paid > (0)::double precision) THEN 'PAID_PARTIALLY'::text\n            ELSE 'WAITING_FOR_PAYMENT'::text\n        END AS status_id,\n        CASE\n            WHEN (rda.id IS NULL) THEN (0)::double precision\n            ELSE rda.amount_paid\n        END AS amount_paid,\n        CASE\n            WHEN (rda.id IS NULL) THEN rd.amount\n            ELSE rda.amount_left\n        END AS amount_left,\n    ps.name AS beneficiary_name,\n    tp.abbreviated AS beneficiary_abbreviated,\n    tp.code AS beneficiary_code\n   FROM (((pay_reference_document rd\n     LEFT JOIN pay_reference_document_amount_view rda ON ((rda.id = rd.id)))\n     LEFT JOIN pay_third_party tp ON ((tp.id = rd.beneficiary_id)))\n     LEFT JOIN ad_person ps ON ((ps.id = rd.beneficiary_id)));"));
     }
 
     /**
@@ -214,11 +209,11 @@ public class PayReferenceDocumentView extends TableImpl<PayReferenceDocumentView
     }
 
     // -------------------------------------------------------------------------
-    // Row21 type methods
+    // Row20 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row21<Long, String, LocalDate, String, String, String, String, Double, LocalDate, LocalDate, Long, String, Long, Double, Long, String, Double, Double, String, String, String> fieldsRow() {
-        return (Row21) super.fieldsRow();
+    public Row20<Long, String, LocalDate, String, String, String, String, Double, LocalDate, LocalDate, Long, String, Long, Long, String, Double, Double, String, String, String> fieldsRow() {
+        return (Row20) super.fieldsRow();
     }
 }
