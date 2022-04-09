@@ -129,17 +129,26 @@ public final class DbPaymentOrderGroupsToPrepare implements PaymentOrderGroupsTo
 		}
 		try {
 			new JdbcSession(this.source)
-            .sql(
-                new Joined(
-                    " ",
-                    "UPDATE pay_payment_order",
-                    "SET group_id=?",
-                    "WHERE id=?"
-                ).toString()
-            )
-            .set(group.id())
-            .set(order.id())
-            .execute();
+				.sql(
+					new Joined(
+						" ",
+						"DELETE FROM pay_payment_order_group_line",
+						"WHERE id=?"
+					).toString()
+				)
+				.set(order.id())
+				.execute();
+			new JdbcSession(this.source)
+				.sql(
+					new Joined(
+						" ",
+						"INSERT INTO pay_payment_order_group_line (id, group_id) VALUES",
+						"(?, ?)"
+					).toString()
+				)
+				.set(order.id())
+				.set(group.id())
+				.execute();
 			this.removeEmptyGroups();
 	    } catch (SQLException ex) {
 	        throw new DatabaseException(ex);
@@ -202,7 +211,7 @@ public final class DbPaymentOrderGroupsToPrepare implements PaymentOrderGroupsTo
                 new Joined(
                     " ",
                     "DELETE FROM pay_payment_order_group",
-                    "WHERE id NOT IN (SELECT group_id FROM pay_payment_order)"
+                    "WHERE id NOT IN (SELECT group_id FROM pay_payment_order_group_line)"
                 ).toString()
             )
             .execute();

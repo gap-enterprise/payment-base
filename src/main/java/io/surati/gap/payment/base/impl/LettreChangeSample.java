@@ -5,12 +5,14 @@ import io.surati.gap.payment.base.api.BankNote;
 import io.surati.gap.payment.base.api.BankNoteBook;
 import io.surati.gap.payment.base.api.PaymentCancelReason;
 import io.surati.gap.payment.base.api.PaymentMeanType;
+import io.surati.gap.payment.base.api.PaymentOrder;
 import io.surati.gap.payment.base.api.PaymentOrderGroup;
 import io.surati.gap.payment.base.api.PaymentStatus;
 import io.surati.gap.payment.base.api.ThirdParty;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 public final class LettreChangeSample implements BankNote {
 
@@ -120,8 +122,8 @@ public final class LettreChangeSample implements BankNote {
 	}
 	
 	@Override
-	public PaymentOrderGroup orders() {
-		return PaymentOrderGroup.EMPTY;
+	public Iterable<PaymentOrder> orders() {
+		return Collections.emptyList();
 	}
 
 	@Override

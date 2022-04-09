@@ -218,10 +218,9 @@ SOFTWARE.
       );
 
       CREATE TABLE pay_payment_order_group_line (
-        order_id bigint NOT NULL,
+        id bigint PRIMARY KEY,
         group_id bigint NOT NULL,
-        CONSTRAINT pay_payment_order_group_line_pkey PRIMARY KEY (order_id, group_id),
-        CONSTRAINT pay_payment_order_group_line_order_id_fkey FOREIGN KEY (order_id) REFERENCES pay_payment_order (id)
+        CONSTRAINT pay_payment_order_group_line_id_fkey FOREIGN KEY (id) REFERENCES pay_payment_order (id)
           ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT pay_payment_order_group_line_group_id_fkey FOREIGN KEY (group_id) REFERENCES pay_payment_order_group (id)
           ON UPDATE CASCADE ON DELETE CASCADE
@@ -238,10 +237,9 @@ SOFTWARE.
       );
 
       CREATE TABLE pay_payment_batch_line (
-        payment_id bigint NOT NULL,
+        id bigint PRIMARY KEY,
         batch_id bigint NOT NULL,
-        CONSTRAINT pay_payment_batch_line_pkey PRIMARY KEY (payment_id, batch_id),
-        CONSTRAINT pay_payment_batch_line_payment_id_fkey FOREIGN KEY (payment_id) REFERENCES pay_payment (id)
+        CONSTRAINT pay_payment_batch_line_id_fkey FOREIGN KEY (id) REFERENCES pay_payment (id)
           ON UPDATE CASCADE ON DELETE CASCADE,
         CONSTRAINT pay_payment_batch_line_batch_id_fkey FOREIGN KEY (batch_id) REFERENCES pay_payment_batch (id)
           ON UPDATE CASCADE ON DELETE CASCADE

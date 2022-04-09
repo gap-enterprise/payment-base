@@ -111,7 +111,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 				connection.prepareStatement(
 					new Joined(
         				" ",
-        				"SELECT amount_to_pay FROM pay_payment_order",
+        				"SELECT amount FROM pay_payment_order",
         				"WHERE id=?"
         			).toString()
 				)
@@ -174,7 +174,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                     new Joined(
                         " ",
                         "UPDATE pay_payment_order",
-                        "SET date=?, beneficiary_id=?, amount_to_pay=?, reason=?, description=?",
+                        "SET date=?, beneficiary_id=?, amount=?, reason=?, description=?",
                         "WHERE id=?"
                     ).toString()
                 )

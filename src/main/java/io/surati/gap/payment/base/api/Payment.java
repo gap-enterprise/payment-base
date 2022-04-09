@@ -4,6 +4,7 @@ import io.surati.gap.admin.base.api.User;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 public interface Payment {
 	
@@ -51,7 +52,7 @@ public interface Payment {
 	
 	void complete();
 	
-	PaymentOrderGroup orders();
+	Iterable<PaymentOrder> orders();
 	
 	Payment EMPTY = new Payment() {
 		
@@ -168,8 +169,8 @@ public interface Payment {
 		}
 
 		@Override
-		public PaymentOrderGroup orders() {
-			return PaymentOrderGroup.EMPTY;
+		public Iterable<PaymentOrder> orders() {
+			return Collections.emptyList();
 		}
 
 		@Override

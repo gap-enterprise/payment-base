@@ -141,7 +141,7 @@ public final class DbPaymentBatch implements PaymentBatch {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM pay_payment",
+                            "SELECT id FROM pay_payment_batch_line",
                             "WHERE batch_id=?",
             				"ORDER BY id ASC"
                         ).toString()
@@ -192,13 +192,12 @@ public final class DbPaymentBatch implements PaymentBatch {
                 .sql(
                     new Joined(
                         " ",
-                        "UPDATE pay_payment",
-                        "SET batch_id=?",
-                        "WHERE id=?"
+                        "INSERT INTO pay_payment_batch_line (id, batch_id) VALUES",
+                        "(?, ?)"
                     ).toString()
                 )
+				.set(item.id())
                 .set(this.id)
-                .set(item.id())
                 .execute();
         } catch (SQLException ex) {
             throw new DatabaseException(ex);

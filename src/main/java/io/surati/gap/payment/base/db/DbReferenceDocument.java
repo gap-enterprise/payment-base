@@ -206,7 +206,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "UPDATE pay_reference_document",
-                        "SET other_reference=?",
+                        "SET internal_reference=?",
                         "WHERE id=?"
                     ).toString()
                 )
@@ -227,7 +227,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 					.sql(
 		        		new Joined(
 	        				" ",
-	        				"SELECT issuer_id FROM pay_reference_document",
+	        				"SELECT beneficiary_id FROM pay_reference_document",
 	        				"WHERE id=?"
 	        			).toString()
 	        		)
@@ -355,12 +355,11 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "UPDATE pay_reference_document",
-                        "SET amount=?, advanced_amount=?",
+                        "SET amount=?",
                         "WHERE id=?"
                     ).toString()
                 )
                 .set(amount)
-                .set(advamount)
                 .set(this.id)
                 .execute();
             this.updateState();
@@ -378,7 +377,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "SELECT amount_paid",
-                        "FROM pay_reference_document",
+                        "FROM pay_reference_document_view",
                         "WHERE id=?"
                     ).toString()
                 )
@@ -399,7 +398,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "SELECT amount_left",
-                        "FROM pay_reference_document",
+                        "FROM pay_reference_document_view",
                         "WHERE id=?"
                     ).toString()
                 )
@@ -419,7 +418,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 					.sql(
 		        		new Joined(
 		    				" ",
-		    				"SELECT status_id FROM pay_reference_document",
+		    				"SELECT status_id FROM pay_reference_document_view",
 		    				"WHERE id=?"
 		    			).toString()
 		    		)
@@ -440,9 +439,9 @@ public final class DbReferenceDocument implements ReferenceDocument {
                         new Joined(
                             " ",
                             "SELECT id FROM pay_payment pay",
-                            "WHERE group_id IN (",
-                            "SELECT group_id FROM pay_payment_order",
-                            "WHERE group_id=pay.group_id and reference_document_id=?",
+                            "WHERE id IN (",
+                            "SELECT payment_id FROM pay_payment_order",
+                            "WHERE reference_document_id=?",
                             ")",
             				"ORDER BY pay.date, id DESC"
                         ).toString()
@@ -487,7 +486,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 	        		new Joined(
         				" ",
         				"SELECT COUNT(*) FROM pay_reference_document",
-        				"WHERE other_reference=? AND issuer_id=? AND type_id=?"
+        				"WHERE internal_reference=? AND beneficiary_id=? AND type_id=?"
         			).toString()
         		)
 				.set(otherref)
@@ -539,7 +538,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
                     new Joined(
                         " ",
                         "UPDATE pay_reference_document",
-                        "SET issuer_id=?",
+                        "SET beneficiary_id=?",
                         "WHERE id=?"
                     ).toString()
                 )
@@ -612,40 +611,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 	
 	@Override
 	public void updateState() {
-		double amountpaid = this.advancedAmount();
-		final PaymentOrders orders = new DbReferenceDocumentPaymentOrders(this.source, this);
-		for (PaymentOrder order : orders.iterate()) {
-			if(order.status() == PaymentOrderStatus.EXECUTED) {
-				amountpaid += order.amountToPay();
-			}
-		}
-		final double amountleft = this.amount() - amountpaid;
-		final ReferenceDocumentStatus status;
-		if(amountleft == 0) {
-			status = ReferenceDocumentStatus.PAID;
-		} else if(Math.abs(amountpaid) > 0) {
-			status = ReferenceDocumentStatus.PAID_PARTIALLY;
-		} else {
-			status = ReferenceDocumentStatus.WAITING_FOR_PAYMENT;
-		}
-		try {
-            new JdbcSession(this.source)
-                .sql(
-                    new Joined(
-                        " ",
-                        "UPDATE pay_reference_document",
-                        "SET status_id=?, amount_paid=?, amount_left=?",
-                        "WHERE id=?"
-                    ).toString()
-                )
-                .set(status.name())
-                .set(amountpaid)
-                .set(amountleft)
-                .set(this.id)
-                .execute();
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
+		// Do nothing. All things are done by views
 	}
 
 	@Override
@@ -655,7 +621,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				.sql(
 	        		new Joined(
         				" ",
-        				"SELECT other_reference FROM pay_reference_document",
+        				"SELECT internal_reference FROM pay_reference_document",
         				"WHERE id=?"
         			).toString()
         		)
@@ -685,26 +651,5 @@ public final class DbReferenceDocument implements ReferenceDocument {
 		} catch (SQLException ex) {
 			throw new DatabaseException(ex);
 		}
-	}
-
-	@Override
-	public Double advancedAmount() {
-		try {
-            return
-            	new JdbcSession(this.source)
-                .sql(
-                    new Joined(
-                        " ",
-                        "SELECT advanced_amount",
-                        "FROM pay_reference_document",
-                        "WHERE id=?"
-                    ).toString()
-                )
-                .set(this.id)
-                .select(new SingleOutcome<>(Long.class))
-                .doubleValue();
-        } catch (SQLException ex) {
-            throw new DatabaseException(ex);
-        }
 	}
 }

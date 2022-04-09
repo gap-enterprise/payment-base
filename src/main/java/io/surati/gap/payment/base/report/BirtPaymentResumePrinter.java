@@ -31,7 +31,7 @@ public final class BirtPaymentResumePrinter implements Printer {
 	@Override
 	public void print(final OutputStream output) throws Exception {
 		final Map<String, Object> context = new HashMap<>();
-	    context.put("lines", new ListOf<>(note.orders().iterate()));
+	    context.put("lines", new ListOf<>(note.orders()));
 	    context.put(Locale.class.getSimpleName(), Locale.FRENCH);
 	    IReportEngine engine = null;
 		try {
