@@ -110,7 +110,7 @@ public final class DbPaginedPayments implements Payments {
                     .select(
                         new ListOutcome<>(
                             rset ->
-                            new DbBankNote(
+                            new DbPayment(
                                 this.source,
                                 rset.getLong(1)
                             )
