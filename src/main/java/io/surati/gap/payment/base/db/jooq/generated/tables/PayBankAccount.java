@@ -76,7 +76,7 @@ public class PayBankAccount extends TableImpl<PayBankAccountRecord> {
     /**
      * The column <code>public.pay_bank_account.holder_id</code>.
      */
-    public final TableField<PayBankAccountRecord, Long> HOLDER_ID = createField(DSL.name("holder_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<PayBankAccountRecord, Long> HOLDER_ID = createField(DSL.name("holder_id"), SQLDataType.BIGINT, this, "");
 
     private PayBankAccount(Name alias, Table<PayBankAccountRecord> aliased) {
         this(alias, aliased, null);

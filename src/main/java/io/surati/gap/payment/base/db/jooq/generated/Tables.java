@@ -12,12 +12,15 @@ import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankNote;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankNoteBook;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPayment;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentBatch;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentBatchLine;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentExport;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentMean;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentMeanField;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentOrder;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentOrderGroup;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentOrderGroupLine;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayReferenceDocument;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayReferenceDocumentAmountView;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayReferenceDocumentView;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdParty;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdPartyFamily;
@@ -71,6 +74,11 @@ public class Tables {
     public static final PayPaymentBatch PAY_PAYMENT_BATCH = PayPaymentBatch.PAY_PAYMENT_BATCH;
 
     /**
+     * The table <code>public.pay_payment_batch_line</code>.
+     */
+    public static final PayPaymentBatchLine PAY_PAYMENT_BATCH_LINE = PayPaymentBatchLine.PAY_PAYMENT_BATCH_LINE;
+
+    /**
      * The table <code>public.pay_payment_export</code>.
      */
     public static final PayPaymentExport PAY_PAYMENT_EXPORT = PayPaymentExport.PAY_PAYMENT_EXPORT;
@@ -96,9 +104,19 @@ public class Tables {
     public static final PayPaymentOrderGroup PAY_PAYMENT_ORDER_GROUP = PayPaymentOrderGroup.PAY_PAYMENT_ORDER_GROUP;
 
     /**
+     * The table <code>public.pay_payment_order_group_line</code>.
+     */
+    public static final PayPaymentOrderGroupLine PAY_PAYMENT_ORDER_GROUP_LINE = PayPaymentOrderGroupLine.PAY_PAYMENT_ORDER_GROUP_LINE;
+
+    /**
      * The table <code>public.pay_reference_document</code>.
      */
     public static final PayReferenceDocument PAY_REFERENCE_DOCUMENT = PayReferenceDocument.PAY_REFERENCE_DOCUMENT;
+
+    /**
+     * The table <code>public.pay_reference_document_amount_view</code>.
+     */
+    public static final PayReferenceDocumentAmountView PAY_REFERENCE_DOCUMENT_AMOUNT_VIEW = PayReferenceDocumentAmountView.PAY_REFERENCE_DOCUMENT_AMOUNT_VIEW;
 
     /**
      * The table <code>public.pay_reference_document_view</code>.

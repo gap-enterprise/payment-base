@@ -70,9 +70,9 @@ public class PayPaymentOrder extends TableImpl<PayPaymentOrderRecord> {
     public final TableField<PayPaymentOrderRecord, Long> BENEFICIARY_ID = createField(DSL.name("beneficiary_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.pay_payment_order.amount_to_pay</code>.
+     * The column <code>public.pay_payment_order.amount</code>.
      */
-    public final TableField<PayPaymentOrderRecord, Double> AMOUNT_TO_PAY = createField(DSL.name("amount_to_pay"), SQLDataType.DOUBLE.nullable(false), this, "");
+    public final TableField<PayPaymentOrderRecord, Double> AMOUNT = createField(DSL.name("amount"), SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_payment_order.reference_document_id</code>.
@@ -95,9 +95,9 @@ public class PayPaymentOrder extends TableImpl<PayPaymentOrderRecord> {
     public final TableField<PayPaymentOrderRecord, Long> AUTHOR_ID = createField(DSL.name("author_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.pay_payment_order.group_id</code>.
+     * The column <code>public.pay_payment_order.payment_id</code>.
      */
-    public final TableField<PayPaymentOrderRecord, Long> GROUP_ID = createField(DSL.name("group_id"), SQLDataType.BIGINT, this, "");
+    public final TableField<PayPaymentOrderRecord, Long> PAYMENT_ID = createField(DSL.name("payment_id"), SQLDataType.BIGINT, this, "");
 
     /**
      * The column <code>public.pay_payment_order.reason</code>.
@@ -159,17 +159,17 @@ public class PayPaymentOrder extends TableImpl<PayPaymentOrderRecord> {
 
     @Override
     public List<UniqueKey<PayPaymentOrderRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentOrderRecord>>asList(Keys.PAY_PAYMENT_ORDER_PKEY);
+        return Arrays.<UniqueKey<PayPaymentOrderRecord>>asList(Keys.PAY_PAYMENT_ORDER_PKEY, Keys.PAY_PAYMENT_ORDER_REFERENCE_KEY);
     }
 
     @Override
     public List<ForeignKey<PayPaymentOrderRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<PayPaymentOrderRecord, ?>>asList(Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_BENEFICIARY_ID_FKEY, Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_REFERENCE_DOCUMENT_ID_FKEY, Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_GROUP_ID_FKEY);
+        return Arrays.<ForeignKey<PayPaymentOrderRecord, ?>>asList(Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_BENEFICIARY_ID_FKEY, Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_REFERENCE_DOCUMENT_ID_FKEY, Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_PAYMENT_ID_FKEY);
     }
 
     private transient PayThirdParty _payThirdParty;
     private transient PayReferenceDocument _payReferenceDocument;
-    private transient PayPaymentOrderGroup _payPaymentOrderGroup;
+    private transient PayPayment _payPayment;
 
     public PayThirdParty payThirdParty() {
         if (_payThirdParty == null)
@@ -185,11 +185,11 @@ public class PayPaymentOrder extends TableImpl<PayPaymentOrderRecord> {
         return _payReferenceDocument;
     }
 
-    public PayPaymentOrderGroup payPaymentOrderGroup() {
-        if (_payPaymentOrderGroup == null)
-            _payPaymentOrderGroup = new PayPaymentOrderGroup(this, Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_GROUP_ID_FKEY);
+    public PayPayment payPayment() {
+        if (_payPayment == null)
+            _payPayment = new PayPayment(this, Keys.PAY_PAYMENT_ORDER__PAY_PAYMENT_ORDER_PAYMENT_ID_FKEY);
 
-        return _payPaymentOrderGroup;
+        return _payPayment;
     }
 
     @Override

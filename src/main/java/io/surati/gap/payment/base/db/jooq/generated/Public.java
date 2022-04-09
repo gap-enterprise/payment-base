@@ -12,12 +12,15 @@ import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankNote;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankNoteBook;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPayment;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentBatch;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentBatchLine;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentExport;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentMean;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentMeanField;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentOrder;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentOrderGroup;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentOrderGroupLine;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayReferenceDocument;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayReferenceDocumentAmountView;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayReferenceDocumentView;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdParty;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdPartyFamily;
@@ -86,6 +89,11 @@ public class Public extends SchemaImpl {
     public final PayPaymentBatch PAY_PAYMENT_BATCH = PayPaymentBatch.PAY_PAYMENT_BATCH;
 
     /**
+     * The table <code>public.pay_payment_batch_line</code>.
+     */
+    public final PayPaymentBatchLine PAY_PAYMENT_BATCH_LINE = PayPaymentBatchLine.PAY_PAYMENT_BATCH_LINE;
+
+    /**
      * The table <code>public.pay_payment_export</code>.
      */
     public final PayPaymentExport PAY_PAYMENT_EXPORT = PayPaymentExport.PAY_PAYMENT_EXPORT;
@@ -111,9 +119,19 @@ public class Public extends SchemaImpl {
     public final PayPaymentOrderGroup PAY_PAYMENT_ORDER_GROUP = PayPaymentOrderGroup.PAY_PAYMENT_ORDER_GROUP;
 
     /**
+     * The table <code>public.pay_payment_order_group_line</code>.
+     */
+    public final PayPaymentOrderGroupLine PAY_PAYMENT_ORDER_GROUP_LINE = PayPaymentOrderGroupLine.PAY_PAYMENT_ORDER_GROUP_LINE;
+
+    /**
      * The table <code>public.pay_reference_document</code>.
      */
     public final PayReferenceDocument PAY_REFERENCE_DOCUMENT = PayReferenceDocument.PAY_REFERENCE_DOCUMENT;
+
+    /**
+     * The table <code>public.pay_reference_document_amount_view</code>.
+     */
+    public final PayReferenceDocumentAmountView PAY_REFERENCE_DOCUMENT_AMOUNT_VIEW = PayReferenceDocumentAmountView.PAY_REFERENCE_DOCUMENT_AMOUNT_VIEW;
 
     /**
      * The table <code>public.pay_reference_document_view</code>.
@@ -175,12 +193,15 @@ public class Public extends SchemaImpl {
             PayBankNoteBook.PAY_BANK_NOTE_BOOK,
             PayPayment.PAY_PAYMENT,
             PayPaymentBatch.PAY_PAYMENT_BATCH,
+            PayPaymentBatchLine.PAY_PAYMENT_BATCH_LINE,
             PayPaymentExport.PAY_PAYMENT_EXPORT,
             PayPaymentMean.PAY_PAYMENT_MEAN,
             PayPaymentMeanField.PAY_PAYMENT_MEAN_FIELD,
             PayPaymentOrder.PAY_PAYMENT_ORDER,
             PayPaymentOrderGroup.PAY_PAYMENT_ORDER_GROUP,
+            PayPaymentOrderGroupLine.PAY_PAYMENT_ORDER_GROUP_LINE,
             PayReferenceDocument.PAY_REFERENCE_DOCUMENT,
+            PayReferenceDocumentAmountView.PAY_REFERENCE_DOCUMENT_AMOUNT_VIEW,
             PayReferenceDocumentView.PAY_REFERENCE_DOCUMENT_VIEW,
             PayThirdParty.PAY_THIRD_PARTY,
             PayThirdPartyFamily.PAY_THIRD_PARTY_FAMILY,

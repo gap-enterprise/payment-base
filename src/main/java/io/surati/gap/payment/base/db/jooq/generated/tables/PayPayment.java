@@ -17,7 +17,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row19;
+import org.jooq.Row17;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -100,9 +100,14 @@ public class PayPayment extends TableImpl<PayPaymentRecord> {
     public final TableField<PayPaymentRecord, String> STATUS_ID = createField(DSL.name("status_id"), SQLDataType.VARCHAR(25).nullable(false), this, "");
 
     /**
-     * The column <code>public.pay_payment.cancel_reason_description</code>.
+     * The column <code>public.pay_payment.mean_type_id</code>.
      */
-    public final TableField<PayPaymentRecord, String> CANCEL_REASON_DESCRIPTION = createField(DSL.name("cancel_reason_description"), SQLDataType.VARCHAR(100), this, "");
+    public final TableField<PayPaymentRecord, String> MEAN_TYPE_ID = createField(DSL.name("mean_type_id"), SQLDataType.VARCHAR(25).nullable(false), this, "");
+
+    /**
+     * The column <code>public.pay_payment.issuer_id</code>.
+     */
+    public final TableField<PayPaymentRecord, Long> ISSUER_ID = createField(DSL.name("issuer_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_payment.author_id</code>.
@@ -110,9 +115,9 @@ public class PayPayment extends TableImpl<PayPaymentRecord> {
     public final TableField<PayPaymentRecord, Long> AUTHOR_ID = createField(DSL.name("author_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>public.pay_payment.group_id</code>.
+     * The column <code>public.pay_payment.cancel_reason_description</code>.
      */
-    public final TableField<PayPaymentRecord, Long> GROUP_ID = createField(DSL.name("group_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<PayPaymentRecord, String> CANCEL_REASON_DESCRIPTION = createField(DSL.name("cancel_reason_description"), SQLDataType.VARCHAR(100), this, "");
 
     /**
      * The column <code>public.pay_payment.cancel_reason_id</code>.
@@ -123,21 +128,6 @@ public class PayPayment extends TableImpl<PayPaymentRecord> {
      * The column <code>public.pay_payment.cancel_author_id</code>.
      */
     public final TableField<PayPaymentRecord, Long> CANCEL_AUTHOR_ID = createField(DSL.name("cancel_author_id"), SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>public.pay_payment.batch_id</code>.
-     */
-    public final TableField<PayPaymentRecord, Long> BATCH_ID = createField(DSL.name("batch_id"), SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>public.pay_payment.issuer_id</code>.
-     */
-    public final TableField<PayPaymentRecord, Long> ISSUER_ID = createField(DSL.name("issuer_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>public.pay_payment.mean_type_id</code>.
-     */
-    public final TableField<PayPaymentRecord, String> MEAN_TYPE_ID = createField(DSL.name("mean_type_id"), SQLDataType.VARCHAR(25).nullable(false), this, "");
 
     /**
      * The column <code>public.pay_payment.cancel_date</code>.
@@ -194,17 +184,15 @@ public class PayPayment extends TableImpl<PayPaymentRecord> {
 
     @Override
     public List<UniqueKey<PayPaymentRecord>> getKeys() {
-        return Arrays.<UniqueKey<PayPaymentRecord>>asList(Keys.PAY_PAYMENT_PKEY);
+        return Arrays.<UniqueKey<PayPaymentRecord>>asList(Keys.PAY_PAYMENT_PKEY, Keys.PAY_PAYMENT_INTERNAL_REFERENCE_KEY);
     }
 
     @Override
     public List<ForeignKey<PayPaymentRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<PayPaymentRecord, ?>>asList(Keys.PAY_PAYMENT__PAY_PAYMENT_BENEFICIARY_ID_FKEY, Keys.PAY_PAYMENT__PAY_PAYMENT_GROUP_ID_FKEY, Keys.PAY_PAYMENT__PAY_PAYMENT_BATCH_ID_FKEY, Keys.PAY_PAYMENT__PAY_PAYMENT_ISSUER_ID_FKEY);
+        return Arrays.<ForeignKey<PayPaymentRecord, ?>>asList(Keys.PAY_PAYMENT__PAY_PAYMENT_BENEFICIARY_ID_FKEY, Keys.PAY_PAYMENT__PAY_PAYMENT_ISSUER_ID_FKEY);
     }
 
     private transient PayThirdParty _payPaymentBeneficiaryIdFkey;
-    private transient PayPaymentOrderGroup _payPaymentOrderGroup;
-    private transient PayPaymentBatch _payPaymentBatch;
     private transient PayThirdParty _payPaymentIssuerIdFkey;
 
     public PayThirdParty payPaymentBeneficiaryIdFkey() {
@@ -212,20 +200,6 @@ public class PayPayment extends TableImpl<PayPaymentRecord> {
             _payPaymentBeneficiaryIdFkey = new PayThirdParty(this, Keys.PAY_PAYMENT__PAY_PAYMENT_BENEFICIARY_ID_FKEY);
 
         return _payPaymentBeneficiaryIdFkey;
-    }
-
-    public PayPaymentOrderGroup payPaymentOrderGroup() {
-        if (_payPaymentOrderGroup == null)
-            _payPaymentOrderGroup = new PayPaymentOrderGroup(this, Keys.PAY_PAYMENT__PAY_PAYMENT_GROUP_ID_FKEY);
-
-        return _payPaymentOrderGroup;
-    }
-
-    public PayPaymentBatch payPaymentBatch() {
-        if (_payPaymentBatch == null)
-            _payPaymentBatch = new PayPaymentBatch(this, Keys.PAY_PAYMENT__PAY_PAYMENT_BATCH_ID_FKEY);
-
-        return _payPaymentBatch;
     }
 
     public PayThirdParty payPaymentIssuerIdFkey() {
@@ -262,11 +236,11 @@ public class PayPayment extends TableImpl<PayPaymentRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row19 type methods
+    // Row17 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row19<Long, String, String, Long, Double, LocalDateTime, String, String, String, String, String, Long, Long, String, Long, Long, Long, String, LocalDateTime> fieldsRow() {
-        return (Row19) super.fieldsRow();
+    public Row17<Long, String, String, Long, Double, LocalDateTime, String, String, String, String, String, Long, Long, String, String, Long, LocalDateTime> fieldsRow() {
+        return (Row17) super.fieldsRow();
     }
 }

@@ -3,6 +3,7 @@ package io.surati.gap.payment.base.api;
 public enum PaymentMeanType {
 
 	NONE("Aucun", false),
+	ANONYMOUS("Anonyme", false),
 	CHQ("Chèque", true),
 	BO("Billet à ordre", true),
 	LC("Lettre de change", true),

@@ -80,16 +80,16 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
     }
 
     /**
-     * Setter for <code>public.pay_payment_order.amount_to_pay</code>.
+     * Setter for <code>public.pay_payment_order.amount</code>.
      */
-    public void setAmountToPay(Double value) {
+    public void setAmount(Double value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>public.pay_payment_order.amount_to_pay</code>.
+     * Getter for <code>public.pay_payment_order.amount</code>.
      */
-    public Double getAmountToPay() {
+    public Double getAmount() {
         return (Double) get(4);
     }
 
@@ -150,16 +150,16 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
     }
 
     /**
-     * Setter for <code>public.pay_payment_order.group_id</code>.
+     * Setter for <code>public.pay_payment_order.payment_id</code>.
      */
-    public void setGroupId(Long value) {
+    public void setPaymentId(Long value) {
         set(9, value);
     }
 
     /**
-     * Getter for <code>public.pay_payment_order.group_id</code>.
+     * Getter for <code>public.pay_payment_order.payment_id</code>.
      */
-    public Long getGroupId() {
+    public Long getPaymentId() {
         return (Long) get(9);
     }
 
@@ -236,7 +236,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public Field<Double> field5() {
-        return PayPaymentOrder.PAY_PAYMENT_ORDER.AMOUNT_TO_PAY;
+        return PayPaymentOrder.PAY_PAYMENT_ORDER.AMOUNT;
     }
 
     @Override
@@ -261,7 +261,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public Field<Long> field10() {
-        return PayPaymentOrder.PAY_PAYMENT_ORDER.GROUP_ID;
+        return PayPaymentOrder.PAY_PAYMENT_ORDER.PAYMENT_ID;
     }
 
     @Override
@@ -296,7 +296,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public Double component5() {
-        return getAmountToPay();
+        return getAmount();
     }
 
     @Override
@@ -321,7 +321,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public Long component10() {
-        return getGroupId();
+        return getPaymentId();
     }
 
     @Override
@@ -356,7 +356,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public Double value5() {
-        return getAmountToPay();
+        return getAmount();
     }
 
     @Override
@@ -381,7 +381,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public Long value10() {
-        return getGroupId();
+        return getPaymentId();
     }
 
     @Override
@@ -420,7 +420,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public PayPaymentOrderRecord value5(Double value) {
-        setAmountToPay(value);
+        setAmount(value);
         return this;
     }
 
@@ -450,7 +450,7 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
 
     @Override
     public PayPaymentOrderRecord value10(Long value) {
-        setGroupId(value);
+        setPaymentId(value);
         return this;
     }
 
@@ -497,19 +497,19 @@ public class PayPaymentOrderRecord extends UpdatableRecordImpl<PayPaymentOrderRe
     /**
      * Create a detached, initialised PayPaymentOrderRecord
      */
-    public PayPaymentOrderRecord(Long id, LocalDate date, String reference, Long beneficiaryId, Double amountToPay, Long referenceDocumentId, Long authorizingOfficerId, String statusId, Long authorId, Long groupId, String reason, String description) {
+    public PayPaymentOrderRecord(Long id, LocalDate date, String reference, Long beneficiaryId, Double amount, Long referenceDocumentId, Long authorizingOfficerId, String statusId, Long authorId, Long paymentId, String reason, String description) {
         super(PayPaymentOrder.PAY_PAYMENT_ORDER);
 
         setId(id);
         setDate(date);
         setReference(reference);
         setBeneficiaryId(beneficiaryId);
-        setAmountToPay(amountToPay);
+        setAmount(amount);
         setReferenceDocumentId(referenceDocumentId);
         setAuthorizingOfficerId(authorizingOfficerId);
         setStatusId(statusId);
         setAuthorId(authorId);
-        setGroupId(groupId);
+        setPaymentId(paymentId);
         setReason(reason);
         setDescription(description);
     }
