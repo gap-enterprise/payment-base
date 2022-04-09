@@ -8,7 +8,6 @@ install: |
   javac -version
 release:
     script: |-
-     [[ "${tag}" =~ ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$ ]] || exit -1
      gpg --import /home/r/public.key
      gpg --allow-secret-key-import --import --batch --pinentry-mode=loopback /home/r/private.key 
      mvn versions:set "-DnewVersion=${tag}"
