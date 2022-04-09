@@ -17,7 +17,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row18;
+import org.jooq.Row15;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -70,6 +70,11 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
     public final TableField<PayReferenceDocumentRecord, String> REFERENCE = createField(DSL.name("reference"), SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
+     * The column <code>public.pay_reference_document.internal_reference</code>.
+     */
+    public final TableField<PayReferenceDocumentRecord, String> INTERNAL_REFERENCE = createField(DSL.name("internal_reference"), SQLDataType.VARCHAR(50), this, "");
+
+    /**
      * The column <code>public.pay_reference_document.object</code>.
      */
     public final TableField<PayReferenceDocumentRecord, String> OBJECT = createField(DSL.name("object"), SQLDataType.VARCHAR(100).nullable(false), this, "");
@@ -95,34 +100,14 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
     public final TableField<PayReferenceDocumentRecord, LocalDate> ENTRY_DATE = createField(DSL.name("entry_date"), SQLDataType.LOCALDATE.nullable(false), this, "");
 
     /**
-     * The column <code>public.pay_reference_document.issuer_id</code>.
+     * The column <code>public.pay_reference_document.beneficiary_id</code>.
      */
-    public final TableField<PayReferenceDocumentRecord, Long> ISSUER_ID = createField(DSL.name("issuer_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>public.pay_reference_document.other_reference</code>.
-     */
-    public final TableField<PayReferenceDocumentRecord, String> OTHER_REFERENCE = createField(DSL.name("other_reference"), SQLDataType.VARCHAR(50), this, "");
-
-    /**
-     * The column <code>public.pay_reference_document.status_id</code>.
-     */
-    public final TableField<PayReferenceDocumentRecord, String> STATUS_ID = createField(DSL.name("status_id"), SQLDataType.VARCHAR(25).nullable(false), this, "");
+    public final TableField<PayReferenceDocumentRecord, Long> BENEFICIARY_ID = createField(DSL.name("beneficiary_id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_reference_document.step_id</code>.
      */
     public final TableField<PayReferenceDocumentRecord, String> STEP_ID = createField(DSL.name("step_id"), SQLDataType.VARCHAR(25).nullable(false), this, "");
-
-    /**
-     * The column <code>public.pay_reference_document.amount_paid</code>.
-     */
-    public final TableField<PayReferenceDocumentRecord, Double> AMOUNT_PAID = createField(DSL.name("amount_paid"), SQLDataType.DOUBLE.nullable(false), this, "");
-
-    /**
-     * The column <code>public.pay_reference_document.amount_left</code>.
-     */
-    public final TableField<PayReferenceDocumentRecord, Double> AMOUNT_LEFT = createField(DSL.name("amount_left"), SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_reference_document.author_id</code>.
@@ -194,14 +179,14 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
 
     @Override
     public List<ForeignKey<PayReferenceDocumentRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<PayReferenceDocumentRecord, ?>>asList(Keys.PAY_REFERENCE_DOCUMENT__PAY_REFERENCE_DOCUMENT_ISSUER_ID_FKEY);
+        return Arrays.<ForeignKey<PayReferenceDocumentRecord, ?>>asList(Keys.PAY_REFERENCE_DOCUMENT__PAY_REFERENCE_DOCUMENT_BENEFICIARY_ID_FKEY);
     }
 
     private transient PayThirdParty _payThirdParty;
 
     public PayThirdParty payThirdParty() {
         if (_payThirdParty == null)
-            _payThirdParty = new PayThirdParty(this, Keys.PAY_REFERENCE_DOCUMENT__PAY_REFERENCE_DOCUMENT_ISSUER_ID_FKEY);
+            _payThirdParty = new PayThirdParty(this, Keys.PAY_REFERENCE_DOCUMENT__PAY_REFERENCE_DOCUMENT_BENEFICIARY_ID_FKEY);
 
         return _payThirdParty;
     }
@@ -233,11 +218,11 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
     }
 
     // -------------------------------------------------------------------------
-    // Row18 type methods
+    // Row15 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row18<Long, String, LocalDate, String, String, String, Double, LocalDate, LocalDate, Long, String, String, String, Double, Double, Long, Double, Long> fieldsRow() {
-        return (Row18) super.fieldsRow();
+    public Row15<Long, String, LocalDate, String, String, String, String, Double, LocalDate, LocalDate, Long, String, Long, Double, Long> fieldsRow() {
+        return (Row15) super.fieldsRow();
     }
 }
