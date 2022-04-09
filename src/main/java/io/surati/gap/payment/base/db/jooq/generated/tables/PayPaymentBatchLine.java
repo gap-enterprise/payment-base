@@ -48,9 +48,9 @@ public class PayPaymentBatchLine extends TableImpl<PayPaymentBatchLineRecord> {
     }
 
     /**
-     * The column <code>public.pay_payment_batch_line.payment_id</code>.
+     * The column <code>public.pay_payment_batch_line.id</code>.
      */
-    public final TableField<PayPaymentBatchLineRecord, Long> PAYMENT_ID = createField(DSL.name("payment_id"), SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<PayPaymentBatchLineRecord, Long> ID = createField(DSL.name("id"), SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_payment_batch_line.batch_id</code>.
@@ -107,7 +107,7 @@ public class PayPaymentBatchLine extends TableImpl<PayPaymentBatchLineRecord> {
 
     @Override
     public List<ForeignKey<PayPaymentBatchLineRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<PayPaymentBatchLineRecord, ?>>asList(Keys.PAY_PAYMENT_BATCH_LINE__PAY_PAYMENT_BATCH_LINE_PAYMENT_ID_FKEY, Keys.PAY_PAYMENT_BATCH_LINE__PAY_PAYMENT_BATCH_LINE_BATCH_ID_FKEY);
+        return Arrays.<ForeignKey<PayPaymentBatchLineRecord, ?>>asList(Keys.PAY_PAYMENT_BATCH_LINE__PAY_PAYMENT_BATCH_LINE_ID_FKEY, Keys.PAY_PAYMENT_BATCH_LINE__PAY_PAYMENT_BATCH_LINE_BATCH_ID_FKEY);
     }
 
     private transient PayPayment _payPayment;
@@ -115,7 +115,7 @@ public class PayPaymentBatchLine extends TableImpl<PayPaymentBatchLineRecord> {
 
     public PayPayment payPayment() {
         if (_payPayment == null)
-            _payPayment = new PayPayment(this, Keys.PAY_PAYMENT_BATCH_LINE__PAY_PAYMENT_BATCH_LINE_PAYMENT_ID_FKEY);
+            _payPayment = new PayPayment(this, Keys.PAY_PAYMENT_BATCH_LINE__PAY_PAYMENT_BATCH_LINE_ID_FKEY);
 
         return _payPayment;
     }

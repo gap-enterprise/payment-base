@@ -7,6 +7,7 @@ package io.surati.gap.payment.base.db.jooq.generated.tables.records;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentOrderGroupLine;
 
 import org.jooq.Field;
+import org.jooq.Record1;
 import org.jooq.Record2;
 import org.jooq.Row2;
 import org.jooq.impl.UpdatableRecordImpl;
@@ -21,16 +22,16 @@ public class PayPaymentOrderGroupLineRecord extends UpdatableRecordImpl<PayPayme
     private static final long serialVersionUID = 1L;
 
     /**
-     * Setter for <code>public.pay_payment_order_group_line.order_id</code>.
+     * Setter for <code>public.pay_payment_order_group_line.id</code>.
      */
-    public void setOrderId(Long value) {
+    public void setId(Long value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>public.pay_payment_order_group_line.order_id</code>.
+     * Getter for <code>public.pay_payment_order_group_line.id</code>.
      */
-    public Long getOrderId() {
+    public Long getId() {
         return (Long) get(0);
     }
 
@@ -53,8 +54,8 @@ public class PayPaymentOrderGroupLineRecord extends UpdatableRecordImpl<PayPayme
     // -------------------------------------------------------------------------
 
     @Override
-    public Record2<Long, Long> key() {
-        return (Record2) super.key();
+    public Record1<Long> key() {
+        return (Record1) super.key();
     }
 
     // -------------------------------------------------------------------------
@@ -73,7 +74,7 @@ public class PayPaymentOrderGroupLineRecord extends UpdatableRecordImpl<PayPayme
 
     @Override
     public Field<Long> field1() {
-        return PayPaymentOrderGroupLine.PAY_PAYMENT_ORDER_GROUP_LINE.ORDER_ID;
+        return PayPaymentOrderGroupLine.PAY_PAYMENT_ORDER_GROUP_LINE.ID;
     }
 
     @Override
@@ -83,7 +84,7 @@ public class PayPaymentOrderGroupLineRecord extends UpdatableRecordImpl<PayPayme
 
     @Override
     public Long component1() {
-        return getOrderId();
+        return getId();
     }
 
     @Override
@@ -93,7 +94,7 @@ public class PayPaymentOrderGroupLineRecord extends UpdatableRecordImpl<PayPayme
 
     @Override
     public Long value1() {
-        return getOrderId();
+        return getId();
     }
 
     @Override
@@ -103,7 +104,7 @@ public class PayPaymentOrderGroupLineRecord extends UpdatableRecordImpl<PayPayme
 
     @Override
     public PayPaymentOrderGroupLineRecord value1(Long value) {
-        setOrderId(value);
+        setId(value);
         return this;
     }
 
@@ -134,10 +135,10 @@ public class PayPaymentOrderGroupLineRecord extends UpdatableRecordImpl<PayPayme
     /**
      * Create a detached, initialised PayPaymentOrderGroupLineRecord
      */
-    public PayPaymentOrderGroupLineRecord(Long orderId, Long groupId) {
+    public PayPaymentOrderGroupLineRecord(Long id, Long groupId) {
         super(PayPaymentOrderGroupLine.PAY_PAYMENT_ORDER_GROUP_LINE);
 
-        setOrderId(orderId);
+        setId(id);
         setGroupId(groupId);
     }
 }

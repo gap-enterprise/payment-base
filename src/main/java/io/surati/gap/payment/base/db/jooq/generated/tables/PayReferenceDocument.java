@@ -17,7 +17,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row15;
+import org.jooq.Row14;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -113,11 +113,6 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
      * The column <code>public.pay_reference_document.author_id</code>.
      */
     public final TableField<PayReferenceDocumentRecord, Long> AUTHOR_ID = createField(DSL.name("author_id"), SQLDataType.BIGINT.nullable(false), this, "");
-
-    /**
-     * The column <code>public.pay_reference_document.advanced_amount</code>.
-     */
-    public final TableField<PayReferenceDocumentRecord, Double> ADVANCED_AMOUNT = createField(DSL.name("advanced_amount"), SQLDataType.DOUBLE.nullable(false), this, "");
 
     /**
      * The column <code>public.pay_reference_document.worker_id</code>.
@@ -218,11 +213,11 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
     }
 
     // -------------------------------------------------------------------------
-    // Row15 type methods
+    // Row14 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row15<Long, String, LocalDate, String, String, String, String, Double, LocalDate, LocalDate, Long, String, Long, Double, Long> fieldsRow() {
-        return (Row15) super.fieldsRow();
+    public Row14<Long, String, LocalDate, String, String, String, String, Double, LocalDate, LocalDate, Long, String, Long, Long> fieldsRow() {
+        return (Row14) super.fieldsRow();
     }
 }
