@@ -292,6 +292,23 @@ SOFTWARE.
         CONSTRAINT pay_third_party_payment_mean_allowed_third_party_id_fkey FOREIGN KEY (third_party_id) REFERENCES pay_third_party (id)
           ON UPDATE CASCADE ON DELETE CASCADE
       );
+
+      CREATE VIEW pay_third_party_view AS
+        SELECT
+          tp.*,
+          ps.name
+        FROM pay_third_party tp
+        LEFT JOIN ad_person ps ON ps.id = tp.id;
+
+      CREATE VIEW pay_bank_view AS
+        SELECT
+          tp.*,
+          bk.representative,
+          bk.representative_position,
+          bk.representative_civility,
+          bk.headquarters
+        FROM pay_bank bk
+        LEFT JOIN pay_third_party_view tp ON tp.id = bk.id;
     </sql>
     <sql>
       INSERT INTO pay_third_party (id, code, abbreviated, family_id, payment_deadline) VALUES (2, 'ANONYMOUS', 'ANONYMOUS', NULL, 0);

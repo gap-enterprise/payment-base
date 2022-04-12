@@ -10,6 +10,7 @@ import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankAccountAccount
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankAccountView;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankNote;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankNoteBook;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayBankView;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPayment;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentBatch;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayPaymentBatchLine;
@@ -25,6 +26,7 @@ import io.surati.gap.payment.base.db.jooq.generated.tables.PayReferenceDocumentV
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdParty;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdPartyFamily;
 import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdPartyPaymentMeanAllowed;
+import io.surati.gap.payment.base.db.jooq.generated.tables.PayThirdPartyView;
 
 
 /**
@@ -62,6 +64,11 @@ public class Tables {
      * The table <code>public.pay_bank_note_book</code>.
      */
     public static final PayBankNoteBook PAY_BANK_NOTE_BOOK = PayBankNoteBook.PAY_BANK_NOTE_BOOK;
+
+    /**
+     * The table <code>public.pay_bank_view</code>.
+     */
+    public static final PayBankView PAY_BANK_VIEW = PayBankView.PAY_BANK_VIEW;
 
     /**
      * The table <code>public.pay_payment</code>.
@@ -137,4 +144,9 @@ public class Tables {
      * The table <code>public.pay_third_party_payment_mean_allowed</code>.
      */
     public static final PayThirdPartyPaymentMeanAllowed PAY_THIRD_PARTY_PAYMENT_MEAN_ALLOWED = PayThirdPartyPaymentMeanAllowed.PAY_THIRD_PARTY_PAYMENT_MEAN_ALLOWED;
+
+    /**
+     * The table <code>public.pay_third_party_view</code>.
+     */
+    public static final PayThirdPartyView PAY_THIRD_PARTY_VIEW = PayThirdPartyView.PAY_THIRD_PARTY_VIEW;
 }
