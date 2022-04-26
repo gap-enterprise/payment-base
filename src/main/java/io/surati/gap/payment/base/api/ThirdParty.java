@@ -73,13 +73,38 @@ public interface ThirdParty extends Person {
 			
 			
 		}
-		
+
+		@Override
+		public void contacts(String s, String s1, String s2, String s3) {
+
+		}
+
 		@Override
 		public String name() {
 			
 			return null;
 		}
-		
+
+		@Override
+		public String address() {
+			return null;
+		}
+
+		@Override
+		public String pobox() {
+			return null;
+		}
+
+		@Override
+		public String phone() {
+			return null;
+		}
+
+		@Override
+		public String email() {
+			return null;
+		}
+
 		@Override
 		public Long id() {
 			

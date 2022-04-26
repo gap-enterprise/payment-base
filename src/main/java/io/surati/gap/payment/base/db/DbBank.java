@@ -82,8 +82,33 @@ public final class DbBank implements Bank {
 	}
 
 	@Override
+	public String address() {
+		return null;
+	}
+
+	@Override
+	public String pobox() {
+		return null;
+	}
+
+	@Override
+	public String phone() {
+		return null;
+	}
+
+	@Override
+	public String email() {
+		return null;
+	}
+
+	@Override
 	public void update(String name) {
 		this.tp.update(name);
+	}
+
+	@Override
+	public void contacts(String s, String s1, String s2, String s3) {
+
 	}
 
 	@Override
