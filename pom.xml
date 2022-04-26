@@ -185,7 +185,7 @@ SOFTWARE.
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-imaging</artifactId>
-      <version>1.0-alpha1</version>
+      <version>1.0-alpha2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
