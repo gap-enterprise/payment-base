@@ -52,12 +52,37 @@ public interface Bank extends ThirdParty {
 		public void update(String name) {
 			throw new UnsupportedOperationException("Bank#update");
 		}
-		
+
+		@Override
+		public void contacts(String s, String s1, String s2, String s3) {
+
+		}
+
 		@Override
 		public String name() {
 			return "Aucune";
 		}
-		
+
+		@Override
+		public String address() {
+			return null;
+		}
+
+		@Override
+		public String pobox() {
+			return null;
+		}
+
+		@Override
+		public String phone() {
+			return null;
+		}
+
+		@Override
+		public String email() {
+			return null;
+		}
+
 		@Override
 		public Long id() {
 			return 0L;
