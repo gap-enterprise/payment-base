@@ -98,7 +98,7 @@ SOFTWARE.
         date date NOT NULL,
         reference character varying(50) NOT NULL,
         internal_reference character varying(50),
-        object character varying(100) NOT NULL,
+        object character varying(255) NOT NULL,
         place character varying(50) NOT NULL,
         amount double precision NOT NULL,
         deposit_date date,
