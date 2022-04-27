@@ -77,7 +77,7 @@ public class PayReferenceDocument extends TableImpl<PayReferenceDocumentRecord> 
     /**
      * The column <code>public.pay_reference_document.object</code>.
      */
-    public final TableField<PayReferenceDocumentRecord, String> OBJECT = createField(DSL.name("object"), SQLDataType.VARCHAR(100).nullable(false), this, "");
+    public final TableField<PayReferenceDocumentRecord, String> OBJECT = createField(DSL.name("object"), SQLDataType.VARCHAR(255).nullable(false), this, "");
 
     /**
      * The column <code>public.pay_reference_document.place</code>.

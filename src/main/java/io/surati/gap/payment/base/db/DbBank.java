@@ -83,22 +83,22 @@ public final class DbBank implements Bank {
 
 	@Override
 	public String address() {
-		return null;
+		return this.tp.address();
 	}
 
 	@Override
 	public String pobox() {
-		return null;
+		return this.tp.pobox();
 	}
 
 	@Override
 	public String phone() {
-		return null;
+		return this.tp.phone();
 	}
 
 	@Override
 	public String email() {
-		return null;
+		return this.tp.email();
 	}
 
 	@Override
@@ -108,7 +108,7 @@ public final class DbBank implements Bank {
 
 	@Override
 	public void contacts(String s, String s1, String s2, String s3) {
-
+		this.tp.contacts(s, s1, s2, s3);
 	}
 
 	@Override
