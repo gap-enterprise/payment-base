@@ -48,7 +48,7 @@ public final class BirtLetterPrinter implements Printer {
 			Platform.startup(config);
 			final IReportEngineFactory fact = (IReportEngineFactory) Platform.createFactoryObject(IReportEngineFactory.EXTENSION_REPORT_ENGINE_FACTORY);
 			engine = fact.createReportEngine(config);
-			final InputStream reportResource = getClass().getClassLoader().getResourceAsStream("io/surati/gap/payment/report/letter.rptdesign");
+			final InputStream reportResource = getClass().getClassLoader().getResourceAsStream("io/surati/gap/payment/base/report/letter.rptdesign");
 			final IReportRunnable runnable = engine.openReportDesign(reportResource);
 			final IRunAndRenderTask task = engine.createRunAndRenderTask(runnable);
 			final RenderOption pdfOptions = new PDFRenderOption();
