@@ -113,7 +113,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	public Double totalAmount() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT SUM(amount_to_pay) FROM pay_payment_order WHERE group_id=?")
+				.sql("SELECT SUM(po.amount) FROM pay_payment_order po LEFT JOIN pay_payment_order_group_line pol ON pol.id=po.id WHERE pol.group_id=?")
 				.set(this.id)
 				.select(new SingleOutcome<>(Long.class)).doubleValue();
 		} catch(SQLException ex) {

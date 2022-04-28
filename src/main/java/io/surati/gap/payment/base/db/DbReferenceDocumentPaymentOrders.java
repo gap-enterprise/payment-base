@@ -133,7 +133,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
 	public Double totalAmount() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT SUM(amount_to_pay) FROM pay_payment_order WHERE reference_document_id=?")
+				.sql("SELECT SUM(amount) FROM pay_payment_order WHERE reference_document_id=?")
 				.set(this.rd.id())
 				.select(new SingleOutcome<>(Long.class)).doubleValue();
 		} catch(SQLException ex) {

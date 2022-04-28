@@ -183,7 +183,7 @@ public final class DbPaginedPaymentOrders implements PaymentOrders {
 	public Double totalAmount() {
 		try {
 			return
-				this.session("SELECT SUM(po.amount_to_pay)")
+				this.session("SELECT SUM(po.amount)")
 					.select(new SingleOutcome<>(Long.class)).doubleValue();
         } catch (SQLException ex) {
             throw new DatabaseException(ex);

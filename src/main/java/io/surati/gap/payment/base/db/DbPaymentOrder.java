@@ -505,7 +505,7 @@ public final class DbPaymentOrder implements PaymentOrder {
                     new Joined(
                         " ",
                         "UPDATE pay_payment_order",
-                        "SET amount_to_pay=?",
+                        "SET amount=?",
                         "WHERE id=?"
                     ).toString()
                 )
