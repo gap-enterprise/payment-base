@@ -106,7 +106,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 		                new Joined(
 		                    " ",
 		                    "INSERT INTO pay_payment_order",
-		                    "(date, reference, beneficiary_id, amount_to_pay, author_id, status_id, reason, description)",
+		                    "(date, reference, beneficiary_id, amount, author_id, status_id, reason, description)",
 		                    "VALUES",
 		                    "(?, ?, ?, ?, ?, ?, ?, ?)"
 		                ).toString()
@@ -288,7 +288,7 @@ public final class DbThirdPartyPaymentOrders implements ThirdPartyPaymentOrders 
 	public Double totalAmount() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT SUM(amount_to_pay) FROM pay_payment_order WHERE beneficiary_id=? AND (?='NONE' OR status_id=?)")
+				.sql("SELECT SUM(amount) FROM pay_payment_order WHERE beneficiary_id=? AND (?='NONE' OR status_id=?)")
 				.set(this.tp.id())
 				.set(this.status.name())
 				.set(this.status.name())
