@@ -32,7 +32,6 @@ public final class BirtPaymentResumePrinter implements Printer {
 	public void print(final OutputStream output) throws Exception {
 		final Map<String, Object> context = new HashMap<>();
 	    context.put("lines", new ListOf<>(note.orders()));
-	    context.put(Locale.class.getSimpleName(), Locale.FRENCH);
 	    IReportEngine engine = null;
 		try {
 			final EngineConfig config = new EngineConfig();
@@ -42,6 +41,7 @@ public final class BirtPaymentResumePrinter implements Printer {
 			final InputStream reportResource = getClass().getClassLoader().getResourceAsStream("io/surati/gap/payment/base/report/payment_resume.rptdesign");
 			final IReportRunnable runnable = engine.openReportDesign(reportResource);
 			final IRunAndRenderTask task = engine.createRunAndRenderTask(runnable);
+			task.setLocale(Locale.FRENCH);
 			final RenderOption pdfOptions = new PDFRenderOption();
 			pdfOptions.setOutputFormat("PDF");
 			pdfOptions.setOutputStream(output);

@@ -41,7 +41,6 @@ public final class BirtLetterPrinter implements Printer {
 	public void print(final OutputStream output) throws Exception {
 		final Map<String, Object> context = new HashMap<>();
 	    context.put("lines", new ListOf<>(notes));
-	    context.put(Locale.class.getSimpleName(), Locale.FRENCH);
 	    IReportEngine engine = null;
 		try {
 			final EngineConfig config = new EngineConfig();
@@ -51,13 +50,14 @@ public final class BirtLetterPrinter implements Printer {
 			final InputStream reportResource = getClass().getClassLoader().getResourceAsStream("io/surati/gap/payment/base/report/letter.rptdesign");
 			final IReportRunnable runnable = engine.openReportDesign(reportResource);
 			final IRunAndRenderTask task = engine.createRunAndRenderTask(runnable);
+			task.setLocale(Locale.FRENCH);
 			final RenderOption pdfOptions = new PDFRenderOption();
 			pdfOptions.setOutputFormat("PDF");
 			pdfOptions.setOutputStream(output);
 			pdfOptions.setOption(PDFRenderOption.PAGE_OVERFLOW, PDFRenderOption.FIT_TO_PAGE_SIZE);
 			task.setRenderOption(pdfOptions);
 			task.setAppContext(context);
-			task.setParameterValue("Today", String.format("%s, le %s", new PropCompany().city(), DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(LocalDate.now())));
+			task.setParameterValue("Today", String.format("%s, le %s", new PropCompany().city(), DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).withLocale(Locale.FRENCH).format(LocalDate.now())));
 			final BankNote note = this.notes.iterator().next();
 			final Bank bank = note.book().account().bank();
 			task.setParameterValue("Announce", String.format("A l'attention de %s %s", bank.representativeCivility(), bank.representative()));

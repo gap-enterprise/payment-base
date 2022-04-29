@@ -40,7 +40,6 @@ public final class PaymentHistoryPrinter implements Printer {
 		}
 		final Map<String, Object> context = new HashMap<>();
 	    context.put("lines", rows);
-	    context.put(Locale.class.getSimpleName(), Locale.FRENCH);
 	    IReportEngine engine = null;
 		try {
 			final EngineConfig config = new EngineConfig();
@@ -50,6 +49,7 @@ public final class PaymentHistoryPrinter implements Printer {
 			final InputStream reportResource = getClass().getClassLoader().getResourceAsStream("io/surati/gap/payment/base/report/payment_export_story_format.rptdesign");
 			final IReportRunnable runnable = engine.openReportDesign(reportResource);
 			final IRunAndRenderTask task = engine.createRunAndRenderTask(runnable);
+			task.setLocale(Locale.FRENCH);
 			final RenderOption options = new EXCELRenderOption();
 			options.setOutputFormat("XLSX");
 			options.setOutputStream(output);

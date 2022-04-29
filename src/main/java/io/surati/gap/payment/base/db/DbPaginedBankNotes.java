@@ -31,6 +31,7 @@ import io.surati.gap.database.utils.exceptions.DatabaseException;
 import io.surati.gap.payment.base.api.BankNote;
 import io.surati.gap.payment.base.api.BankNotes;
 import io.surati.gap.payment.base.api.PaymentStatus;
+import java.time.LocalDate;
 import org.cactoos.text.Joined;
 
 import javax.sql.DataSource;
@@ -105,10 +106,10 @@ public final class DbPaginedBankNotes implements BankNotes {
                     .set("%" + this.filter + "%")
                     .set(this.status.name())
                     .set(this.status.name())
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
+                    .set(java.sql.Date.valueOf(this.payperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.payperiod.begin()))
+                    .set(java.sql.Date.valueOf(this.payperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.payperiod.begin()))
+                    .set(java.sql.Date.valueOf(this.payperiod.end() == LocalDate.MAX ? LocalDate.of(1970, 01, 01) : this.payperiod.end()))
+                    .set(java.sql.Date.valueOf(this.payperiod.end() == LocalDate.MAX ? LocalDate.of(1970, 01, 01) : this.payperiod.end()))
                     .set(this.nbperpage)
                     .set(this.nbperpage * (this.page - 1))
                     .select(
@@ -161,10 +162,10 @@ public final class DbPaginedBankNotes implements BankNotes {
                     .set("%" + this.filter + "%")
                     .set(this.status.name())
                     .set(this.status.name())
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.begin()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
-                    .set(java.sql.Date.valueOf(this.payperiod.end()))
+                    .set(java.sql.Date.valueOf(this.payperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.payperiod.begin()))
+                    .set(java.sql.Date.valueOf(this.payperiod.begin() == LocalDate.MIN ? LocalDate.of(1970, 01, 01) : this.payperiod.begin()))
+                    .set(java.sql.Date.valueOf(this.payperiod.end() == LocalDate.MAX ? LocalDate.of(1970, 01, 01) : this.payperiod.end()))
+                    .set(java.sql.Date.valueOf(this.payperiod.end() == LocalDate.MAX ? LocalDate.of(1970, 01, 01) : this.payperiod.end()))
 					.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
 			throw new DatabaseException(ex);

@@ -75,9 +75,9 @@ public final class DbBankNotePen implements BankNotePen {
 					new Joined(
 						" ",
 						"INSERT INTO pay_payment",
-						"(internal_reference, issuer_reference, beneficiary_id, amount, date, edition_place, mention_1, mention_2, status_id, author_id, group_id, issuer_id, mean_type_id)",
+						"(internal_reference, issuer_reference, beneficiary_id, amount, date, edition_place, mention_1, mention_2, status_id, author_id, issuer_id, mean_type_id)",
 						"VALUES",
-						"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+						"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 					).toString()
 				)
 				.set(this.generateReference())
@@ -90,7 +90,6 @@ public final class DbBankNotePen implements BankNotePen {
 				.set(this.mention2)
 				.set(PaymentStatus.TO_PRINT.name())
 				.set(this.author.id())
-				.set(this.orders.id())
 				.set(this.book.account().bank().id())
 				.set(this.book.meanType().name())
 				.insert(new SingleOutcome<>(Long.class));
@@ -107,6 +106,18 @@ public final class DbBankNotePen implements BankNotePen {
 				.set(payid)
 				.set(this.book.id())
 				.set(this.duedate == null ? null : java.sql.Date.valueOf(this.duedate))
+				.insert(Outcome.VOID);
+			new JdbcSession(this.source)
+				.sql(
+					new Joined(
+						" ",
+						"UPDATE pay_payment_order",
+						"SET payment_id=?",
+						"WHERE id IN (SELECT id FROM pay_payment_order_group_line WHERE group_id=?)"
+					).toString()
+				)
+				.set(payid)
+				.set(this.orders.id())
 				.insert(Outcome.VOID);
 	        final BankNote note = new DbBankNote(this.source, payid);
 	        this.orders.execute();

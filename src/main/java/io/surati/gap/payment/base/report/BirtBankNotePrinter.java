@@ -12,6 +12,7 @@ import io.surati.gap.payment.base.api.PaymentMeanType;
 import io.surati.gap.payment.base.api.Point;
 import io.surati.gap.payment.base.api.Printer;
 import io.surati.gap.payment.base.db.BankNotePrintDirection;
+import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.birt.core.framework.Platform;
 import org.eclipse.birt.report.engine.api.EngineConfig;
@@ -198,6 +199,7 @@ public final class BirtBankNotePrinter implements Printer {
 			engine = fact.createReportEngine(config);
 			final IReportRunnable runnable = engine.openReportDesign(design);
 			final IRunAndRenderTask task = engine.createRunAndRenderTask(runnable);
+			task.setLocale(Locale.FRENCH);
 			final RenderOption pdfOptions = new PDFRenderOption();
 			pdfOptions.setOutputFormat("PDF");
 			pdfOptions.setOutputStream(output);

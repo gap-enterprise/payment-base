@@ -51,9 +51,10 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
                     .sql(
                         new Joined(
                             " ",
-                            "SELECT id FROM pay_payment_order",
-                            "WHERE group_id=?",
-            				"ORDER BY date ASC"
+                            "SELECT pol.id FROM pay_payment_order_group_line pol",
+							"LEFT JOIN pay_payment_order po ON po.id = pol.id",
+                            "WHERE pol.group_id=?",
+            				"ORDER BY po.date ASC"
                         ).toString()
                     )
                     .set(this.id)
@@ -83,7 +84,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	private boolean has(final Long id) {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE id=? AND group_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order_group_line WHERE id=? AND group_id=?")
 				.set(id)
 				.set(this.id)
 				.select(new SingleOutcome<>(Long.class)) > 0;
@@ -101,7 +102,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	public Long count() {
 		try {
 			return new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM pay_payment_order WHERE group_id=?")
+				.sql("SELECT COUNT(*) FROM pay_payment_order_group_line WHERE group_id=?")
 				.set(this.id)
 				.select(new SingleOutcome<>(Long.class));
 		} catch(SQLException ex) {
@@ -426,7 +427,7 @@ public final class DbPaymentOrderGroup implements PaymentOrderGroup {
 	                new Joined(
 	                    " ",
 	                    "SELECT COUNT(*) FROM pay_payment_order",
-	                    "WHERE group_id=? AND beneficiary_id=?"
+	                    "WHERE id IN (SELECT id FROM pay_payment_order_group_line WHERE group_id=?) AND beneficiary_id=?"
 	                ).toString()
 	            )
 	            .set(this.id)

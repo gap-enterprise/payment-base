@@ -59,7 +59,7 @@
                 <structure>
                     <property name="position">3</property>
                     <property name="name">columnAmount</property>
-                    <property name="dataType">string</property>
+                    <property name="dataType">float</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
@@ -100,7 +100,7 @@
                     <structure>
                         <property name="position">3</property>
                         <property name="name">columnAmount</property>
-                        <property name="dataType">string</property>
+                        <property name="dataType">float</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
@@ -194,7 +194,8 @@ return false;]]></method>
                     <property name="name">columnAmount</property>
                     <text-property name="displayName">Montant</text-property>
                     <expression name="expression" type="javascript">dataSetRow["columnAmount"]</expression>
-                    <property name="dataType">string</property>
+                    <property name="dataType">float</property>
+                    <property name="allowExport">true</property>
                 </structure>
                 <structure>
                     <property name="name">columnCity</property>
@@ -266,6 +267,10 @@ return false;]]></method>
                     </cell>
                     <cell id="19">
                         <data id="47">
+                            <structure name="numberFormat">
+                                <property name="category">Currency</property>
+                                <property name="pattern">#,##0{RoundingMode=HALF_UP}</property>
+                            </structure>
                             <property name="resultSetColumn">columnAmount</property>
                         </data>
                     </cell>

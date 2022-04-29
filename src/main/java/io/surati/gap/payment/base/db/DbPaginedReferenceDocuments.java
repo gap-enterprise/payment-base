@@ -239,7 +239,7 @@ public final class DbPaginedReferenceDocuments implements ReferenceDocuments {
 		}
 		final ThirdParty issuer = this.criteria.issuer();
 		if(issuer != ThirdParty.EMPTY) {
-			sql.append(" AND issuer_id=?");
+			sql.append(" AND beneficiary_id=?");
 			args.add(issuer.id());
 		}
 		if(StringUtils.isNotBlank(this.criteria.reference())) {
@@ -247,12 +247,12 @@ public final class DbPaginedReferenceDocuments implements ReferenceDocuments {
 			args.add(this.criteria.reference());
 		}
 		if(StringUtils.isNotBlank(this.criteria.otherReference())) {
-			sql.append(" AND other_reference=?");
+			sql.append(" AND internal_reference=?");
 			args.add(this.criteria.otherReference());
 		}
 		final SQLPrinter filterprint = new FilterSQLPrinter(
 			this.criteria.filters(),
-			"name_issuer ILIKE ? OR abbreviated_issuer ILIKE ? OR reference ILIKE ? OR place ILIKE ? OR object ILIKE ?"
+			"beneficiary_name ILIKE ? OR beneficiary_abbreviated ILIKE ? OR reference ILIKE ? OR place ILIKE ? OR object ILIKE ?"
 		);
 		sql.append(filterprint);
 		args.addAll(new ListOf<>(filterprint.args()));
@@ -289,7 +289,7 @@ public final class DbPaginedReferenceDocuments implements ReferenceDocuments {
 				sortermap.put("amount", sorter);
 			}
 			if(sorter.field() == ReferenceDocument.BENEFICIARY) {
-				sortermap.put("name_issuer", sorter);
+				sortermap.put("beneficiary_name", sorter);
 			}
 		}
 		final SQLPrinter sorterprinter = new SorterSQLPrinter(sortermap);

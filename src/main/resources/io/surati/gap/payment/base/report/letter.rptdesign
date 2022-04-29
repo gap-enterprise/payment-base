@@ -114,7 +114,7 @@
                 <structure>
                     <property name="position">3</property>
                     <property name="name">columnEcheance</property>
-                    <property name="dataType">date</property>
+                    <property name="dataType">string</property>
                 </structure>
                 <structure>
                     <property name="position">4</property>
@@ -155,7 +155,7 @@
                     <structure>
                         <property name="position">3</property>
                         <property name="name">columnEcheance</property>
-                        <property name="dataType">date</property>
+                        <property name="dataType">string</property>
                     </structure>
                     <structure>
                         <property name="position">4</property>
@@ -171,8 +171,8 @@ lines = reportContext.getAppContext().get("lines");]]></method>
 
    line = lines.get(count);
    row["columnBeneficiary"] = line.beneficiary().name();
-   row["columnNumNote"] = line.number();
-   row["columnEcheance"] = line.dueDate().toString();
+   row["columnNumNote"] = line.issuerReference();
+   row["columnEcheance"] = line.dueDate();
    row["columnAmount"] = line.amountInHuman();
    
    count++;
