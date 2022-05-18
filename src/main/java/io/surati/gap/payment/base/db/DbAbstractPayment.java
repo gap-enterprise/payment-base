@@ -95,7 +95,7 @@ public abstract class DbAbstractPayment implements Payment {
 			pstmt.setLong(1, this.id);
 			try (final ResultSet rs = pstmt.executeQuery()) {
 				rs.next();
-				return rs.getDate(1).toLocalDate();
+				return rs.getTimestamp(1).toLocalDateTime().toLocalDate();
 			}
 		} catch (SQLException e) {
 			throw new DatabaseException(e);

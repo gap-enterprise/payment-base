@@ -11,7 +11,7 @@ public interface ReferenceDocument {
 	
 	Long id();
 	
-	ThirdParty issuer();
+	ThirdParty beneficiary();
 
 	ReferenceDocumentType type();
 	
@@ -34,6 +34,8 @@ public interface ReferenceDocument {
 	Double amountPaid();
 	
 	Double amountLeft();
+
+	Double priorAmountPaid();
 	
 	ReferenceDocumentStatus status();
 	
@@ -182,7 +184,7 @@ public interface ReferenceDocument {
 		}
 		
 		@Override
-		public ThirdParty issuer() {
+		public ThirdParty beneficiary() {
 			
 			return null;
 		}
@@ -221,7 +223,12 @@ public interface ReferenceDocument {
 			
 			return null;
 		}
-		
+
+		@Override
+		public Double priorAmountPaid() {
+			return null;
+		}
+
 		@Override
 		public void amount(Double amount, Double advamount) {
 			
