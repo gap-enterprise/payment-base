@@ -117,9 +117,9 @@ public final class DbThirdPartyReferenceDocuments implements ThirdPartyReference
 		                new Joined(
 		                    " ",
 		                    "INSERT INTO pay_reference_document",
-		                    "(date, type_id, reference, object, place, issuer_id, amount, status_id, step_id, amount_paid, amount_left, author_id, entry_date, worker_id)",
+		                    "(date, type_id, reference, object, place, beneficiary_id, amount, step_id, author_id, entry_date, worker_id)",
 		                    "VALUES",
-		                    "(?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, ?, ?, ?)"
+		                    "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 		                ).toString()
 		            )
 		            .set(java.sql.Date.valueOf(date))
@@ -129,7 +129,6 @@ public final class DbThirdPartyReferenceDocuments implements ThirdPartyReference
 		            .set(place)
 		            .set(this.issuer.id())
 		            .set(amount)
-		            .set(ReferenceDocumentStatus.WAITING_FOR_PAYMENT.name())
 		            .set(ReferenceDocumentStep.TO_TREAT.name())
 		            .set(author.id())
 		            .set(java.sql.Date.valueOf(LocalDate.now()))

@@ -14,6 +14,8 @@ import io.surati.gap.payment.base.api.BankNotePen;
 import io.surati.gap.payment.base.api.PaymentOrderGroup;
 import io.surati.gap.payment.base.api.PaymentStatus;
 import io.surati.gap.payment.base.api.ThirdParty;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import org.apache.commons.lang.StringUtils;
 import org.cactoos.text.Joined;
 
@@ -80,11 +82,11 @@ public final class DbBankNotePen implements BankNotePen {
 						"(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 					).toString()
 				)
-				.set(this.generateReference())
+				.set(new PaymentReferenceGenerator(this.source).next())
 				.set(number)
 				.set(this.beneficiary.id())
 				.set(this.orders.totalAmount())
-				.set(java.sql.Date.valueOf(this.date))
+				.set(java.sql.Timestamp.valueOf(LocalDateTime.of(this.date, LocalTime.MIDNIGHT)))
 				.set(new PropCompany().city())
 				.set(this.mention1)
 				.set(this.mention2)
@@ -128,52 +130,5 @@ public final class DbBankNotePen implements BankNotePen {
 	    } catch (SQLException ex) {
 	        throw new DatabaseException(ex);
 	    }
-	}
-
-	private BankNote lastNote() {
-		try {
-			final boolean hasany = new JdbcSession(this.source)
-				.sql("SELECT COUNT(*) FROM pay_bank_note")
-				.select(new SingleOutcome<>(Long.class)) > 0;
-			if(hasany) {
-				return new DbBankNote(
-					this.source,
-					new JdbcSession(this.source)
-						.sql("SELECT id FROM pay_bank_note order by id DESC limit 1")
-						.select(new SingleOutcome<>(Long.class))
-				);
-			} else {
-				return BankNote.EMPTY;
-			}
-		} catch(SQLException ex) {
-			throw new DatabaseException(ex);
-		}
-	}
-	
-	private String generateReference() {
-		final Company company = new PropCompany();
-		final BankNote last = this.lastNote();
-		final LocalDate today = LocalDate.now();
-		final LocalDate date;
-		final Long nextnumber;
-		if(last == BankNote.EMPTY) {
-			date = today;
-			nextnumber = 1L;
-		} else {
-			final LocalDate lastdate = last.date();
-			if(lastdate.getYear() != today.getYear()) {
-				date = today;
-				nextnumber = 1L;
-			} else {
-				date = lastdate;
-				nextnumber = Long.parseLong(company.parameter("paymentcurrnum")) + 1;
-			}
-		}
-		company.parameter("paymentcurrnum", nextnumber.toString());
-		return String.format(
-			"PAY/%s/%s",
-			date.getYear(),
-			StringUtils.leftPad(Long.toString(nextnumber), 4, "0")
-		);
 	}
 }

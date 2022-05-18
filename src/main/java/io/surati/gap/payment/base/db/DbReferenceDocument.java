@@ -8,16 +8,17 @@ import io.surati.gap.admin.base.api.User;
 import io.surati.gap.admin.base.db.DbUser;
 import io.surati.gap.database.utils.exceptions.DatabaseException;
 import io.surati.gap.payment.base.api.Payment;
+import io.surati.gap.payment.base.api.PaymentMeanType;
 import io.surati.gap.payment.base.api.PaymentOrder;
-import io.surati.gap.payment.base.api.PaymentOrderStatus;
-import io.surati.gap.payment.base.api.PaymentOrders;
 import io.surati.gap.payment.base.api.ReferenceDocument;
 import io.surati.gap.payment.base.api.ReferenceDocumentStatus;
 import io.surati.gap.payment.base.api.ReferenceDocumentStep;
 import io.surati.gap.payment.base.api.ThirdParty;
 import io.surati.gap.payment.base.api.ThirdPartyPaymentOrders;
 import io.surati.gap.payment.base.api.ThirdPartyReferenceDocuments;
+import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
+import org.cactoos.list.ListOf;
 import org.cactoos.text.Joined;
 
 import javax.sql.DataSource;
@@ -153,7 +154,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 		if(StringUtils.isBlank(object)) {
 			throw new IllegalArgumentException("Vous devez renseigner l'objet du document !");
 		}
-		final ThirdPartyReferenceDocuments issuerdocs = new DbThirdPartyReferenceDocuments(this.source, this.issuer());
+		final ThirdPartyReferenceDocuments issuerdocs = new DbThirdPartyReferenceDocuments(this.source, this.beneficiary());
 		if(
 			!this.reference().equals(reference) && issuerdocs.has(reference, this.type())
 		) {
@@ -161,7 +162,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				String.format("La référence du document (%s N°%s) est déjà utilisée par le tiers (%s)!",
 					this.type(),
 					reference,
-					this.issuer().abbreviated()
+					this.beneficiary().abbreviated()
 				)
 			);
 		}
@@ -196,7 +197,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 				String.format("L'autre référence du document (%s N°%s) est déjà utilisée par le tiers (%s)!",
 					this.type(),
 					otherref,
-					this.issuer().abbreviated()
+					this.beneficiary().abbreviated()
 				)
 			);
 		}
@@ -219,7 +220,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 	}
 
 	@Override
-	public ThirdParty issuer() {
+	public ThirdParty beneficiary() {
 		try {
 			return new DbThirdParty(
 				this.source,
@@ -362,10 +363,86 @@ public final class DbReferenceDocument implements ReferenceDocument {
                 .set(amount)
                 .set(this.id)
                 .execute();
+			this.registerPriorPayment(advamount);
             this.updateState();
         } catch (SQLException ex) {
             throw new DatabaseException(ex);
         }
+	}
+
+	/**
+	 * Registers a prior payment.
+	 *
+	 * @param amount Amount paid
+	 */
+	private void registerPriorPayment(final double amount) {
+		if (amount > this.amountLeft() + this.priorAmountPaid()) {
+			throw new IllegalArgumentException("Le montant est supérieur au reste à payer !");
+		}
+		try {
+			final Optional<Payment> payment = new ListOf<>(this.payments())
+				.stream()
+				.filter(p -> p.meanType() == PaymentMeanType.ANONYMOUS)
+				.findFirst();
+			if (payment.isPresent()) {
+				if (amount == 0) {
+					new JdbcSession(this.source)
+						.sql(
+							new Joined(
+								" ",
+								"DELETE FROM pay_payment_order",
+								"WHERE payment_id=?"
+							).toString()
+						)
+						.set(payment.get().id())
+						.execute()
+						.sql(
+							new Joined(
+								" ",
+								"DELETE FROM pay_payment",
+								"WHERE id=?"
+							).toString()
+						)
+						.set(payment.get().id())
+						.execute();
+				} else {
+					new JdbcSession(this.source)
+						.sql(
+							new Joined(
+								" ",
+								"UPDATE pay_payment_order",
+								"SET amount=?",
+								"WHERE payment_id=?"
+							).toString()
+						)
+						.set(amount)
+						.set(payment.get().id())
+						.execute()
+						.sql(
+							new Joined(
+								" ",
+								"UPDATE pay_payment",
+								"SET amount=?",
+								"WHERE id=?"
+							).toString()
+						)
+						.set(amount)
+						.set(payment.get().id())
+						.execute();
+				}
+			} else if (amount > 0) {
+				final PaymentOrder po = new DbThirdPartyPaymentOrders(this.source, this.beneficiary())
+					.add(amount, "Paiement réalisé antérieurement", "", this.author());
+				po.joinTo(this);
+				new DbAnonymousPaymentPen(
+					this.source,
+					po,
+					this.author()
+				).write();
+			}
+		} catch (final SQLException ex) {
+			throw new DatabaseException(ex);
+		}
 	}
 
 	@Override
@@ -408,6 +485,15 @@ public final class DbReferenceDocument implements ReferenceDocument {
         } catch (SQLException ex) {
             throw new DatabaseException(ex);
         }
+	}
+
+	@Override
+	public Double priorAmountPaid() {
+		return new ListOf<>(this.payments())
+			.stream()
+			.filter(p -> p.meanType() == PaymentMeanType.ANONYMOUS)
+			.mapToDouble(p -> p.amount())
+			.sum();
 	}
 
 	@Override
@@ -466,7 +552,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
 		if(this.status() == ReferenceDocumentStatus.PAID) {
 			throw new IllegalArgumentException("Ce document de référence est déjà réglé !");
 		}
-		final ThirdPartyPaymentOrders orders = new DbThirdPartyPaymentOrders(this.source, this.issuer());
+		final ThirdPartyPaymentOrders orders = new DbThirdPartyPaymentOrders(this.source, this.beneficiary());
 		final PaymentOrder order = orders.add(this.amountLeft(), this.object(), StringUtils.EMPTY, author);
 		order.joinTo(this);
 		this.changeStep(ReferenceDocumentStep.IN_PREPARATION_FOR);
@@ -490,7 +576,7 @@ public final class DbReferenceDocument implements ReferenceDocument {
         			).toString()
         		)
 				.set(otherref)
-				.set(this.issuer().id())
+				.set(this.beneficiary().id())
 				.set(this.type().name())
 	            .select(new SingleOutcome<>(Long.class)) > 0;
 		} catch (SQLException ex) {
