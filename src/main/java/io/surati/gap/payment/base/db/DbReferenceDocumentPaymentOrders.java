@@ -30,7 +30,7 @@ public final class DbReferenceDocumentPaymentOrders implements ThirdPartyPayment
 	public DbReferenceDocumentPaymentOrders(final DataSource source, final ReferenceDocument rd) {
 		this.source = source;
 		this.rd = rd;
-		this.tporders = new DbThirdPartyPaymentOrders(source, this.rd.issuer());
+		this.tporders = new DbThirdPartyPaymentOrders(source, this.rd.beneficiary());
 	}
 
 	@Override
