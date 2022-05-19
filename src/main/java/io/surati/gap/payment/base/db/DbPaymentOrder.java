@@ -13,6 +13,7 @@ import io.surati.gap.payment.base.api.PaymentOrder;
 import io.surati.gap.payment.base.api.PaymentOrderStatus;
 import io.surati.gap.payment.base.api.ReferenceDocument;
 import io.surati.gap.payment.base.api.ReferenceDocumentStatus;
+import io.surati.gap.payment.base.api.ReferenceDocumentStep;
 import io.surati.gap.payment.base.api.ThirdParty;
 import io.surati.gap.payment.base.api.ThirdPartyPaymentOrders;
 import org.apache.commons.lang3.StringUtils;
@@ -301,7 +302,7 @@ public final class DbPaymentOrder implements PaymentOrder {
 	public void cancelExecution() {
 		this.changeStatus(PaymentOrderStatus.CANCELLED);
 		final ReferenceDocument document = this.document();
-		if(document != ReferenceDocument.EMPTY) {
+		if(document != ReferenceDocument.EMPTY && document.step() != ReferenceDocumentStep.TO_TREAT) {
 			document.sendToTreatment();
 			document.updateState();
 		}

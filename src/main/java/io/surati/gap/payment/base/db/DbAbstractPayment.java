@@ -28,8 +28,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Optional;
 import javax.sql.DataSource;
 import org.apache.commons.lang3.StringUtils;
+import org.cactoos.list.ListOf;
 import org.cactoos.text.Joined;
 
 public abstract class DbAbstractPayment implements Payment {
@@ -491,7 +493,7 @@ public abstract class DbAbstractPayment implements Payment {
 						"WHERE id=?"
 					).toString()
 				)
-				.set(PaymentOrderStatus.CANCELLED)
+				.set(PaymentOrderStatus.CANCELLED.name())
 				.set(group.id())
 				.execute();
 		} catch (SQLException ex) {
@@ -500,29 +502,67 @@ public abstract class DbAbstractPayment implements Payment {
 	}
 
 	private void cancelExecution(final User author, final boolean sentbackinpayment) {
-		/*for (PaymentOrder order : this.orders()) {
+		for (PaymentOrder order : this.orders()) {
 			order.cancelExecution();
 		}
+		final PaymentOrderGroup group = this.groupOf(
+			new ListOf<>(this.orders()).get(0)
+		);
+		if (group != PaymentOrderGroup.EMPTY) {
+			this.cancelPaymentGroup(group);
+			if(sentbackinpayment) {
+				final Collection<PaymentOrder> duplicatedorders = new LinkedList<>();
+				for (PaymentOrder order : this.orders()) {
+					duplicatedorders.add(
+						order.duplicate(author)
+					);
+				}
+				final PaymentOrderGroupsToPrepare groups = new DbPaymentOrderGroupsToPrepare(this.source, author);
+				final PaymentOrderGroup newgroup;
+				if(group.isHetero()) {
+					newgroup = groups.mergeAcross(this.beneficiary(), duplicatedorders);
+				} else {
+					newgroup = groups.merge(duplicatedorders);
+				}
+				newgroup.useAccount(group.accountToUse());
+				newgroup.update(this.meanType(), group.dueDate());
+				newgroup.validate(author);
+			}
+		}
+	}
 
-		this.cancelPaymentGroup(order.);
-		this.changeStatus(PaymentOrderStatus.CANCELLED);
-		if(sentbackinpayment) {
-			final Collection<PaymentOrder> duplicatedorders = new LinkedList<>();
-			for (PaymentOrder order : this.iterate()) {
-				duplicatedorders.add(
-					order.duplicate(author)
-				);
-			}
-			final PaymentOrderGroupsToPrepare groups = new DbPaymentOrderGroupsToPrepare(this.source, author);
-			final PaymentOrderGroup newgroup;
-			if(this.isHetero()) {
-				newgroup = groups.mergeAcross(this.beneficiary(), duplicatedorders);
+	private final PaymentOrderGroup groupOf(final PaymentOrder order) {
+		final PaymentOrderGroup group;
+		try {
+			final boolean exists = new JdbcSession(this.source)
+				.sql(
+					new Joined(
+						" ",
+						"SELECT COUNT(*) FROM pay_payment_order_group_line",
+						"WHERE id=?"
+					).toString()
+				)
+				.set(order.id())
+				.select(new SingleOutcome<>(Long.class)) > 0;
+			if (exists) {
+				final Long grpid = new JdbcSession(this.source)
+					.sql(
+						new Joined(
+							" ",
+							"SELECT group_id FROM pay_payment_order_group_line",
+							"WHERE id=?",
+							"LIMIT 1"
+						).toString()
+					)
+					.set(order.id())
+					.select(new SingleOutcome<>(Long.class));
+				group = new DbPaymentOrderGroup(this.source, grpid);
 			} else {
-				newgroup = groups.merge(duplicatedorders);
+				group = PaymentOrderGroup.EMPTY;
 			}
-			newgroup.useAccount(this.accountToUse());
-			newgroup.update(this.meanType(), this.dueDate());
-			newgroup.validate(author);
-		}*/
+		} catch (final SQLException exe) {
+			throw new DatabaseException(exe);
+		}
+		return group;
 	}
 }
