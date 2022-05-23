@@ -144,7 +144,7 @@ SOFTWARE.
     <dependency>
       <groupId>io.surati.gap</groupId>
       <artifactId>commons-utils</artifactId>
-      <version>0.3.1</version>
+      <version>0.5.0</version>
     </dependency>
     <dependency>
       <groupId>com.baudoliver7</groupId>
